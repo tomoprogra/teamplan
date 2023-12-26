@@ -18,7 +18,7 @@ RUN bundle install
 
 COPY package.json yarn.lock /test_app/
 
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 RUN yarn add daisyui
 
