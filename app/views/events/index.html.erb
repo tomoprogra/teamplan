@@ -1,8 +1,8 @@
 <h1>Events#index</h1>
 <p>Find me in app/views/events/index.html.erb</p>
-
+<%= link_to "イベント作成", new_event_path %>
 <%= month_calendar events: @events do |date, events| %>
-  <%= link_to date.day, new_event_path %>
+  <%= link_to date.day, "#" %>
 
   <% events.each do |event| %>
     <div>
