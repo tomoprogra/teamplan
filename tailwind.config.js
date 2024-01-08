@@ -5,5 +5,15 @@ module.exports = {
     './app/assets/stylesheets/**/*.css',
     './app/javascript/**/*.js'
   ],
+  extend: {
+    colors: {
+      primary: {
+        100: "D2FFFA"
+      },
+      lemon: {
+        100: "FDFF90"
+      },
+    },
+  },
   plugins: [require("daisyui")],
 }
