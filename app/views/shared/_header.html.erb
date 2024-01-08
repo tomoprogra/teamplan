@@ -1,9 +1,11 @@
 <header class="bg-cyan-100 text-gray-600">
 <div class="container mx-auto flex justify-between items-center px-8 py-2 text-lg">
   <div class="space-x-3">
+  <!-- アカウント設定 -->
   <button class="rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2">
       <i class="fa-solid fa-gear fa-xl"></i>
   </button>
+  <!-- カレンダー選択 -->
   <div class="relative inline-block" id="calendar-select-wrapper">
     <button id="dropdown-button" class="rounded-lg drop-shadow-lg bg-yellow-100 hover:drop-shadow-none px-2.5 py-2">
       <i class="fa-regular fa-calendar-check fa-xl"></i>
@@ -19,6 +21,7 @@
   </div>
   <div>
     <ul>
+    <!-- ハンバーガーメニュー -->
      <li class="relative" id="hamburger-wrapper">
        <i class="fa-solid fa-bars fa-xl cursor-pointer" id="hamburger-icon""></i>
         <ul class="hidden absolute right-0 mt-0 p-2 w-48 px-2 py-6 bg-yellow-100 space-y-5 border rounded-l-lg shadow-lg" id="menu-list">
@@ -34,57 +37,37 @@
 </header>
 
 <script>
-const hamburgerWrapper = document.getElementById('hamburger-wrapper');
-const hamburgerIcon = document.getElementById('hamburger-icon');
-const menuList = document.getElementById('menu-list');
+function toggleMenu(wrapper, icon, menu) {
+  wrapper.addEventListener('mouseenter', function() {
+    menu.classList.remove('hidden');
+  });
 
-hamburgerWrapper.addEventListener('mouseenter', function() {
-  menuList.classList.remove('hidden');
-});
+  wrapper.addEventListener('mouseleave', function(event) {
+    if (!menu.contains(event.relatedTarget)) {
+      menu.classList.add('hidden');
+    }
+  });
 
-hamburgerWrapper.addEventListener('mouseleave', function(event) {
-  // マウスがメニュー内にある場合は、メニューが非表示にならないようにする
-  if (!menuList.contains(event.relatedTarget)) {
-    menuList.classList.add('hidden');
-  }
-});
+  menu.addEventListener('mouseenter', function() {
+    menu.classList.remove('hidden');
+  });
 
-menuList.addEventListener('mouseenter', function() {
-  // メニュー内にカーソルがある間はメニューが非表示にならないようにする
-  menuList.classList.remove('hidden');
-});
+  menu.addEventListener('mouseleave', function(event) {
+    if (!wrapper.contains(event.relatedTarget)) {
+      menu.classList.add('hidden');
+    }
+  });
+}
 
-menuList.addEventListener('mouseleave', function(event) {
-  // メニュー内からカーソルが離れた場合はメニューを非表示にする
-  if (!hamburgerWrapper.contains(event.relatedTarget)) {
-    menuList.classList.add('hidden');
-  }
-});
-
+// カレンダーセレクト
 const calendarSelectWrapper = document.getElementById('calendar-select-wrapper');
 const dropdownButton = document.getElementById('dropdown-button');
 const dropdownCalendar = document.getElementById('dropdown-calendar');
+toggleMenu(calendarSelectWrapper, dropdownButton, dropdownCalendar);
 
-calendarSelectWrapper.addEventListener('mouseenter', function() {
-    dropdownCalendar.classList.remove('hidden');
-});
-
-calendarSelectWrapper.addEventListener('mouseleave', function(event) {
-  // マウスがメニュー内にある場合は、メニューが非表示にならないようにする
-  if (!dropdownCalendar.contains(event.relatedTarget)) {
-    dropdownCalendar.classList.add('hidden');
-  }
-});
-
-dropdownCalendar.addEventListener('mouseenter', function() {
-  // メニュー内にカーソルがある間はメニューが非表示にならないようにする
-  dropdownCalendar.classList.remove('hidden');
-});
-
-dropdownCalendar.addEventListener('mouseleave', function(event) {
-  // メニュー内からカーソルが離れた場合はメニューを非表示にする
-  if (!calendarSelectWrapper.contains(event.relatedTarget)) {
-    dropdownCalendar.classList.add('hidden');
-  }
-});
+// ハンバーガーメニュー
+const hamburgerWrapper = document.getElementById('hamburger-wrapper');
+const hamburgerIcon = document.getElementById('hamburger-icon');
+const menuList = document.getElementById('menu-list');
+toggleMenu(hamburgerWrapper, hamburgerIcon, menuList);
 </script>
