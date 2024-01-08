@@ -12,9 +12,13 @@
   </head>
 
   <body class="flex flex-col min-h-screen">
-    <%= render 'shared/header' %>
     <% flash.each do |key, value| %>
       <div class="flash <%= key %>"><%= value %></div>
+    <% end %>
+   <% if user_signed_in? %>
+      <%= render 'shared/header' %>
+    <% else %>
+      <%= render 'shared/before_login_header' %>
     <% end %>
     <div class="flex-grow">
       <%= yield %>
