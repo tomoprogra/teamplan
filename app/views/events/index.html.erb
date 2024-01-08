@@ -2,7 +2,7 @@
 <p>Find me in app/views/events/index.html.erb</p>
 
 <%= month_calendar events: @events do |date, events| %>
-  <%= date.day %>
+  <%= link_to date.day, new_event_path %>
 
   <% events.each do |event| %>
     <div>
