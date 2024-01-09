@@ -1,12 +1,73 @@
-<header class="bg-primary-100 text-gray-600">
-<div class="container mx-auto flex justify-end items-center px-8 text-lg">
+<header class="bg-cyan-100 text-gray-600">
+<div class="container mx-auto flex justify-between items-center px-8 py-2 text-lg">
+  <div class="space-x-3">
+  <!-- アカウント設定 -->
+  <button class="rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2">
+      <i class="fa-solid fa-gear fa-xl"></i>
+  </button>
+  <!-- カレンダー選択 -->
+  <div class="relative inline-block" id="calendar-select-wrapper">
+    <button id="dropdown-button" class="rounded-lg drop-shadow-lg bg-yellow-100 hover:drop-shadow-none px-2.5 py-2">
+      <i class="fa-regular fa-calendar-check fa-xl"></i>
+    </button>
+      <ul id="dropdown-calendar" class="hidden absolute left-0 mt-0 p-2 w-48 px-2 py-6 bg-yellow-100 space-y-5 border rounded-r-lg shadow-lg">
+      <li class="border-b-2 border-white pb-5 mx-2">カレンダーを選ぶ</li>
+        <li><%= link_to 'カレンダー１', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
+        <li><%= link_to 'カレンダー２', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
+        <li><%= link_to 'カレンダー３', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
+      </ul>
+  </div>
+
+  </div>
   <div>
-    <button class="rounded-none bg-primary-100 hover:bg-cyan-300 px-10 py-6">
-      <%= link_to 'Login', '#' %>
-    </button>
-    <button class="rounded-none bg-lemon-100 hover:bg-yellow-100 px-8 py-6">
-      <%= link_to 'SignUp', '#'%>
-    </button>
+    <ul>
+    <!-- ハンバーガーメニュー -->
+     <li class="relative" id="hamburger-wrapper">
+       <i class="fa-solid fa-bars fa-xl cursor-pointer" id="hamburger-icon""></i>
+        <ul class="hidden absolute right-0 mt-0 p-2 w-48 px-2 py-6 bg-yellow-100 space-y-5 border rounded-l-lg shadow-lg" id="menu-list">
+          <li class="border-b-2 border-white pb-5 mx-2">Menu</li>
+          <li><%= link_to 'マイカレンダー', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
+          <li><%= link_to 'カレンダー作成', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
+          <li><%= link_to 'ログアウト', '#',class: "ml-2 hover:text-white transition-all duration-300" %></li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </div>
 </header>
+
+<script>
+function toggleMenu(wrapper, icon, menu) {
+  wrapper.addEventListener('mouseenter', function() {
+    menu.classList.remove('hidden');
+  });
+
+  wrapper.addEventListener('mouseleave', function(event) {
+    if (!menu.contains(event.relatedTarget)) {
+      menu.classList.add('hidden');
+    }
+  });
+
+  menu.addEventListener('mouseenter', function() {
+    menu.classList.remove('hidden');
+  });
+
+  menu.addEventListener('mouseleave', function(event) {
+    if (!wrapper.contains(event.relatedTarget)) {
+      menu.classList.add('hidden');
+    }
+  });
+}
+
+// カレンダーセレクト
+const calendarSelectWrapper = document.getElementById('calendar-select-wrapper');
+const dropdownButton = document.getElementById('dropdown-button');
+const dropdownCalendar = document.getElementById('dropdown-calendar');
+toggleMenu(calendarSelectWrapper, dropdownButton, dropdownCalendar);
+
+// ハンバーガーメニュー
+const hamburgerWrapper = document.getElementById('hamburger-wrapper');
+const hamburgerIcon = document.getElementById('hamburger-icon');
+const menuList = document.getElementById('menu-list');
+toggleMenu(hamburgerWrapper, hamburgerIcon, menuList);
+</script>
