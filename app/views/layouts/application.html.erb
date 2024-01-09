@@ -12,17 +12,21 @@
   </head>
 
   <body class="flex flex-col min-h-screen">
-    <% flash.each do |key, value| %>
-      <div class="flash <%= key %>"><%= value %></div>
-    <% end %>
-   <% if user_signed_in? %>
+    <% if user_signed_in? %>
       <%= render 'shared/header' %>
     <% else %>
       <%= render 'shared/before_login_header' %>
     <% end %>
+
+    <% flash.each do |key, value| %>
+      <div class="flash <%= flash_background_color(key) %> "><%= value %></div>
+    <% end %>
+    
     <div class="flex-grow">
       <%= yield %>
     </div>
     <%= render 'shared/footer' %>
   </body>
 </html>
+
+

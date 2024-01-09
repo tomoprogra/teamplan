@@ -16,6 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       flash[:success] = "ユーザー登録が完了しました。"
       redirect_to new_user_registration_path
     else
+      flash.now[:alert] = "ユーザー登録に失敗しました"
       render 'new'
     end
   end
