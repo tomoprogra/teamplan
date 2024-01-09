@@ -4,7 +4,6 @@ services:
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: test_app_development
     volumes:
       - postgres_volume:/var/lib/postgresql/data
     ports:
