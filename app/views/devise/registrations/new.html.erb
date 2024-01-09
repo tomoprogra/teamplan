@@ -1,10 +1,10 @@
-<div class="flex items-center justify-center">
+<div class="container mx-auto">
 <h2>Sign up</h2>
 
 <%= form_with model: resource, url: registration_path(resource_name), local: true do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
+  <div class="mx-auto field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email address"%>
   </div>
@@ -22,10 +22,13 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <button class="rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2">
+  <button class="rounded-full drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-4 py-2">
     <%= f.submit "Sign up" %>
   </button>
 <% end %>
 
 <%= render "devise/shared/links" %>
 </div>
+<div class="fixed bottom-8 right-8 rounded-full w-24 py-9 bg-green-300 text-white text-center ring-4 ring-offset-4 ring-offset-blue">
+        TOPへ戻る   
+    </div>
