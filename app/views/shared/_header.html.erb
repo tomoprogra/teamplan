@@ -28,7 +28,7 @@
           <li class="border-b-2 border-white pb-5 mx-2">Menu</li>
           <li><%= link_to 'マイカレンダー', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
           <li><%= link_to 'カレンダー作成', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
-          <li><%= link_to 'ログアウト', '#',class: "ml-2 hover:text-white transition-all duration-300" %></li>
+          <li><%= link_to 'ログアウト', destroy_user_session_path ,class: "ml-2 hover:text-white transition-all duration-300" %></li>
         </ul>
       </li>
     </ul>
