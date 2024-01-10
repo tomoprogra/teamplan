@@ -4,6 +4,11 @@
 <%= form_with model: resource, url: registration_path(resource_name), local: true do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+  </div>
   <div class="mx-auto field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email address"%>
