@@ -10,7 +10,7 @@
     <button id="dropdown-button" class="rounded-lg drop-shadow-lg bg-yellow-100 hover:drop-shadow-none px-2.5 py-2">
       <i class="fa-regular fa-calendar-check fa-xl"></i>
     </button>
-      <ul id="dropdown-calendar" class="hidden absolute left-0 mt-0 p-2 w-48 px-2 py-6 bg-yellow-100 space-y-5 border rounded-r-lg shadow-lg">
+      <ul id="dropdown-calendar" class="hidden absolute z-50 left-0 mt-0 p-2 w-48 px-2 py-6 bg-yellow-100 space-y-5 border rounded-r-lg shadow-lg">
       <li class="border-b-2 border-white pb-5 mx-2">カレンダーを選ぶ</li>
         <li><%= link_to 'カレンダー１', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
         <li><%= link_to 'カレンダー２', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
@@ -28,7 +28,7 @@
           <li class="border-b-2 border-white pb-5 mx-2">Menu</li>
           <li><%= link_to 'マイカレンダー', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
           <li><%= link_to 'カレンダー作成', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
-          <li><%= link_to 'ログアウト', '#',class: "ml-2 hover:text-white transition-all duration-300" %></li>
+          <li><%= link_to 'ログアウト', destroy_user_session_path ,class: "ml-2 hover:text-white transition-all duration-300" %></li>
         </ul>
       </li>
     </ul>
@@ -37,37 +37,28 @@
 </header>
 
 <script>
-function toggleMenu(wrapper, icon, menu) {
-  wrapper.addEventListener('mouseenter', function() {
-    menu.classList.remove('hidden');
-  });
+document.addEventListener('DOMContentLoaded', function () {
+  // ドロップダウンメニュー
+  const setupDropdown = (buttonId, menuId) => {
+    const button = document.getElementById(buttonId);
+    const menu = document.getElementById(menuId);
 
-  wrapper.addEventListener('mouseleave', function(event) {
-    if (!menu.contains(event.relatedTarget)) {
-      menu.classList.add('hidden');
-    }
-  });
+    button.addEventListener('click', function () {
+      menu.classList.toggle('hidden');
+    });
 
-  menu.addEventListener('mouseenter', function() {
-    menu.classList.remove('hidden');
-  });
+    // メニュー外をクリックした場合に非表示にする
+    document.addEventListener('click', function (event) {
+      if (!button.contains(event.target) && !menu.contains(event.target)) {
+        menu.classList.add('hidden');
+      }
+    });
+  };
 
-  menu.addEventListener('mouseleave', function(event) {
-    if (!wrapper.contains(event.relatedTarget)) {
-      menu.classList.add('hidden');
-    }
-  });
-}
+  // カレンダー選択
+  setupDropdown('dropdown-button', 'dropdown-calendar');
 
-// カレンダーセレクト
-const calendarSelectWrapper = document.getElementById('calendar-select-wrapper');
-const dropdownButton = document.getElementById('dropdown-button');
-const dropdownCalendar = document.getElementById('dropdown-calendar');
-toggleMenu(calendarSelectWrapper, dropdownButton, dropdownCalendar);
-
-// ハンバーガーメニュー
-const hamburgerWrapper = document.getElementById('hamburger-wrapper');
-const hamburgerIcon = document.getElementById('hamburger-icon');
-const menuList = document.getElementById('menu-list');
-toggleMenu(hamburgerWrapper, hamburgerIcon, menuList);
+  // ハンバーガーメニュー
+  setupDropdown('hamburger-wrapper', 'menu-list');
+});
 </script>
