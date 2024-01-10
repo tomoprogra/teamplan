@@ -1,0 +1,11 @@
+ja:
+  defaults:
+  events:
+    new:
+      title: イベント作成
+  groups:
+    new:
+      title: グループ作成
+  simple_calendar:
+    previous: "<<"
+    next: ">>"
