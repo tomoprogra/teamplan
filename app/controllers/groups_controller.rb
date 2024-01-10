@@ -34,6 +34,11 @@ class GroupsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+
+  def show
+    @group = Group.find(params[:id])
+    @events = @group.events
+  end
   private
 
   def group_params
