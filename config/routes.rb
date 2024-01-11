@@ -5,13 +5,14 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, controllers: {
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    invitations: 'users/invitations'
   }
+  devise_scope :user do
+    patch '/users/invitation/accept', to: 'users/invitations#accept_invitation'
+  end
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root "tops#index"
-  namespace :users do
-    resource :invitations, only: %i[show create]
-  end
 
   resources :users do
     resources :events, only: [:index]
