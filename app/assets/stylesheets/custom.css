@@ -1,1 +1,54 @@
 /* ここにCSSを書いてください */
+
+.simple-calendar {
+  .day {}
+
+  .wday-0 {}
+  .wday-1 {}
+  .wday-2 {}
+  .wday-3 {}
+  .wday-4 {}
+  .wday-5 {}
+  .wday-6 {}
+
+  .today {}
+  .past {}
+  .future {}
+
+  .start-date {}
+
+  .prev-month {}
+  .next-month { }
+  .current-month {}
+
+  .has-events {}
+
+  .prev-month a {
+    display: none;
+  }
+  .next-month a {
+    display: none;
+  }
+  .wday-0 a {
+    color: red;
+  }
+  .wday-6 a {
+    color: blue;
+  }
+  .past a {
+    color: gray;
+  }
+  .day {
+    height: 100px;
+  }
+  td {
+    padding: 9px;
+    vertical-align: top;
+    border-left: 1px solid rgb(221, 221, 221);
+    border-right: 1px solid rgb(221, 221, 221);
+  }
+  th {
+    border-left: 1px solid rgb(221, 221, 221);
+    border-right: 1px solid rgb(221, 221, 221);
+  }
+}
