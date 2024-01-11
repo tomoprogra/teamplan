@@ -1,33 +1,66 @@
 <div class="simple-calendar">
   <div class="calendar-heading">
-    <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
-    <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
-    <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view %>
   </div>
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <% date_range.slice(0, 7).each do |day| %>
-          <th><%= t('date.abbr_day_names')[day.wday] %></th>
-        <% end %>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% date_range.each_slice(7) do |week| %>
-        <tr>
-          <% week.each do |day| %>
-            <%= content_tag :td, class: calendar.td_classes_for(day) do %>
-              <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
-                <% capture_haml(day, sorted_events.fetch(day, []), &passed_block) %>
-              <% else %>
-                <% passed_block.call day, sorted_events.fetch(day, []) %>
+  <div class="antialiased sans-serif bg-gray-100 h-screen">
+    <div class="container mx-auto px-4 py-2 md:py-24">
+      <div class="bg-white rounded-lg shadow overflow-hidden">
+        <div class="flex items-center justify-between py-2 px-6">
+          <div>
+            <span class="ml-1 text-lg text-gray-800 font-normal"><%= "#{start_date.year}年" %></span>
+            <span class="ml-1 text-lg text-gray-800 font-normal"><%= t('date.month_names')[start_date.month] %></span>
+          </div>
+          <div class="border rounded-lg px-1" style="padding-top: 2px;">
+            <button>
+              <%= link_to(calendar.url_for_previous_view, type: "button", class: "leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 items-center") do %>
+                <svg class="h-6 w-6 text-gray-500 inline-flex leading-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
               <% end %>
+            </button>
+            <div class="border-r inline-flex h-6"></div>
+            <button>
+              <%= link_to(calendar.url_for_next_view, type: "button", class: "leading-none rounded-lg transition ease-in-out duration-100 inline-flex items-center cursor-pointer hover:bg-gray-200 p-1") do %>
+                <svg class="h-6 w-6 text-gray-500 inline-flex leading-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              <% end %>
+            </button>
+          </div>
+        </div>
+
+        <table class="table table-striped">
+          <div class="-mx-1 -mb-1">
+            <div class="flex flex-wrap border-t border-l">
+              <div class="flex flex-wrap" style="margin-bottom: -40px;">
+                <thead>
+                  <tr>
+                    <div style="width: 14.26%" class="px-0.5 py-0.5">
+                        <% date_range.slice(0, 7).each do |day| %>
+                            <th class="text-gray-600 text-sm uppercase tracking-wide font-bold text-center"><%= t('date.abbr_day_names')[day.wday] %></th>
+                        <% end %>
+                    </div>
+                  </tr>
+                </thead>
+              </div>
+            </div>
+          </div>
+          <tbody>
+            <% date_range.each_slice(7) do |week| %>
+              <tr>
+                <% week.each do |day| %>
+                  <%= content_tag :td, class: calendar.td_classes_for(day) do %>
+                    <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
+                      <% capture_haml(day, sorted_events.fetch(day, []), &passed_block) %>
+                    <% else %>
+                      <% passed_block.call day, sorted_events.fetch(day, []) %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </tr>
             <% end %>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
