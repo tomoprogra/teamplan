@@ -1,15 +1,22 @@
 Rails.application.routes.draw do
   resources :events
-  resources :groups
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
+  resources :groups do
+    resources :events
+  end
 
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
   }
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root "tops#index"
   namespace :users do
     resource :invitations, only: %i[show create]
   end
+
+  resources :users do
+    resources :events, only: [:index]
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
