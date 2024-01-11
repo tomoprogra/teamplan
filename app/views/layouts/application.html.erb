@@ -24,7 +24,7 @@
     <% end %>
 
     <% flash.each do |key, value| %>
-      <div class="flash <%= flash_background_color(key) %> "><%= value %></div>
+      <div class="flash <%= flash_background_color(key) %> px-4 py-2 rounded-md mb-4 "><%= value %></div>
     <% end %>
     
     <div class="flex-grow">
