@@ -1,0 +1,29 @@
+<div class="container mx-auto mt-8">
+  <h1 class="text-3xl font-bold"><%= @group.title %></h1>
+  <div class="text-right">
+    <!-- ユーザー追加ボタン -->
+    <%= link_to '#', class: "rounded-none bg-lemon-100 bg-yellow-100 px-8 py-6" do %>
+      <i class="fas fa-plus"></i>
+    <% end %>
+  </div>
+
+  <h2 class="text-2xl font-semibold mt-5 mb-3">メンバー一覧</h2>
+    <div class="mb-5 px-5">
+      <% @users.each do |user| %>
+        <div class="flex items-center space-x-4">
+          <!-- ユーザープロフィール画像 -->
+          <%= image_tag user.profile_image, class: "rounded-full h-24 w-24" %>
+          <div class="flex-grow ml-4 px-4">
+            <!-- ユーザー名 -->
+            <h3 class="text-xl font-bold"><%= user.name %></h3>
+            <!-- 自己紹介文 -->
+            <p class="bg-cyan-100 rounded-lg p-2 text-gray-600"><%= user.introduction %></p>
+          </div>
+          <!-- ユーザー削除ボタン -->
+          <%= link_to '#', method: :delete, data: { confirm: 'ユーザーを削除しますか？' }, class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2" do %>
+            <i class="fas fa-trash"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+</div>
