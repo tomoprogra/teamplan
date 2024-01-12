@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :events
+  resources :events do
+    get 'daily_schedule', on: :collection
+  end
   resources :groups do
     resources :events
   end

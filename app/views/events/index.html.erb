@@ -7,11 +7,11 @@
 <%= link_to t('events.new.title'), new_event_path %>
 <%= turbo_frame_tag 'calendar' do %>
   <%= month_calendar events: @events do |date, events| %>
-    <%= link_to date.day, "#", class:"inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100 hover:bg-blue-200" %>
+    <%= link_to date.day, daily_schedule_events_path(date: date, group_id: @group.id), class:"inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100 hover:bg-blue-200", data: { turbo_frame: '_top' } %>
 
     <% events.each do |event| %>
       <div class="px-2 py-1 rounded-lg mt-1 overflow-hidden border border-blue-200 text-blue-800 bg-blue-100">
-        <%= link_to event.title, event, class:"text-sm truncate leading-tight" %>
+        <%= link_to event.title, event_path(event), class:"text-sm truncate leading-tight", data: { turbo_frame: '_top' } %>
       </div>
     <% end %>
   <% end %>
