@@ -1,5 +1,6 @@
 <%= form_with(model: @event, local: true) do |f| %>
 
+  <%= f.hidden_field :group_id, value: @group.id %>
   <div class="title">
     <%= f.label :title %>
     <%= f.text_field :title %>
@@ -7,12 +8,12 @@
 
   <div class="time">
     <%= f.label :start_time %>
-    <%= f.datetime_field :start_datetime %>
+    <%= f.datetime_field :start_time %>
   </div>
 
   <div class="time">
     <%= f.label :end_time %>
-    <%= f.datetime_field :end_datetime %>
+    <%= f.datetime_field :end_time %>
   </div>
 
   <div class="description">
