@@ -10,4 +10,14 @@ class User < ApplicationRecord
 
   has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
+
+  # ユーザーが所属するグループの一覧
+  def belonging_groups
+    groups
+  end
+
+  # ユーザーが指定したグループに所属しているかどうかをチェックする
+  def belongs_to_group?(group)
+    groups.exists?(group.id)
+  end
 end

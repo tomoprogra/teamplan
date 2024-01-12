@@ -1,5 +1,16 @@
 ja:
+  helpers:
+    submit:
+      create: create
+      submit: save
+      update: update
   defaults:
+    flash_message:
+      created: "%{item}を作成しました"
+      not_created: "%{item}を作成出来ませんでした"
+      updated: "%{item}を更新しました"
+      not_updated: "%{item}を更新出来ませんでした"
+      delete: "%{item}を削除しました"
   events:
     new:
       title: イベント作成
