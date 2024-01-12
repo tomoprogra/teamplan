@@ -5,16 +5,43 @@ ja:
       submit: save
       update: update
   defaults:
+    delete_confirm: 削除しますか
+    search_word: 検索ワード
+    show: 詳細
+    edit: 編集
+    delete: 削除
+    unspecified: 指定なし
+    require_login: ログインしてください
+    not_authorized: 権限がありません
     flash_message:
       created: "%{item}を作成しました"
       not_created: "%{item}を作成出来ませんでした"
       updated: "%{item}を更新しました"
       not_updated: "%{item}を更新出来ませんでした"
       delete: "%{item}を削除しました"
+  boards:
+    new:
+      title: 掲示板作成
+    index:
+      title: 掲示板一覧
+      error:
+        blank_title: "タイトルを入力してください"
+        blank_body: "本文を入力してください"
+        too_long_title: "タイトルは255文字以内で入力してください"
+        too_long_body: "本文は65535文字以内で入力してください"
   events:
     new:
       title: イベント作成
+    error:
+      blank_title: "タイトルを入力してください"
+      blank_description: "内容入力してください"
+      blank_start_time: "開始日時を入力してください"
+      blank_end_time: "終了日時を入力してください"
+      too_long_title: "タイトルは255文字以内で入力してください"
+      too_long_description: "本文は65535文字以内で入力してください"
   groups:
     new:
       title: グループ作成
+    error:
+      blank_title: "グループ名を入力してください"
   simple_calendar:
