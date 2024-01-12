@@ -1,28 +1,6 @@
 /* ここにCSSを書いてください */
 
 .simple-calendar {
-  .day {}
-
-  .wday-0 {}
-  .wday-1 {}
-  .wday-2 {}
-  .wday-3 {}
-  .wday-4 {}
-  .wday-5 {}
-  .wday-6 {}
-
-  .today {}
-  .past {}
-  .future {}
-
-  .start-date {}
-
-  .prev-month {}
-  .next-month { }
-  .current-month {}
-
-  .has-events {}
-
   .prev-month a {
     display: none;
   }
@@ -44,11 +22,11 @@
   td {
     padding: 9px;
     vertical-align: top;
-    border-left: 1px solid rgb(221, 221, 221);
-    border-right: 1px solid rgb(221, 221, 221);
+    border-left: 0.8px solid rgba(234, 232, 232, 0.857);
+    border-right: 0.8px solid rgba(234, 232, 232, 0.857);
   }
   th {
-    border-left: 1px solid rgb(221, 221, 221);
-    border-right: 1px solid rgb(221, 221, 221);
+    border-left: 0.8px solid rgba(234, 232, 232, 0.857);
+    border-right: 0.8px solid rgba(234, 232, 232, 0.857);
   }
 }
