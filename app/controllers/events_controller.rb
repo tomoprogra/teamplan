@@ -5,7 +5,8 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
+    @group = Group.find(params[:group_id])
+    @event = @group.events.build
   end
 
   def show
@@ -13,8 +14,14 @@ class EventsController < ApplicationController
   end
 
   def create
-    Event.create(event_parameter)
-    redirect_to events_path
+    @group = Group.find(params[:event][:group_id])
+    @event = @group.events.build(event_parameter)
+
+    if @event.save
+      redirect_to group_events_path(@group, @event), notice: 'イベントを作成しました。'
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -36,9 +43,15 @@ class EventsController < ApplicationController
     end
   end
 
+  def daily_schedule
+    @date = Date.parse(params[:date])
+    @group = Group.find(params[:group_id])
+    @events = @group.events.where('DATE(start_time) = ?', @date)
+  end
+
   private
 
   def event_parameter
-    params.require(:event).permit(:title, :start_datetime, :end_datetime)
+    params.require(:event).permit(:title, :start_time, :end_time, :description, :group_id)
   end
 end
