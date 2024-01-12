@@ -10,6 +10,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     if @group.save
+      @group.users << current_user
       redirect_to group_events_path(@group), notice: "作成しました"
     else
       render :new, status: :unprocessable_entity
