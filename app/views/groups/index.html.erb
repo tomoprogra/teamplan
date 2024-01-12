@@ -2,7 +2,9 @@
 <p>Find me in app/views/groups/index.html.erb</p>
 <div>
 <% if @groups.present? %>
+<div>
   <%= render @groups %>
+</div>
 <% else %>
   <div>参加グループがありません</div>
 <% end %>

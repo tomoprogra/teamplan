@@ -10,7 +10,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     if @group.save
-      redirect_to root_path
+      redirect_to groups_path #修正必要
     else
       render :new, status: :unprocessable_entity
     end
