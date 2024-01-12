@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.all
+    @group = Group.find(params[:group_id])
+    @events = @group.events
   end
 
   def new
