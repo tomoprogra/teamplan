@@ -1,6 +1,9 @@
 <h1>Events#index</h1>
 <p>Find me in app/views/events/index.html.erb</p>
 <h2>グループ名:<%= @group.title %><h2>
+<div>
+<%= link_to "メンバー一覧", group_path(@group)%>
+</div
 <%= link_to t('events.new.title'), new_event_path %>
 <%= turbo_frame_tag 'calendar' do %>
   <%= month_calendar events: @events do |date, events| %>
