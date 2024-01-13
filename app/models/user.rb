@@ -17,7 +17,8 @@ class User < ApplicationRecord
   end
 
   # ユーザーが指定したグループに所属しているかどうかをチェックする
-  def belongs_to_group?(group)
-    groups.exists?(group.id)
-  end
+  # def belongs_to_group?(group)
+  #   return false unless group
+  #   groups.exists?(group.id)
+  # end
 end
