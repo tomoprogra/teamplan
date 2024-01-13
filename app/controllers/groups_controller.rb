@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :check_membership, only: [:update, :destroy, :edit, :show]
+  # before_action :check_membership, only: [:update, :destroy, :edit, :show]
 
   def new
     @group = Group.new
@@ -43,11 +43,11 @@ class GroupsController < ApplicationController
 
   private
 
-  def check_membership
-    unless current_user.belongs_to_group?(@group)
-      redirect_to root_path, flash.now[:alert] = "グループに参加してください"
-    end
-  end
+  # def check_membership
+  #   unless current_user.belongs_to_group?(@group)
+  #     redirect_to root_path, flash.now[:alert] = "グループに参加してください"
+  #   end
+  # end
 
   def group_params
     params.require(:group).permit(:title)
