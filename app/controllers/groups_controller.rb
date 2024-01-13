@@ -41,6 +41,33 @@ class GroupsController < ApplicationController
     @users = @group.users
   end
 
+  def add_member
+    invitation = Invitation.find_by(token: params[:token])
+    if invitation && !invitation.group.users.include?(invitation.user)
+      invitation.group.users << invitation.user
+      # 成功のメッセージ
+      redirect_to group_path(invitation.group), notice: "グループに参加しました！"
+    else
+      # エラーメッセージ
+      redirect_to root_path, alert: "無効な招待です。"
+    end
+  end
+
+  def invite
+    group = Group.find(params[:id])
+    email = params[:email].downcase
+    user = User.find_by(email: email)
+
+    if user
+      invitation = Invitation.create(user: user, group: group)
+      GroupInvitationMailer.invite_email(user, group, invitation).deliver_now
+      flash[:notice] = "#{email} に招待メールを送信しました。"
+    else
+      flash[:alert] = "#{email} は登録されているメールアドレスではありません。"
+    end
+
+    redirect_to group_path(group)
+  end
   private
 
   # def check_membership

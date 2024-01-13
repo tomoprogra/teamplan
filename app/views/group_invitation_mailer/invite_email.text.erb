@@ -1,0 +1,9 @@
+グループへの招待
+
+<%= @user.name %>さん、こんにちは！
+
+あなたは<%= @group.title %>グループに招待されています。
+以下のリンクからグループを確認してください。
+
+<%= link_to 'このグループに参加する', join_group_url(token: @invitation.token) %>
+

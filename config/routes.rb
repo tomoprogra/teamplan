@@ -4,15 +4,13 @@ Rails.application.routes.draw do
   end
   resources :groups do
     resources :events
+    post :invite, on: :member
   end
-
+  
+  get '/join_group/:token', to: 'groups#add_member', as: :join_group
   devise_for :users, controllers: {
     registrations: 'users/registrations',
-    invitations: 'users/invitations'
   }
-  devise_scope :user do
-    patch '/users/invitation/accept', to: 'users/invitations#accept_invitation'
-  end
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root "tops#index"
 
