@@ -30,5 +30,10 @@
           <% end %>
         </div>
       <% end %>
+      <%= form_with url: invite_group_path(@group), method: :post do |form| %>
+        <%= form.label :email, "招待するユーザーのメールアドレス:" %>
+        <%= form.text_field :email %>
+        <%= form.submit "招待" %>
+      <% end %>
     </div>
 </div>
