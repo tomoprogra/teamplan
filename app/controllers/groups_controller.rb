@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  before_action :authenticate_user!
   # before_action :check_membership, only: [:update, :destroy, :edit, :show]
 
   def new

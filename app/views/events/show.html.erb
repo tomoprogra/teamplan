@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>タイトル</strong>
   <%= @event.title %>
@@ -15,5 +13,6 @@
   <%= @event.description %>
 </p>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Edit', edit_event_path(@event, group_id: @group.id) %>
+<%= link_to 'Delete', event_path(@event, group_id: @group.id), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') } %>
+<%= link_to 'Back', group_events_path(@group) %>
