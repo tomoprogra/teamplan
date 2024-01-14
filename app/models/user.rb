@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
+  has_many :chats, dependent: :destroy
+
 
   # ユーザーが所属するグループの一覧
   def belonging_groups

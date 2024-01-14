@@ -1,0 +1,9 @@
+<%= turbo_stream_from @group %>
+
+<%= render @group.chats %>
+
+<%= form_with(model: [@group, @group.chats.new], data: { controller: "form", action: "turbo:submit-end->form#reset" }) do |f| %>
+  <%= f.label :body, 'Say something:' %>
+  <%= f.text_field :body %>
+  <%= f.submit %>
+<% end %>
