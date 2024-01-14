@@ -1,18 +1,30 @@
-<h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
-<h2>グループ名:<%= @group.title %><h2>
-<div>
-<%= link_to "メンバー一覧", group_path(@group)%>
-</div
-<%= link_to t('events.new.title'), new_event_path %>
-<%= turbo_frame_tag 'calendar' do %>
-  <%= month_calendar events: @events do |date, events| %>
-    <%= link_to date.day, daily_schedule_events_path(date: date, group_id: @group.id), class:"inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100 hover:bg-blue-200", data: { turbo_frame: '_top' } %>
+<div class="antialiased sans-serif bg-gray-100 h-screen">
+  <h3 class="text-lg font-bold text-neutral-600 l eading-6 lg:text-5xl"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%= @group.title %></font></font></h3>
+  <div class="px-1 py-1 text-neutral-600">
+    <%= link_to "メンバー一覧", group_path(@group)%>
+  </div>
+  <div class="px-1 py-1 text-neutral-600">
+    <%= link_to new_group_event_path(group_id: @group.id), class: "add-event-link" do %>
+      <i class="fas fa-plus"></i>
+    <% end %>
+  </div>
+  <%= turbo_frame_tag 'calendar' do %>
+    <%= month_calendar events: @events do |date, events| %>
+      <%= link_to date.day, daily_schedule_events_path(date: date, group_id: @group.id), class:"inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100 hover:bg-blue-200", data: { turbo_frame: '_top' } %>
 
-    <% events.each do |event| %>
-      <div class="px-2 py-1 rounded-lg mt-1 overflow-hidden border border-blue-200 text-blue-800 bg-blue-100">
-        <%= link_to event.title, event_path(event), class:"text-sm truncate leading-tight", data: { turbo_frame: '_top' } %>
+      <div class="overflow-hidden">
+      <% events.first(2).each do |event| %>
+          <div class="px-1 py-1 rounded-lg mt-1 overflow-auto border border-blue-200 text-blue-800 bg-blue-100">
+            <%= link_to event.title, event_path(event, group_id: @group.id), class:"text-sm truncate leading-tight", data: { turbo_frame: '_top' } %>
+          </div>
+        <% end %>
+
+        <% if events.size > 2 %>
+          <div class="px-1 py-1 text-blue-800">
+            <%= link_to "+#{events.size - 2} more", daily_schedule_events_path(date: date, group_id: @group.id), class: "text-sm truncate leading-tight", data: { turbo_frame: '_top' } %>
+          </div>
+        <% end %>
       </div>
     <% end %>
   <% end %>
-<% end %>
+</div>

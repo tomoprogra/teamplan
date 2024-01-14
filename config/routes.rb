@@ -4,12 +4,13 @@ Rails.application.routes.draw do
   resources :events do
     get 'daily_schedule', on: :collection
   end
+
   resources :groups do
     resources :events
     post :invite, on: :member
     resources :chats, only: %i[create index]
   end
-  
+
   get '/join_group/:token', to: 'groups#add_member', as: :join_group
   devise_for :users, controllers: {
     registrations: 'users/registrations',

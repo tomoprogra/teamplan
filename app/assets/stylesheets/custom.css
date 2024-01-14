@@ -17,7 +17,8 @@
     color: gray;
   }
   .day {
-    height: 100px;
+    height: 120px;
+    max-width: 130px;
   }
   td {
     padding: 9px;

@@ -19,19 +19,11 @@ ja:
       updated: "%{item}を更新しました"
       not_updated: "%{item}を更新出来ませんでした"
       delete: "%{item}を削除しました"
-  boards:
-    new:
-      title: 掲示板作成
-    index:
-      title: 掲示板一覧
-      error:
-        blank_title: "タイトルを入力してください"
-        blank_body: "本文を入力してください"
-        too_long_title: "タイトルは255文字以内で入力してください"
-        too_long_body: "本文は65535文字以内で入力してください"
   events:
     new:
       title: イベント作成
+    edit :
+      title: イベント編集
     error:
       blank_title: "タイトルを入力してください"
       blank_description: "内容入力してください"
