@@ -1,0 +1,41 @@
+<% if chat.user == current_user %>
+<!-- Current Userのchatは右に表示 -->
+  <div class="mt-5 mb-3 flex justify-end">
+  <div>
+  <div class="bg-cyan-100 rounded-lg p-2 text-gray-600">
+    <%= chat.body %>
+  </div>
+  <div class="text-muted mt-2">
+    <%= chat.created_at %>
+  </div>
+  </div>
+    <div class="commenter text-center">
+      <% if current_user.profile_image.present? %>
+        <%= image_tag current_user.profile_image.url, class: "rounded-full h-24 w-24" %>
+      <% else %>
+        <%= image_tag 'default.jpg', class: "rounded-full h-24 w-24" %>
+      <% end %>
+      <div class="break-all text-muted"><%= current_user.name %></div>
+    </div>
+  </div>
+<% else %>
+<!-- Current User以外のchatは左に表示 -->
+  <div class="mt-5 mb-3 flex justify-start">
+    <div class="commenter text-center">
+      <% if chat.user.profile_image.present? %>
+        <%= image_tag current_user.profile_image.url, class: "rounded-full h-24 w-24" %>
+      <% else %>
+        <%= image_tag 'default.jpg', class: "rounded-full h-24 w-24" %>
+      <% end %>
+      <div class="break-all text-muted"><%= chat.user.name %></div>
+    </div>
+    <div>
+      <div class="bg-cyan-100 rounded-lg p-2 text-gray-600">
+        <%= chat.body %>
+      </div>
+      <div class="text-muted mt-2">
+        <%= chat.created_at %>
+      </div>
+    </div>
+  </div>
+<% end %>
