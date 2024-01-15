@@ -55,6 +55,7 @@ gem "simple_calendar", "~> 2.4"
 
 gem 'rails-i18n', '~> 7.0.0'
 gem 'devise_invitable'
+gem 'dotenv-rails'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
