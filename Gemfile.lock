@@ -120,6 +120,10 @@ GEM
     devise_invitable (2.0.9)
       actionmailer (>= 5.0)
       devise (>= 4.6)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
@@ -300,6 +304,7 @@ DEPENDENCIES
   devise
   devise-i18n
   devise_invitable
+  dotenv-rails
   jbuilder
   jsbundling-rails
   letter_opener_web
