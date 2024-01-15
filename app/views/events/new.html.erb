@@ -1,5 +1,5 @@
-<div class="flex items-center justify-center h-screen bg-gray-100">
-  <div class="bg-white py-6 rounded-md px-10 max-w-lg shadow-md">
+<div class="flex items-center justify-center bg-gray-100">
+  <div class="bg-white py-6 mt-10 rounded-md px-10 max-w-lg shadow-md">
     <h1 class="text-center text-lg font-bold text-gray-600">
       イベント作成
     </h1>
@@ -8,7 +8,7 @@
     </p>
     <%= form_with(model: @event, url: group_events_path(@group, @event), local: true) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
-      <div class="border-2 rounded-lg w-full h-12 px-4">
+      <div class="rounded-lg w-full h-12 px-4">
         <div>
           <div class="title">
             <%= f.label :title %>
