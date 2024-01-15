@@ -13,6 +13,7 @@
   </head>
 
   <body class="flex flex-col min-h-screen">
+    <header>
     <% if user_signed_in? %>
       <%= render 'shared/header' %>
       <%= render 'shared/user_setting' %>
@@ -23,15 +24,15 @@
     <% flash.each do |key, value| %>
       <div class="flash <%= flash_background_color(key) %> flex items-center p-4 mb-4  "><i class="fa-solid fa-circle-info"></i> <%= value %></div>
     <% end %>
-    
-    <div class="flex-grow">
+    </header>
+    <main class="flex-grow">
       <%= yield %>
-    </div>
+    </main>
     
-    <div class="mt-auto">
+    <footer class="mt-auto">
     <%= render 'shared/footer' %>
-    </div>
-    
+    </footer>
+
     <script>
       // Open modal function
       function openUserSettingModal() {
