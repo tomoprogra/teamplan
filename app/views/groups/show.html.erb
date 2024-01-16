@@ -25,7 +25,7 @@
             <p class="bg-cyan-100 rounded-lg p-2 text-gray-600"><%= user.introduction %></p>
           </div>
           <!-- ユーザー削除ボタン -->
-          <%= link_to '#', method: :delete, data: { confirm: 'ユーザーを削除しますか？' }, class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2" do %>
+          <%= link_to '#', data: { "turbo-method": :delete }, data: { confirm: 'ユーザーを削除しますか？' }, class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2" do %>
             <i class="fas fa-trash"></i>
           <% end %>
         </div>
