@@ -23,4 +23,9 @@ class User < ApplicationRecord
   #   return false unless group
   #   groups.exists?(group.id)
   # end
+
+  def events_for_calendar
+    group_ids = self.groups.pluck(:id)
+    Event.where(group_id: group_ids)
+  end
 end
