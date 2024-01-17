@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   resources :groups do
     resources :events
+    member do
+      delete :leave
+    end
     post :invite, on: :member
     resources :chats, only: %i[create index]
   end

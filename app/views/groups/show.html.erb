@@ -1,16 +1,19 @@
 <div class="container mx-auto mt-8">
-  <h1 class="text-3xl font-bold"><%= @group.title %></h1>
-  <div class="text-right">
-    <!-- ユーザー追加ボタン -->
-    <%= link_to '#', class: "rounded-none bg-lemon-100 bg-yellow-100 px-8 py-6" do %>
-      <i class="fas fa-plus"></i>
-    <% end %>
+    <div class="text-3xl font-bold">グループ名：<%=@group.title %></div>
+     <!-- ユーザー追加ボタン -->
+  <div class="mt-4">
+      <%= form_with url: invite_group_path(@group), method: :post do |form| %>
+            <%= form.label :email, "招待するユーザーのemail:", class: "mr-10"%>
+            <%= form.text_field :email, class: "py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
+            <%= button_tag(type: "submit", class: "rounded-none bg-lemon-100 bg-yellow-100 px-6 py-6") do%>
+              <i class="fas fa-plus"></i>
+            <% end %>
+      <% end %>
   </div>
-
   <h2 class="text-2xl font-semibold mt-5 mb-3">メンバー一覧</h2>
     <div class="mb-5 px-5">
       <% @users.each do |user| %>
-        <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-7">
           <!-- ユーザープロフィール画像 -->
           <% if user.profile_image.present? %>
             <%= image_tag user.profile_image.url, class: "rounded-full h-24 w-24" %>
@@ -24,16 +27,20 @@
             <!-- 自己紹介文 -->
             <p class="bg-cyan-100 rounded-lg p-2 text-gray-600"><%= user.introduction %></p>
           </div>
-          <!-- ユーザー削除ボタン -->
-          <%= link_to '#', data: { "turbo-method": :delete }, data: { confirm: 'ユーザーを削除しますか？' }, class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2" do %>
+          <!-- 退出ボタン -->
+          <% if current_user && current_user == user %>
+            <%= link_to leave_group_path(user_id: current_user.id), data: { turbo_method: :delete, turbo_confirm: 'グループから退出しますか？' }, class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2" do %>
+              <i class="fas fa-sign-out-alt"></i>
+            <% end %>
+            <% else %>
+            <%= link_to leave_group_path(user_id: user), data: { turbo_method: :delete, turbo_confirm: 'メンバーを削除しますか？' }, class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2" do %>
             <i class="fas fa-trash"></i>
+            <% end %>
           <% end %>
         </div>
       <% end %>
-      <%= form_with url: invite_group_path(@group), method: :post do |form| %>
-        <%= form.label :email, "招待するユーザーのメールアドレス:" %>
-        <%= form.text_field :email %>
-        <%= form.submit "招待" %>
-      <% end %>
+      <div class="rounded-lg drop-shadow-lg text-red-100 hover:bg-red-300 hover:drop-shadow-none px-2 py-2">
+        <%= link_to 'グループを削除', group_path(@group),  data: { turbo_method: :delete, turbo_confirm: 'グループを削除しますか？' } %>
+      </div>
     </div>
 </div>
