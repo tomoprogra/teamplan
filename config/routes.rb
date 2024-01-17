@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users/show'
   get 'chats/index'
   get 'chats/create'
   resources :events do
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
   }
+  get "users/mypage" => "users#show"
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root "tops#index"
 
