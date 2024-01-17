@@ -3,22 +3,22 @@
 <%= form_for(current_user, url: user_registration_path, method: :put, remote: true) do |f| %>
   <%= render "devise/shared/error_messages", resource: current_user %>
   <div class="mb-4">
-    <%= f.label :name, class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= f.text_field :name, class: "form-input mt-1 block w-full" %>
+    <%= f.label '名前', class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= f.text_field :name, class: "form-input block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
   </div>
 
   <div class="mb-4">
     <%= f.label :email, class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= f.email_field :email, class: "form-input mt-1 block w-full" %>
+    <%= f.email_field :email, class: "form-input block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
   </div>
 
   <div class="mb-4">
-    <%= f.label :introduction, class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= f.text_area :introduction, class: "form-input mt-1 block w-full" %>
+    <%= f.label '自己紹介', class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= f.text_area :introduction, class: "form-input block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
   </div>
 
   <div class="mb-4">
-    <%= f.label :profile_image %>
+    <%= f.label 'プロフィール画像' %>
           <%= f.file_field :profile_image, class: 'form-control mb-3', accept: 'image/*' %>
           <%= f.hidden_field :profile_image_cache %>
           <div class='mt-3 mb-3'>
@@ -30,6 +30,6 @@
   </div>
 
   <div class="flex items-center justify-end mt-4">
-    <%= f.submit "Save", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    <%= f.submit "保存する", class: "text-base font-medium text-center text-gray-600 transition duration-500 ease-in-out transform bg-yellow-100 rounded-xl hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 py-2 px-4 rounded" %>
   </div>
 <% end %>
