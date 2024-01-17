@@ -1,18 +1,24 @@
+<div class="navbar bg-secondary bg-opacity-50 text-gray-600">
+  <div class="btn btn-ghost text-xl">
+    <%= link_to group_events_path(@group) do%>
+      <%= @group.title %>
+      <% end %>
+    </div>
+  </div>
 <div class="text-gray-600 mb-5 px-5">
+  <%= turbo_stream_from @group %>
 
-<%= turbo_stream_from @group %>
+  <div class="flex flex-col space-y-4">
+    <%= render @group.chats %>
+  </div>
 
-<div class="flex flex-col space-y-4">
-  <%= render @group.chats %>
-</div>
-
-<div>
-<%= form_with(model: [@group, @group.chats.new], data: { controller: "form", action: "turbo:submit-end->form#reset" }) do |f| %>
-  <%= f.label :body, 'Say something:' %>
-  <%= f.text_field :body, class: "input input-bordered input-primary w-full"%>
-  <%= button_tag type: 'submit', class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2" do %>
-    <i class="fa-solid fa-paper-plane fa-xl"></i>
-  <% end %>
-<% end %>
-</div>
+  <div>
+    <%= form_with(model: [@group, @group.chats.new], data: { controller: "form", action: "turbo:submit-end->form#reset" }) do |f| %>
+      <%= f.label :body, 'メッセージを入力' %>
+      <%= f.text_field :body, class: "input input-bordered input-base-200 w-full"%>
+      <%= button_tag type: 'submit', class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2" do %>
+        <i class="fa-solid fa-paper-plane fa-xl"></i>
+      <% end %>
+    <% end %>
+  </div>
 </div>
