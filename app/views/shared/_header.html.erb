@@ -47,28 +47,21 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  // ドロップダウンメニュー
-  const setupDropdown = (buttonId, menuId) => {
-    const button = document.getElementById(buttonId);
-    const menu = document.getElementById(menuId);
+document.addEventListener('click', (e) => {
+  if(!hamburgerIcon.contains(e.target) && menuList.classList.contains('hidden')) {
+    menuList.classList.add('hidden');
+  }
 
-    button.addEventListener('click', function () {
-      menu.classList.toggle('hidden');
-    });
+  if(!dropdownButton.contains(e.target) && calendarMenu.classList.contains('hidden')){
+     calendarMenu.classList.add('hidden'); 
+  }
+})
 
-    // メニュー外をクリックした場合に非表示にする
-    document.addEventListener('click', function (event) {
-      if (!button.contains(event.target) && !menu.contains(event.target)) {
-        menu.classList.add('hidden');
-      }
-    });
-  };
+hamburgerIcon.addEventListener('click', () => {
+  menuList.classList.toggle('hidden'); 
+})
 
-  // カレンダー選択
-  setupDropdown('dropdown-button', 'dropdown-calendar');
-
-  // ハンバーガーメニュー
-  setupDropdown('hamburger-wrapper', 'menu-list');
-});
+dropdownButton.addEventListener('click', () => {
+  calendarMenu.classList.toggle('hidden');
+})
 </script>
