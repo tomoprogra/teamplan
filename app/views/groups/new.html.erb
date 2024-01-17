@@ -1,1 +1,11 @@
-<%= render "form" %>
+<div class="flex items-center justify-center h-screen bg-gray-100">
+  <div class="bg-white py-6 rounded-md px-10 max-w-lg shadow-md ">
+    <h1 class="text-center text-lg font-bold text-gray-600 py-2">
+      <%= t('.title') %>
+    </h1>
+    <p class="text-sm text-gray-500 text-center py-3">
+      グループ名を記入してください
+    </p>
+    <%= render "form" %>
+  </div>
+</div>

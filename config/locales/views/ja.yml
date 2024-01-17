@@ -34,6 +34,8 @@ ja:
   groups:
     new:
       title: グループ作成
+    edit:
+      title: グループ名変更
     error:
       blank_title: "グループ名を入力してください"
   simple_calendar:

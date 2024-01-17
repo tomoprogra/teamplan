@@ -1,1 +1,13 @@
-<%= render "form" %>
+<div class="flex items-center justify-center h-screen bg-gray-100">
+  <div class="flex-col items-center justify-center">
+    <div class="bg-white py-6 rounded-md px-10 max-w-lg shadow-md ">
+      <h1 class="text-center text-lg font-bold text-gray-600 py-2">
+        <%= t('.title') %>
+      </h1>
+      <%= render "form" %>
+    </div>
+    <div class="text-center text-gray-500 py-2">
+    <%= link_to "back", group_events_path(@group), title: "戻る" %>
+    </div>
+  </div>
+</div>
