@@ -12,10 +12,10 @@
   </div>
   <div class="chat-header">
   <%= current_user.name %>
-    <time class="text-xs opacity-50"><%= chat.created_at %></time>
   </div>
   <div class="chat-bubble chat-bubble-primary"><%= chat.body %></div>
   <div class="chat-footer opacity-50">
+  <time class="text-xs opacity-50"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></time>
   </div>
 </div>
 
@@ -34,10 +34,10 @@
   </div>
   <div class="chat-header">
   <%= chat.user.name %>
-    <time class="text-xs opacity-50"><%= chat.created_at %></time>
   </div>
   <div class="chat-bubble chat-bubble-primary"><%= chat.body %></div>
   <div class="chat-footer opacity-50">
+  <time class="text-xs opacity-50"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></time>
   </div>
 </div>
 

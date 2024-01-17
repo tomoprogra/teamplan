@@ -6,11 +6,13 @@
   <%= render @group.chats %>
 </div>
 
+<div>
 <%= form_with(model: [@group, @group.chats.new], data: { controller: "form", action: "turbo:submit-end->form#reset" }) do |f| %>
   <%= f.label :body, 'Say something:' %>
-  <%= f.text_field :body, class: "rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-cyan-200 sm:max-w-md"%>
+  <%= f.text_field :body, class: "input input-bordered input-primary w-full"%>
   <%= button_tag type: 'submit', class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2" do %>
     <i class="fa-solid fa-paper-plane fa-xl"></i>
   <% end %>
 <% end %>
+</div>
 </div>
