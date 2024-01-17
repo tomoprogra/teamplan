@@ -8,6 +8,7 @@ class EventsController < ApplicationController
 
   def new
     @event = @group.events.build
+    @event.start_time = DateTime.parse(params[:date])
   end
 
   def show
@@ -46,8 +47,12 @@ class EventsController < ApplicationController
   end
 
   def daily_schedule
-    @date = Date.parse(params[:date])
-    @events = @group.events.where('DATE(start_time) = ?', @date)
+    @date = params[:date].to_date
+    @group = Group.find(params[:group_id])
+  
+    # この日付がイベントの開始日または終了日の範囲内にあるイベントを取得
+    @events = Event.where('start_time <= ? AND end_time >= ?', @date.end_of_day, @date.beginning_of_day)
+                   .where(group_id: @group.id)
   end
 
   private
