@@ -12,9 +12,6 @@ class EventsController < ApplicationController
   # params[:date]が存在する場合のみDateTime.parseを使用
   if params[:date].present?
     @event.start_time = DateTime.parse(params[:date])
-  else
-    #現在の日時を設定
-    @event.start_time = DateTime.now
   end
 end
 
