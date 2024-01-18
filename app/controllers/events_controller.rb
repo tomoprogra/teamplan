@@ -7,9 +7,16 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = @group.events.build
+  @event = @group.events.build
+
+  # params[:date]が存在する場合のみDateTime.parseを使用
+  if params[:date].present?
     @event.start_time = DateTime.parse(params[:date])
+  else
+    #現在の日時を設定
+    @event.start_time = DateTime.now
   end
+end
 
   def show
     @event = Event.find(params[:id])
@@ -21,7 +28,7 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to group_events_path(@group, @event), success: t('defaults.flash_message.created', item: Event.model_name.human)
     else
-      flash.now[:danger] = t('defaults.flash_message.not_created', item: Event.model_name.human)
+      flash.now[:danger] = @event.errors.full_messages.join(', ')
       render :new, status: :unprocessable_entity
     end
   end

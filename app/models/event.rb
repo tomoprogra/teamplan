@@ -6,9 +6,9 @@ class Event < ApplicationRecord
   validates :start_time, presence: true
   validates :end_time, presence: true
   validates :group_id, presence: true
-  validate :date_before_start
+  # validate :date_before_start
 
-  def date_before_start
-    errors.add(:start_time, "は過去の日付を選択できません") if start_time < Date.today
-  end
+  # def date_before_start
+  #   errors.add(:start_time, "は過去の日付を選択できません") if start_time < Date.today
+  # end
 end
