@@ -10,6 +10,7 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     if @group.save
       @group.users << current_user
+      @group.create_notification_join!(current_user)
       redirect_to group_events_path(@group), success: t('defaults.flash_message.created', item: Group.model_name.human)
     else
       flash.now[:danger] = t('defaults.flash_message.not_created', item: Group.model_name.human)

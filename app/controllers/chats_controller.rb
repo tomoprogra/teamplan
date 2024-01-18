@@ -9,6 +9,9 @@ class ChatsController < ApplicationController
   def create
     group = Group.find(params[:group_id])
     group.chats.create!(**chat_params, user: current_user)
+    if @chat.save
+      @group.create_notification_chat!(current_user, @chat.id)
+    end
 
     respond_to do |format|
       format.turbo_stream
