@@ -4,5 +4,6 @@ class Group < ApplicationRecord
   has_many :events, dependent: :destroy
   has_many :chats, dependent: :destroy
   has_many :invitations, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   validates :title, presence: true
 end
