@@ -7,70 +7,64 @@
           <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
           </form>
-          <h3 class="font-bold text-lg">アカウント設定</h3>
           <%= render 'users/settings_form' %>
         </div>
       </dialog>
 
     <!-- グループ選択 -->
     <div class="drawer">
-    <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+      <input id="my-drawer" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content">
       <!-- Page content here -->
       <label for="my-drawer" class="btn btn-secondary drawer-button">
       <i class="fa-regular fa-calendar-check fa-xl"></i></label>
     </div> 
-    <div class="drawer-side rounded-lg z-10">
+    <div class="drawer-side z-10">
       <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
       <ul class="menu p-4 w-80 min-h-full bg-secondary text-base-content">
-      <li class="menu-title hover:text-white transition-all duration-300"">
-        <%= link_to new_group_path do %>
-          <i class="fa-solid fa-plus"></i> グループを作る
-        <% end %>
-      </li>
-
-      <li class="menu-title">グループを選ぶ</li>
-      <% if @user_groups.present? %>
-      <% @user_groups.each do |group| %>
-        <li>
-          <%= link_to group.title, group_events_path(group), class: "ml-2 hover:text-white transition-all duration-300" %>
+        <li class="menu-title hover:text-white transition-all duration-300"">
+          <%= link_to new_group_path do %>
+            <i class="fa-solid fa-plus"></i> グループを作る
+          <% end %>
         </li>
-      <% end %>
-    <% end %>
-        
+
+        <li class="menu-title">グループを選ぶ</li>
+          <% if @user_groups.present? %>
+            <% @user_groups.each do |group| %>
+              <li>
+                <%= link_to group.title, group_events_path(group), class: "ml-2 hover:text-white transition-all duration-300" %>
+              </li>
+            <% end %>
+          <% end %>
       </ul>
     </div>
   </div>
-  </div>
+</div>
+
   <!-- ホームボタン&ユーザー名表示 -->
-  <div class="flex-1">
+<div class="flex-1">
   <%= link_to current_user.name, root_path, class: "btn btn-ghost text-xl" %>
 </div>
 
   <!-- ハンバーガーメニュー -->
-  <div class="flex-none">
+<div class="flex-none">
   <div class="drawer drawer-end">
-  <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content">
-    <label for="my-drawer-4" class="drawer-button btn btn-primary"><i class="fa-solid fa-bars fa-xl cursor-pointer" ></i></label>
-  </div> 
-  <div class="drawer-side z-10">
-    <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
-    <ul class="menu p-4 w-80 min-h-full bg-primary text-base-content">
-      <li class="menu-title">Menu</li>
-      <li><%= link_to 'マイカレンダー', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
-      <li><%= link_to 'ログアウト', destroy_user_session_path, class: "ml-2 hover:text-white transition-all duration-300" %></li>
-    </ul>
-  </div>
-</div>
-<<<<<<< HEAD
-</div>
-=======
-  </div>
+    <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content">
+      <label for="my-drawer-4" class="drawer-button btn btn-primary"><i class="fa-solid fa-bars fa-xl cursor-pointer" ></i></label>
+    </div> 
+    <div class="drawer-side z-10">
+      <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+      <ul class="menu p-4 w-80 min-h-full bg-primary text-base-content">
+        <li class="menu-title">Menu</li>
+        <li><%= link_to 'マイカレンダー', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
+        <li><%= link_to 'ログアウト', destroy_user_session_path, class: "ml-2 hover:text-white transition-all duration-300" %></li>
+      </ul>
+    </div>
+ </div>
 </div>
 
 
->>>>>>> 60efa70 (fix:header修正)
 
 
 
