@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
   }
   get "users/mypage" => "users#show"
+  get "users/events_for_date", to: "users#events_for_date", as: :events_for_date
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root "tops#index"
 

@@ -15,6 +15,9 @@
   }
   .past a {
     color: gray;
+    p {
+      color: gray;
+    }
   }
   .day {
     height: 120px;
