@@ -33,4 +33,13 @@ class User < ApplicationRecord
     group_ids = self.groups.pluck(:id)
     Event.where(group_id: group_ids)
   end
+
+  def events_for_calendar_by_date(selected_date)
+    group_ids = self.groups.pluck(:id)
+    Event.where(group_id: group_ids)
+        .where('(start_time >= ? AND start_time <= ?) OR (end_time >= ? AND end_time <= ?)',
+                selected_date.beginning_of_day, selected_date.end_of_day,
+                selected_date.beginning_of_day, selected_date.end_of_day)
+        .order(:start_time)
+  end
 end

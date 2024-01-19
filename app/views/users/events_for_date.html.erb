@@ -1,0 +1,47 @@
+<div class="container mx-auto mt-8 text-gray-600">
+  <div class="event-date-header text-2xl font-semibold mt-5 mb-3">
+    <p><%= @selected_date.strftime("%Y年%m月%d日") %></p>
+    <p>予定一覧</p>
+  </div>
+
+  <div class="event-list mb-5 px-5">
+    <% if @events_for_selected_date.empty? %>
+      <p>イベントはありません。</p>
+    <% else %>
+      <%= turbo_frame_tag 'events_for_date' do %>
+        <ul>
+          <div class="overflow-hidden">
+            <% @events_for_selected_date.each do |event| %>
+              <li class="event-item my-2">
+                <div class="flex justify-between items-center">
+                  <div class="event-details bg-cyan-100 rounded-lg p-2 text-gray-600 w-full mr-5">
+                    <div class="event-time font-semibold">
+                      <% if event.start_time.to_date == event.end_time.to_date %>
+                        <%= event.start_time.strftime('%H:%M') %> ~ <%= event.end_time.strftime('%H:%M') %>
+                      <% else %>
+                        <%= event.start_time.strftime('%m月%d日 %H:%M') %> ~ <%= event.end_time.strftime('%m月%d日 %H:%M') %>
+                      <% end %>
+                    </div>
+                    <div class="event-title font-semibold">
+                      タイトル: <%= link_to event.title, event_path(event, group_id: event.group_id) %>
+                    </div>
+                    <div class="event-description font-semibold">
+                      内容: <%= event.description %>
+                    </div>
+                    <div class="event-group font-semibold">
+                      グループ:  <%= link_to group_events_path(group_id: event.group_id) do%><i class="fa-solid fa-users" aria-hidden="true"></i> <%= event.group.title %><% end %>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </div>
+        </ul>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="mt-4">
+    <%= link_to "マイページに戻る", users_mypage_path, class: "back-to-calendar rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2" %>
+  </div>
+</div>
