@@ -52,6 +52,7 @@ gem "devise-i18n"
 gem "letter_opener_web"
 
 gem "simple_calendar", "~> 2.4"
+gem 'kaminari'
 
 gem 'rails-i18n', '~> 7.0.0'
 gem 'devise_invitable'

@@ -1,74 +1,72 @@
-<div class="bg-cyan-100 text-gray-600">
-<div class="container mx-auto flex justify-between items-center px-8 py-2 text-lg">
-  <div class="space-x-3">
-  <!-- アカウント設定 -->
-  <button id="openUserSettingModalButton" class="rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2">
-      <i class="fa-solid fa-gear fa-xl"></i>
-  </button>
-  <!-- グループ選択 -->
-  <div class="relative inline-block" id="calendar-select-wrapper">
-    <button id="dropdown-button" class="rounded-lg drop-shadow-lg bg-yellow-100 hover:drop-shadow-none px-2.5 py-2">
-      <i class="fa-regular fa-calendar-check fa-xl"></i>
-    </button>
-      <ul id="dropdown-calendar" class="hidden absolute z-50 left-0 mt-0 p-2 w-48 px-2 py-6 bg-yellow-100 space-y-5 border rounded-r-lg shadow-lg">
-        <li class="border-b-2 border-white pb-5 mx-2">グループを選ぶ</li>
-        <% if @user_groups.present? %>
-          <% @user_groups.each do |group| %>
-            <li>
-              <%= link_to group.title, group_events_path(group), class: "ml-2 hover:text-white transition-all duration-300" %>
-            </li>
+<div class="navbar bg-primary text-gray-600">
+  <div class="flex-none space-x-3">
+    <!-- アカウント設定 -->
+    <button class="btn btn-secondary" onclick="my_modal_3.showModal()"><i class="fa-solid fa-gear fa-xl"></i></button>
+      <dialog id="my_modal_3" class="modal">
+        <div class="modal-box">
+          <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+          </form>
+          <%= render 'users/settings_form' %>
+        </div>
+      </dialog>
+
+    <!-- グループ選択 -->
+    <div class="drawer">
+      <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content">
+      <!-- Page content here -->
+      <label for="my-drawer" class="btn btn-secondary drawer-button">
+      <i class="fa-regular fa-calendar-check fa-xl"></i></label>
+    </div> 
+    <div class="drawer-side z-10">
+      <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+      <ul class="menu p-4 w-80 min-h-full bg-secondary text-base-content">
+        <li class="menu-title hover:text-white transition-all duration-300"">
+          <%= link_to new_group_path do %>
+            <i class="fa-solid fa-plus"></i> グループを作る
           <% end %>
-        <% end %>
-        <li>
-          <%= link_to "グループを作る", new_group_path, class: "ml-2 hover:text-white transition-all duration-300" %>
         </li>
+
+        <li class="menu-title">グループを選ぶ</li>
+          <% if @user_groups.present? %>
+            <% @user_groups.each do |group| %>
+              <li>
+                <%= link_to group.title, group_events_path(group), class: "ml-2 hover:text-white transition-all duration-300" %>
+              </li>
+            <% end %>
+          <% end %>
       </ul>
-  </div>
-  <div class="relative inline-block">
-    <%= current_user.name %>
-  </div>
-
-  </div>
-  <div>
-    <ul>
-    <!-- ハンバーガーメニュー -->
-     <li class="relative" id="hamburger-wrapper">
-       <i class="fa-solid fa-bars fa-xl cursor-pointer" id="hamburger-icon"></i>
-        <ul class="hidden absolute right-0 mt-0 p-2 w-48 px-2 z-50 py-6 bg-yellow-100 space-y-5 border rounded-l-lg shadow-lg" id="menu-list">
-          <li class="border-b-2 border-white pb-5 mx-2">Menu</li>
-          <li><%= link_to 'マイカレンダー', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
-          <li><%= link_to 'カレンダー作成', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
-          <li><%= link_to 'ログアウト', destroy_user_session_path ,class: "ml-2 hover:text-white transition-all duration-300" %></li>
-        </ul>
-      </li>
-    </ul>
+    </div>
   </div>
 </div>
+
+  <!-- ホームボタン&ユーザー名表示 -->
+<div class="flex-1">
+  <%= link_to current_user.name, root_path, class: "btn btn-ghost text-xl" %>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  // ドロップダウンメニュー
-  const setupDropdown = (buttonId, menuId) => {
-    const button = document.getElementById(buttonId);
-    const menu = document.getElementById(menuId);
+  <!-- ハンバーガーメニュー -->
+<div class="flex-none">
+  <div class="drawer drawer-end">
+    <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content">
+      <label for="my-drawer-4" class="drawer-button btn btn-primary"><i class="fa-solid fa-bars fa-xl cursor-pointer" ></i></label>
+    </div> 
+    <div class="drawer-side z-10">
+      <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+      <ul class="menu p-4 w-80 min-h-full bg-primary text-base-content">
+        <li class="menu-title">Menu</li>
+        <li><%= link_to 'マイカレンダー', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
+        <li><%= link_to 'ログアウト', destroy_user_session_path, class: "ml-2 hover:text-white transition-all duration-300" %></li>
+      </ul>
+    </div>
+ </div>
+</div>
 
-    button.addEventListener('click', function () {
-      menu.classList.toggle('hidden');
-    });
 
-    // メニュー外をクリックした場合に非表示にする
-    document.addEventListener('click', function (event) {
-      if (!button.contains(event.target) && !menu.contains(event.target)) {
-        menu.classList.add('hidden');
-      }
-    });
-  };
 
-  // カレンダー選択
-  setupDropdown('dropdown-button', 'dropdown-calendar');
 
-  // ハンバーガーメニュー
-  setupDropdown('hamburger-wrapper', 'menu-list');
-});
-</script>
+
+
+
