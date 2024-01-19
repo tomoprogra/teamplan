@@ -16,7 +16,6 @@
     <header>
     <% if user_signed_in? %>
       <%= render 'shared/header' %>
-      <%= render 'shared/user_setting' %>
     <% else %>
       <%= render 'shared/before_login_header' %>
     <% end %>
@@ -32,23 +31,6 @@
     <footer class="mt-auto">
     <%= render 'shared/footer' %>
     </footer>
-
-    <script>
-      // Open modal function
-      function openUserSettingModal() {
-        document.getElementById('userSettingModal').classList.remove('hidden');
-      }
-
-      // Close modal function
-      function closeUserSettingModal() {
-        document.getElementById('userSettingModal').classList.add('hidden');
-      }
-
-      // Add event listeners to open and close the modal
-      document.getElementById('openUserSettingModalButton').addEventListener('click', openUserSettingModal);
-      document.getElementById('closeUserSettingModal').addEventListener('click', closeUserSettingModal);
-      document.querySelector('.modal-overlay').addEventListener('click', closeUserSettingModal);
-    </script>
   </body>
 </html>
 
