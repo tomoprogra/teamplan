@@ -52,6 +52,32 @@
       </ul>
     </div>
   </div>
+  <!-- 通知 -->
+  <div class="dropdown">
+    <div class="indicator">
+    <% if @notifications.present? && @notifications.reject(&:self_chat_notification?).any? %>
+       <span class="indicator-item badge badge-accent"><%= @notifications.reject(&:self_chat_notification?).count %></span>
+       <% end %> 
+    <div tabindex="0" role="button" class="btn btn-secondary m-1"><i class="fa-regular fa-bell fa-xl"></i></div>
+          </div>
+      <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+        <li class="menu-title">通知</li>
+          <%= turbo_frame_tag 'notifications' do %>
+            <% if @notifications.present? && @notifications.reject(&:self_chat_notification?).any? %>
+              <li class="menu-title">
+                <%= link_to destroy_all_notifications_path, remote: true, data: { turbo_method: :delete }, class: 'text-dark' do %>
+                  全て既読にする
+                <% end %>
+              </i>
+              <% @notifications.each do |notification| %>
+                <i><%= render 'notifications/notification', notification: notification %></i>
+              <% end %>
+                <% else %>
+              通知はありません
+           <% end %>
+          <% end %>
+      </ul>
+   </div>
 </div>
 
   <!-- ホームボタン&ユーザー名表示 -->
@@ -76,7 +102,25 @@
     </div>
  </div>
 </div>
+</div>
+</div>
 
+<script>
+      // Open modal function
+      function openUserSettingModal() {
+        document.getElementById('userSettingModal').classList.remove('hidden');
+      }
+
+      // Close modal function
+      function closeUserSettingModal() {
+        document.getElementById('userSettingModal').classList.add('hidden');
+      }
+
+      // Add event listeners to open and close the modal
+      document.getElementById('openUserSettingModalButton').addEventListener('click', openUserSettingModal);
+      document.getElementById('closeUserSettingModal').addEventListener('click', closeUserSettingModal);
+      document.querySelector('.modal-overlay').addEventListener('click', closeUserSettingModal);
+    </script>
 
 
 
