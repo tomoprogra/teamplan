@@ -24,6 +24,7 @@
     max-width: 130px;
   }
   td {
+    width: 130px;
     padding: 9px;
     vertical-align: top;
     border-left: 0.8px solid rgba(234, 232, 232, 0.857);
@@ -32,5 +33,11 @@
   th {
     border-left: 0.8px solid rgba(234, 232, 232, 0.857);
     border-right: 0.8px solid rgba(234, 232, 232, 0.857);
+  }
+  tr {
+    border-bottom-color: rgba(234, 232, 232, 0.857);
+  }
+  .today a {
+    background-color: lightblue;
   }
 }

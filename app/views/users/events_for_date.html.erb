@@ -23,13 +23,13 @@
                       <% end %>
                     </div>
                     <div class="event-title font-semibold">
-                      タイトル: <%= link_to event.title, event_path(event, group_id: event.group_id) %>
+                      タイトル: <%= link_to event.title, event_path(event, group_id: event.group_id), data: { turbo_frame: '_top' } %>
                     </div>
                     <div class="event-description font-semibold">
                       内容: <%= event.description %>
                     </div>
                     <div class="event-group font-semibold">
-                      グループ:  <%= link_to group_events_path(group_id: event.group_id) do%><i class="fa-solid fa-users" aria-hidden="true"></i> <%= event.group.title %><% end %>
+                      グループ:  <%= link_to group_events_path(group_id: event.group_id), data: { turbo_frame: '_top' } do%><i class="fa-solid fa-users" aria-hidden="true"></i><%= event.group.title %><% end %>
                     </div>
                   </div>
                 </div>
