@@ -11,6 +11,19 @@
         </div>
       </dialog>
 
+    <!-- モーダルの外側を押しても閉じるように設定 -->
+    <script>
+      // モーダルの要素を取得
+      var modal = document.getElementById('my_modal_3');
+
+      // モーダルの外側をクリックしたときにモーダルを閉じる
+      window.onclick = function(event) {
+        if (event.target === modal) {
+          modal.close();
+        }
+      }
+    </script>
+
     <!-- グループ選択 -->
     <div class="drawer">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
@@ -63,7 +76,6 @@
     </div>
  </div>
 </div>
-
 
 
 
