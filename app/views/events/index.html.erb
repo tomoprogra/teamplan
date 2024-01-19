@@ -1,28 +1,28 @@
 <div class="antialiased bg-gray-100 w-full h-full">
-  <div class="container px-6 mx-auto flex justify-between py-4">
-      <div class="flex space-x-3 text-gray-600">
-      <h3 class="text-3xl font-semibold l eading-6 lg:text-5xl"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%= @group.title %></font></font></h3>
+  <div class="container px-6 mx-auto flex justify-between py-2">
+    <div class="flex items-center space-x-2 text-gray-600">
+      <h3 class="text-2xl font-semibold l eading-6 lg:text-4xl"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%= @group.title %></font></font></h3>
         <%= link_to edit_group_path(@group), title: "グループ名変更" do %>
-          <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+          <i class="fa-solid fa-pencil fa-xs" aria-hidden="true"></i>
         <% end %>
-      </div>
-    <div class="flex space-x-3 text-gray-600">
-      <div class="flex flex-col">
-        <%= link_to group_path(@group), class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-4 py-3", title: "グループメンバー" do %>
-        <i class="fa-solid fa-users fa-xl" aria-hidden="true"></i>
-        <% end %>
-      </div>
-      <div class="flex flex-col">
-        <%= link_to group_chats_path, class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-4 py-3", title: "グループチャット" do %>
-          <i class="fa-solid fa-comments fa-xl" aria-hidden="true"></i>
-        <% end%>
-      </div>
-      <div class="flex flex-col">
-        <%= link_to new_group_event_path(group_id: @group.id), class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-4 py-3", title: "イベント作成" do %>
-          <i class="fa-solid fa-plus fa-xl"></i>
-        <% end %>
-      </div>
     </div>
+    <ul class="menu menu-horizontal bg-white rounded-box mt-6 items-center">
+      <li>
+        <%= link_to(group_path(@group), class: "tooltip", "data-tip" => "メンバー") do %>
+          <i class="fa-solid fa-users fa text-gray-600 hover:text-sky-600" aria-hidden="true"></i>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to(group_chats_path, class: "tooltip", "data-tip" => "チャット") do %>
+          <i class="fa-solid fa-comments fa text-gray-600 hover:text-sky-600" aria-hidden="true"></i>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to(new_group_event_path(group_id: @group.id), class: "tooltip", "data-tip" => "イベント作成") do %>
+          <i class="fa-solid fa-plus fa text-gray-600 hover:text-sky-600"></i>
+        <% end %>
+      </li>
+    </ul>
   </div>
   <div>
     <%= turbo_frame_tag 'calendar' do %>
@@ -31,14 +31,14 @@
           <div class="overflow-hidden">
             <% events.first(2).each do |event| %>
                 <%= link_to event_path(event, group_id: @group.id), data: { turbo_frame: '_top' } do %>
-                  <div class="px-1 py-1 rounded-lg mt-1 overflow-auto border border-blue-100 text-blue-800 bg-blue-100">
+                  <div class="px-1 py-1 rounded-lg mt-1 overflow-auto border border-sky-100 text-sky-700 bg-sky-100" >
                     <p class="text-sm truncate leading-tight"><%= event.title %></p>
                   </div>
                 <% end %>
             <% end %>
 
             <% if events.size > 2 %>
-              <div class="px-1 py-1 text-blue-800">
+              <div class="px-1 py-1 text-sky-700">
                 <%= link_to "+#{events.size - 2} more", daily_schedule_events_path(date: date, group_id: @group.id), class: "text-sm truncate leading-tight", data: { turbo_frame: '_top' } %>
               </div>
             <% end %>

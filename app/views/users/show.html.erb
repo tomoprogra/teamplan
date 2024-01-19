@@ -1,7 +1,11 @@
 <div class="antialiased bg-gray-100 w-full h-full">
-  <div class="container px-6 mx-auto flex justify-between py-4">
-      <%= image_tag @user.profile_image.url, class: "rounded-full h-24 xg:h-48 w-24 lg:w-48" %>
-      <h3 class="text-lg font-semibold text-gray-600 l eading-6 lg:text-5xl"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Myカレンダー</font></font></h3>
+  <div class="container px-7 mx-auto flex items-center pt-4 pb-2">
+    <div class="avatar">
+      <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+        <%= image_tag @user.profile_image.url %>
+      </div>
+    </div>
+    <h3 class="pl-3 text-2xl l eading-6 lg:text-4xl text-gray-600"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Myカレンダー</font></font></h3>
   </div>
   <div>
     <%= turbo_frame_tag 'calendar' do %>
@@ -10,15 +14,15 @@
           <div class="overflow-hidden">
             <% events.first(2).each do |event| %>
                 <%= link_to event_path(event, group_id: event.group_id), data: { turbo_frame: '_top' } do %>
-                  <div class="px-1 py-1 rounded-lg mt-1 overflow-auto border border-blue-100 text-blue-800 bg-blue-100">
+                  <div class="px-1 py-1 rounded-lg mt-1 overflow-auto border border-sky-100 text-sky-700 bg-sky-100">
                     <p class="text-sm truncate leading-tight"><%= event.title %></p>
                   </div>
                 <% end %>
             <% end %>
 
             <% if events.size > 2 %>
-              <div class="px-1 py-1 text-blue-800">
-                <%= link_to "+#{events.size - 2} more", "#", class: "text-sm truncate leading-tight", data: { turbo_frame: '_top' } %>
+              <div class="px-1 py-1 text-sky-700">
+                <%= link_to "+#{events.size - 2} more", events_for_date_path(current_user, date: date), class: "text-sm truncate leading-tight", data: { turbo_frame: '_top' } %>
               </div>
             <% end %>
           </div>
