@@ -1,0 +1,30 @@
+<div class="container h-100">
+  <h2 class="text-center">通知</h3>
+  <div class="row mt-5">
+    <div class="col-11 col-md-10 col-lg-8 mx-auto">
+      <%= link_to destroy_all_notifications_path, method: :delete, class: 'text-dark' do %>
+        <i class="fas fa-trash-alt"></i> 全削除
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row mt-2 ">
+    <div class="col-11 col-md-10 col-lg-8 mx-auto p-3">
+      <% @notifications = @notifications.where.not(visitor_id: current_user.id) %>
+      <% if @notifications.present? %>
+        <div class="font-weight-bold">
+          <%= render @notifications %>
+        </div>
+      <% else %>
+          <p>通知はありません</p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-9 mx-auto">
+      <div class="d-flex justify-content-center"><%= paginate @notifications %></div>
+    </div>
+  </div>
+
+</div>
