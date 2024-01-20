@@ -58,7 +58,7 @@
       <%= render 'notifications/notification_count' %></span> 
     <div tabindex="0" role="button" class="btn btn-secondary m-1"><i class="fa-regular fa-bell fa-xl"></i></div>
           </div>
-      <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-secondary rounded-box w-64">
+      <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box w-64">
         <li class="menu-title"><i class="fa-solid fa-bell">&nbsp;通知</i></li>
           <%= turbo_frame_tag 'notifications' do %>
             <% if @notifications.present? && @notifications.reject(&:self_chat_notification?).any? %>
