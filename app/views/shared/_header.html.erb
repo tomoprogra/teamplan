@@ -56,7 +56,7 @@
   <div class="dropdown">
     <div class="indicator">
     <% if @notifications.present? && @notifications.reject(&:self_chat_notification?).any? %>
-       <span class="indicator-item badge badge-accent"><%= @notifications.reject(&:self_chat_notification?).count %></span>
+       <span class="indicator-item badge badge-accent"><%= render 'notifications/notification_count' %></span>
        <% end %> 
     <div tabindex="0" role="button" class="btn btn-secondary m-1"><i class="fa-regular fa-bell fa-xl"></i></div>
           </div>
@@ -73,7 +73,7 @@
                 <i><%= render 'notifications/notification', notification: notification %></i>
               <% end %>
                 <% else %>
-              通知はありません
+                <%= render 'notifications/no_notification' %>
            <% end %>
           <% end %>
       </ul>

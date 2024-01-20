@@ -1,0 +1,6 @@
+<%= turbo_frame_tag 'notification_count' do %>
+    <% if current_user.passive_notifications.present? %>
+        <%= current_user.passive_notifications.size %>
+      </span>
+    <% end %>
+<% end %>

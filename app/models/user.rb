@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   # 相手からの通知
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
-
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   # ユーザーが所属するグループの一覧
   def belonging_groups
