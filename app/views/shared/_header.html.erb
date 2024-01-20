@@ -65,7 +65,7 @@
             <% if @notifications.present? && @notifications.reject(&:self_chat_notification?).any? %>
               <li class="menu-title py-2">
                 <%= link_to destroy_all_notifications_path, remote: true, data: { turbo_method: :delete }, class: 'text-dark py-0.5' do %>
-                  <i class="fa-solid fa-list-check text-sky-500"></i>&nbsp;全て既読にする
+                  <i class="fa-solid fa-list-check text-accent"></i>&nbsp;全て既読にする
                 <% end %>
               </i>
               <% @notifications.each do |notification| %>
