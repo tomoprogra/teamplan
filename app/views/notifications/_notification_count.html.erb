@@ -1,6 +1,6 @@
 <%= turbo_frame_tag 'notification_count' do %>
-    <% if current_user.passive_notifications.present? %>
-        <%= current_user.passive_notifications.size %>
+  <% if @notifications.present? && @notifications.reject(&:self_chat_notification?).any? %>
+  <span class="indicator-item badge badge-accent"><%= @notifications.reject(&:self_chat_notification?).count %>
       </span>
     <% end %>
 <% end %>
