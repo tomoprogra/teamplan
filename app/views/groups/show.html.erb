@@ -1,46 +1,42 @@
 <div class="container mx-auto mt-8">
     <div class="text-3xl font-bold">グループ名：<%=@group.title %></div>
      <!-- ユーザー追加ボタン -->
-  <div class="mt-4">
+  <div class="mt-8 mb-8">
       <%= form_with url: invite_group_path(@group), method: :post do |form| %>
-            <%= form.label :email, "招待するユーザーのemail:", class: "mr-5"%>
-            <%= form.text_field :email, class: "py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 mr-5" %>
-            <%= button_tag(type: "submit", class: "rounded-none bg-lemon-100 bg-yellow-100 px-6 py-6") do%>
+            <%= form.label :email, "グループに招待しよう", class: "mr-5"%>
+            <%= form.text_field :email, placeholder:"メールアドレス", class: " py-3 px-10 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 mr-5" %>
+            <%= button_tag type: "submit", class: "btn btn-secondary m-1" do%>
               <i class="fas fa-plus"></i>
             <% end %>
       <% end %>
   </div>
-  <h2 class="text-2xl font-semibold mt-5 mb-3">メンバー一覧</h2>
-    <div class="mb-5 px-5">
-      <% @users.each do |user| %>
-        <div class="flex items-center space-x-7">
-          <!-- ユーザープロフィール画像 -->
-          <% if user.profile_image.present? %>
-            <%= image_tag user.profile_image.url, class: "rounded-full h-24 w-24" %>
-          <% else %>
-          <!-- デフォルト画像 -->
-            <%= image_tag 'default.jpg', class: "rounded-full h-24 w-24" %>
-          <% end %>
-          <div class="flex-grow ml-4 px-4">
-            <!-- ユーザー名 -->
-            <h3 class="text-xl font-bold"><%= user.name %></h3>
-            <!-- 自己紹介文 -->
-            <p class="bg-cyan-100 rounded-lg p-2 text-gray-600"><%= user.introduction %></p>
-          </div>
-          <!-- 退出ボタン -->
+  <h2 class="text-2xl font-semibold mt-5 mb-3">メンバー</h2>
+<div class="mt-5 flex flex-wrap">
+  <% @users.each do |user| %>
+    <div class="card card-side bg-base-100 shadow-xl w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 m-4">
+      <figure class="w-1/2">
+        <%= image_tag user.profile_image.present? ? user.profile_image.url : "default.jpg"%>
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title"><%= user.name %></h2>
+        <p><%= user.introduction %></p>
+        <div class="card-actions justify-end">
           <% if current_user && current_user == user %>
-            <%= link_to leave_group_path(user_id: current_user.id), data: { turbo_method: :delete, turbo_confirm: 'グループから退出しますか？' }, class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2" do %>
+            <%= link_to leave_group_path(user_id: current_user.id), data: { turbo_method: :delete, turbo_confirm: 'グループから退出しますか？' } do %>
               <i class="fas fa-sign-out-alt"></i>
             <% end %>
-            <% else %>
-            <%= link_to leave_group_path(user_id: user), data: { turbo_method: :delete, turbo_confirm: 'メンバーを削除しますか？' }, class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2" do %>
-            <i class="fas fa-trash"></i>
+          <% else %>
+            <%= link_to leave_group_path(user_id: user), data: { turbo_method: :delete, turbo_confirm: 'メンバーを退出させますか？' } do %>
+              <i class="fas fa-trash"></i>
             <% end %>
           <% end %>
         </div>
-      <% end %>
-      <div class="rounded-lg drop-shadow-lg text-red-100 hover:bg-red-300 hover:drop-shadow-none px-2 py-2">
-        <%= link_to 'グループを削除', group_path(@group),  data: { turbo_method: :delete, turbo_confirm: 'グループを削除しますか？' } %>
       </div>
     </div>
+  <% end %>
+</div>
+
+   <div class="btn btn-error mt-3">
+        <%= link_to 'グループを削除', group_path(@group),  data: { turbo_method: :delete, turbo_confirm: 'グループを削除しますか？' } %>
+      </div>
 </div>
