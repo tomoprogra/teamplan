@@ -54,9 +54,10 @@
     </div>
   <!-- 通知 -->
   <div class="dropdown">
-    <div class="indicator">
-      <%= render 'notifications/notification_count' %></span> 
-    <div tabindex="0" role="button" class="btn btn-primary m-1 hover:accent hover:drop-shadow-none"><i class="fa-regular fa-bell fa-xl"></i></div>
+    <div tabindex="0" role="button" class="btn btn-primary m-1 hover:bg-accent hover:drop-shadow-none">
+      <div class="indicator">
+        <%= render 'notifications/notification_count' %>
+          <i class="fa-regular fa-bell fa-xl p-2"></i></div>
           </div>
       <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-secondary rounded-box w-64 text-gray-600">
         <li class="menu-title"><i class="fa-solid fa-bell">&nbsp;通知</i></li>
