@@ -13,9 +13,9 @@ class NotificationsController < ApplicationController
         format.html
       end
   end
-  def update
+  def destroy
     @notification = current_user.passive_notifications.find(params[:id])
-    @notification.update(checked: true)
+    @notification.destroy
     if @notification
       respond_to do |format|
         format.turbo_stream do

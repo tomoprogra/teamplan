@@ -5,8 +5,8 @@
   <% visitor_chat = notification.chat_id %>
   <% unless notification.self_chat_notification? %>
     <%= link_to notification_path(notification), 
-    method: :patch, 
-    data: { turbo_method: :patch } do %>
+    method: :delete, 
+    data: { turbo_method: :delete } do %>
       <i class="fa-solid fa-check text-sky-500"></i>
     <% end %>
     <%= link_to user_path(visitor) do %>
