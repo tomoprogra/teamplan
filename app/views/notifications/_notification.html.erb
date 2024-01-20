@@ -4,22 +4,25 @@
   <% group = Group.find_by(id: notification.group_id) %>
   <% visitor_chat = notification.chat_id %>
   <% unless notification.self_chat_notification? %>
-          <%= link_to user_path(visitor), class: 'text-dark' do %>
-            <%= visitor.name %>さんが
-          <% end %>
-
-        <span><%= "#{time_ago_in_words(notification.created_at)}前" %></span>
-        <% case notification.action %>
+    <%= link_to notification_path(notification), 
+    method: :delete, 
+    data: { turbo_method: :delete } do %>
+      <i class="fa-solid fa-check text-sky-500"></i>
+    <% end %>
+    <%= link_to user_path(visitor) do %>
+      <%= visitor.name %>さん
+    <% end %>が
+      <% case notification.action %>
         <% when 'join' %>
           <i class="fas fa-user-plus"></i>
-          <%= link_to group.name, group_path(group),class: "font-weight-bold text-dark" %>
+          <%= link_to group.title, group_path(group) %>
           に参加しました
         <% when 'chat' %>
-          <i class="fas fa-comments mr-1"></i>
           <% chat = Chat.find_by(id: visitor_chat) %>
           <% chat_content = chat.body %>
-          <%= link_to group.title,  group_path(group),class: "font-weight-bold text-dark" %>
+          <%= link_to group.title,  group_path(group) %>
           にチャットを送信しました
-        <% end %>
-        <% end %>
-        <% end %>
+      <% end %>
+      <span>(<%= "#{time_ago_in_words(notification.created_at)}前" %>)</span>
+    <% end %>
+  <% end %>

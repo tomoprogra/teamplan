@@ -28,9 +28,10 @@ Rails.application.routes.draw do
     resources :events, only: [:index]
   end
 
-  resources :notifications, only: [:index] do
+  resources :notifications, only: %i[index destroy] do
     collection do
       delete "destroy_all"
+      get :more_read
     end
   end
 

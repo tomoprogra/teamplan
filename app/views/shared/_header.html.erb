@@ -1,7 +1,7 @@
-<div class="navbar bg-primary text-gray-600">
+<div class="navbar bg-primary text-secondary">
   <div class="flex-none space-x-3">
     <!-- アカウント設定 -->
-    <button class="btn btn-secondary" onclick="my_modal_3.showModal()"><i class="fa-solid fa-gear fa-xl"></i></button>
+    <button class="btn btn-primary hover:bg-accent hover:drop-shadow-none" onclick="my_modal_3.showModal()"><i class="fa-solid fa-gear fa-xl text-white"></i></button>
       <dialog id="my_modal_3" class="modal">
         <div class="modal-box">
           <form method="dialog">
@@ -29,51 +29,50 @@
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content">
       <!-- Page content here -->
-      <label for="my-drawer" class="btn btn-secondary drawer-button">
-      <i class="fa-regular fa-calendar-check fa-xl"></i></label>
+      <label for="my-drawer" class="btn btn-primary drawer-button hover:bg-accent hover:drop-shadow-none">
+      <i class="fa-regular fa-calendar-check fa-xl text-secondary"></i></label>
     </div> 
     <div class="drawer-side z-10">
       <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-      <ul class="menu p-4 w-80 min-h-full bg-secondary text-base-content">
-        <li class="menu-title hover:text-white transition-all duration-300"">
+      <ul class="menu p-4 w-80 min-h-full bg-secondary text-gray-600">
+        <li class="menu-title hover:text-accent transition-all duration-300"">
           <%= link_to new_group_path do %>
-            <i class="fa-solid fa-plus"></i> グループを作る
+            <i class="fa-solid fa-plus"></i>&nbsp;グループを作る
           <% end %>
         </li>
 
-        <li class="menu-title">グループを選ぶ</li>
+        <li class="menu-title font-semibold"><i class="fa-regular fa-hand-pointer">&nbsp;グループを選ぶ</i></li>
           <% if @user_groups.present? %>
             <% @user_groups.each do |group| %>
               <li>
-                <%= link_to group.title, group_events_path(group), class: "ml-2 hover:text-white transition-all duration-300" %>
+                <%= link_to group.title, group_events_path(group), class: "ml-2 hover:text-accent transition-all duration-300" %>
               </li>
             <% end %>
           <% end %>
       </ul>
+      </div>
     </div>
-  </div>
   <!-- 通知 -->
   <div class="dropdown">
-    <div class="indicator">
-    <% if @notifications.present? && @notifications.reject(&:self_chat_notification?).any? %>
-       <span class="indicator-item badge badge-accent"><%= @notifications.reject(&:self_chat_notification?).count %></span>
-       <% end %> 
-    <div tabindex="0" role="button" class="btn btn-secondary m-1"><i class="fa-regular fa-bell fa-xl"></i></div>
+    <div tabindex="0" role="button" class="btn btn-primary m-1 hover:bg-accent hover:drop-shadow-none">
+      <div class="indicator">
+        <%= render 'notifications/notification_count' %>
+          <i class="fa-regular fa-bell fa-xl p-2"></i></div>
           </div>
-      <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-        <li class="menu-title">通知</li>
+      <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-secondary rounded-box w-64 text-gray-600">
+        <li class="menu-title"><i class="fa-solid fa-bell">&nbsp;通知</i></li>
           <%= turbo_frame_tag 'notifications' do %>
             <% if @notifications.present? && @notifications.reject(&:self_chat_notification?).any? %>
-              <li class="menu-title">
-                <%= link_to destroy_all_notifications_path, remote: true, data: { turbo_method: :delete }, class: 'text-dark' do %>
-                  全て既読にする
+              <li class="menu-title py-2">
+                <%= link_to destroy_all_notifications_path, remote: true, data: { turbo_method: :delete }, class: 'text-dark py-0.5' do %>
+                  <i class="fa-solid fa-list-check text-sky-500"></i>&nbsp;全て既読にする
                 <% end %>
               </i>
               <% @notifications.each do |notification| %>
-                <i><%= render 'notifications/notification', notification: notification %></i>
+                <i class="py-2"><%= render 'notifications/notification', notification: notification %></i>
               <% end %>
                 <% else %>
-              通知はありません
+                <%= render 'notifications/no_notification' %>
            <% end %>
           <% end %>
       </ul>
@@ -96,8 +95,11 @@
       <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
       <ul class="menu p-4 w-80 min-h-full bg-primary text-base-content">
         <li class="menu-title">Menu</li>
-        <li><%= link_to 'マイカレンダー', '#', class: "ml-2 hover:text-white transition-all duration-300"%></li>
-        <li><%= link_to 'ログアウト', destroy_user_session_path, class: "ml-2 hover:text-white transition-all duration-300" %></li>
+        <li><%= link_to users_mypage_path, class: "ml-2 hover:text-accent transition-all duration-300" do %>
+          <i class="fa-solid fa-calendar"></i>&nbsp;マイカレンダー
+          <% end %></li>
+        <li><%= link_to destroy_user_session_path, class: "ml-2 hover:text-accent transition-all duration-300" do %>
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;ログアウト<% end %></li>
       </ul>
     </div>
  </div>
