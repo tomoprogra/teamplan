@@ -1,7 +1,7 @@
 <div class="navbar bg-primary text-gray-600">
   <div class="flex-none space-x-3">
     <!-- アカウント設定 -->
-    <button class="btn btn-secondary" onclick="my_modal_3.showModal()"><i class="fa-solid fa-gear fa-xl"></i></button>
+    <button class="btn btn-secondary hover:bg-yellow-300 hover:drop-shadow-none" onclick="my_modal_3.showModal()"><i class="fa-solid fa-gear fa-xl"></i></button>
       <dialog id="my_modal_3" class="modal">
         <div class="modal-box">
           <form method="dialog">
@@ -29,7 +29,7 @@
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content">
       <!-- Page content here -->
-      <label for="my-drawer" class="btn btn-secondary drawer-button">
+      <label for="my-drawer" class="btn btn-secondary drawer-button hover:bg-yellow-300 hover:drop-shadow-none">
       <i class="fa-regular fa-calendar-check fa-xl"></i></label>
     </div> 
     <div class="drawer-side z-10">
@@ -56,7 +56,7 @@
   <div class="dropdown">
     <div class="indicator">
       <%= render 'notifications/notification_count' %></span> 
-    <div tabindex="0" role="button" class="btn btn-secondary m-1"><i class="fa-regular fa-bell fa-xl"></i></div>
+    <div tabindex="0" role="button" class="btn btn-secondary m-1 hover:bg-yellow-300 hover:drop-shadow-none"><i class="fa-regular fa-bell fa-xl"></i></div>
           </div>
       <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box w-64">
         <li class="menu-title"><i class="fa-solid fa-bell">&nbsp;通知</i></li>

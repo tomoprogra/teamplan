@@ -2,7 +2,7 @@ class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @notifications = current_user.passive_notifications.checked
+    @notifications = current_user.passive_notifications.checked.page(1).per(5)
       respond_to do |format|
         format.turbo_stream do
             render turbo_stream: [
@@ -35,6 +35,15 @@ class NotificationsController < ApplicationController
         end
       end
     end
+  end
+
+  def more_read
+    @posts = Post.all.page(params[:page]).per(5)
+  
+    render turbo_stream: [
+      turbo_stream.append("posts", partial: "posts"),
+      turbo_stream.update("more_link", partial: "more_link"),
+    ]
   end
 
   def destroy_all
