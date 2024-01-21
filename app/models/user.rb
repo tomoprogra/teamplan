@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
   has_many :chats, dependent: :destroy
+  has_many :permits, dependent: :destroy
 
   # 自分からの通知
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy

@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
-  # before_action :check_membership, only: [:update, :destroy, :edit, :show]
+  before_action :check_membership, only: [:update, :destroy, :edit, :show]
+  before_action :ensure_correct_user, only: [:destroy, :permits]
 
   def new
     @group = Group.new
@@ -8,6 +9,7 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
+    @group.owner_id = current_user.id
     if @group.save
       @group.users << current_user
       @group.create_notification_join!(current_user)
@@ -72,40 +74,51 @@ class GroupsController < ApplicationController
 
   def leave
     group = Group.find(params[:id])
-    # 他のメンバーを削除する場合
-    if params[:user_id].to_i != current_user.id
-      # 権限を入れるか検討
-      user_group = group.group_users.find_by(user_id: params[:user_id])
-      if user_group
-        user_group.destroy
-        flash[:notice] = 'メンバーを削除しました。'
-      end
-    elsif params[:user_id].to_i == current_user.id
-      # カレントユーザーが自分自身をグループから退出させる場合
+    if group.owner_id == current_user.id
+      flash[:alert] = 'オーナーはグループを退出できません。'
+    else
+      # カレントユーザーが自分自身をグループから退出させる
       user_group = group.group_users.find_by(user_id: current_user.id)
       if user_group
         user_group.destroy
         flash[:notice] = 'グループを退出しました。'
       end
-      if group.users.empty?
-        group.destroy
-        flash[:notice] = 'グループが削除されました。'
-      end
     end
     redirect_to root_path
   end
   
-  
+  def permits
+    @group = Group.find(params[:id])
+    @permits = @group.permits.page(params[:page])
+  end
 
+  def new_permit
+    @group = Group.find(params[:id])
+    @permit = Permit.new
+    if @group.members.include?(current_user)
+      flash[:alert] = 'すでにグループに所属しています。'
+      redirect_to root_path
+    end
+  end
   private
 
-  # def check_membership
-  #   unless current_user.belongs_to_group?(@group)
-  #     redirect_to root_path, flash.now[:alert] = "グループに参加してください"
-  #   end
-  # end
+  def check_membership
+    @group = Group.find(params[:id])
+    unless @group.members.include?(current_user)
+      flash[:alert] = "グループに参加してください"
+      redirect_to root_path
+    end
+  end
 
   def group_params
     params.require(:group).permit(:title)
   end
+
+  def ensure_correct_user
+    @group = Group.find(params[:id])
+    unless @group.owner_id == current_user.id
+      redirect_to group_path(@group), alert: "グループオーナーのみ編集が可能です"
+    end
+  end
 end
+

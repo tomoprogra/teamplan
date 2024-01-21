@@ -1,14 +1,16 @@
 <div class="container mx-auto mt-8">
-    <div class="text-3xl font-bold">グループ名：<%=@group.title %></div>
-     <!-- ユーザー追加ボタン -->
-  <div class="mt-8 mb-8">
-      <%= form_with url: invite_group_path(@group), method: :post do |form| %>
-            <%= form.label :email, "グループに招待しよう", class: "mr-5"%>
-            <%= form.text_field :email, placeholder:"メールアドレス", class: " py-3 px-10 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 mr-5" %>
-            <%= button_tag type: "submit", class: "btn btn-secondary m-1" do%>
-              <i class="fas fa-plus"></i>
-            <% end %>
-      <% end %>
+  <div class="text-3xl font-bold">グループ名：<%=@group.title %></div>
+    <div class="mt-8 mb-8">
+        <%= form_with url: invite_group_path(@group), method: :post do |form| %>
+              <%= form.label :email, "グループに招待しよう", class: "mr-5"%>
+              <%= form.text_field :email, placeholder:"メールアドレス", class: " py-3 px-10 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 mr-5" %>
+              <%= button_tag type: "submit", class: "btn btn-secondary m-1" do%>
+                <i class="fas fa-plus"></i>
+              <% end %>
+        <% end %>
+    </div>
+  <div>
+    <%= link_to "Twitterで共有する", "https://twitter.com/intent/tweet?url=#{CGI.escape(new_permit_group_url(@group))}&text=#{CGI.escape('参加申請をしましょう')}", target: "_blank", rel: "noopener" %>
   </div>
   <h2 class="text-2xl font-semibold mt-5 mb-3">メンバー</h2>
 <div class="mt-5 flex flex-wrap">
@@ -18,25 +20,37 @@
         <%= image_tag user.profile_image.present? ? user.profile_image.url : "default.jpg"%>
       </figure>
       <div class="card-body">
-        <h2 class="card-title"><%= user.name %></h2>
+        <% if @group.owner_id == user.id %>
+          <h2 class="card-title">ホスト：<%= user.name %></h2>
+        <% else %>
+          <h2 class="card-title"><%= user.name %></h2>
+        <% end %>
         <p><%= user.introduction %></p>
         <div class="card-actions justify-end">
-          <% if current_user && current_user == user %>
-            <%= link_to leave_group_path(user_id: current_user.id), data: { turbo_method: :delete, turbo_confirm: 'グループから退出しますか？' } do %>
-              <i class="fas fa-sign-out-alt"></i>
+          <div class="card-actions justify-end">
+            <% if current_user && current_user == user && @group.owner_id != current_user.id %>
+              <%= link_to leave_group_path(user_id: current_user.id), data: { turbo_method: :delete, turbo_confirm: 'グループから退出しますか？' } do %>
+                <i class="fas fa-sign-out-alt"></i>
+              <% end %>
             <% end %>
-          <% else %>
-            <%= link_to leave_group_path(user_id: user), data: { turbo_method: :delete, turbo_confirm: 'メンバーを退出させますか？' } do %>
-              <i class="fas fa-trash"></i>
+            <% if current_user && @group.owner_id == current_user.id && current_user != user %>
+              <%= link_to leave_group_path(user_id: user.id), data: { turbo_method: :delete, turbo_confirm: 'メンバーを退出させますか？' } do %>
+                <i class="fas fa-trash"></i>
+               <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
       </div>
     </div>
   <% end %>
 </div>
-
+<%= link_to "戻る", group_events_path(@group) %>
+<% if @group.owner_id == current_user.id %>
    <div class="btn btn-error mt-3">
-        <%= link_to 'グループを削除', group_path(@group),  data: { turbo_method: :delete, turbo_confirm: 'グループを削除しますか？' } %>
-      </div>
+    <%= link_to 'グループを削除', group_path(@group),  data: { turbo_method: :delete, turbo_confirm: 'グループを削除しますか？' } %>
+  </div>
+    <%= link_to "承認待ち一覧", group_permits_path(@group)%>
+<% end %>
 </div>
+
+  

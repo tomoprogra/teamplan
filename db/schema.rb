@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_18_172500) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_21_020354) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_18_172500) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_id"
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -73,6 +74,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_18_172500) do
     t.index ["group_id"], name: "index_notifications_on_group_id"
     t.index ["visited_id"], name: "index_notifications_on_visited_id"
     t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
+  end
+
+  create_table "permits", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_permits_on_group_id"
+    t.index ["user_id"], name: "index_permits_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -111,6 +121,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_18_172500) do
   add_foreign_key "events", "groups"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
+  add_foreign_key "groups", "users", column: "owner_id"
   add_foreign_key "invitations", "groups"
   add_foreign_key "invitations", "users"
+  add_foreign_key "permits", "groups"
+  add_foreign_key "permits", "users"
 end
