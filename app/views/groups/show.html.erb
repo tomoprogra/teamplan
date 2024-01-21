@@ -38,11 +38,12 @@
     </div>
   <% end %>
 </div>
-
-   <div class="btn btn-error mt-3">
-        <%= link_to 'グループを削除', group_path(@group),  data: { turbo_method: :delete, turbo_confirm: 'グループを削除しますか？' } %>
-      </div>
-</div>
 <% if @group.owner_id == current_user.id %>
-  <%= link_to "承認待ち一覧", group_permits_path(@group)%>
+   <div class="btn btn-error mt-3">
+    <%= link_to 'グループを削除', group_path(@group),  data: { turbo_method: :delete, turbo_confirm: 'グループを削除しますか？' } %>
+  </div>
+    <%= link_to "承認待ち一覧", group_permits_path(@group)%>
 <% end %>
+</div>
+
+  
