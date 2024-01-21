@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  include MembershipCheck
   before_action :authenticate_user!
   before_action :set_group
 
