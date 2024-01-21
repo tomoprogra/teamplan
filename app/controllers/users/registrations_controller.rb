@@ -26,10 +26,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super do |resource|
+      if resource.errors.empty?
+        flash[:success] = "プロフィールを更新しました"
+        redirect_to request.referer and return
+      else
+        flash[:alert] = resource.errors.full_messages
+        redirect_to request.referer and return
+      end
+    end
+  end
 
   # DELETE /resource
   # def destroy
