@@ -1,29 +1,5 @@
 <div class="navbar bg-primary text-secondary">
   <div class="flex-none space-x-3">
-    <!-- アカウント設定 -->
-    <button class="btn btn-primary hover:bg-accent hover:drop-shadow-none" onclick="my_modal_3.showModal()"><i class="fa-solid fa-gear fa-xl text-white"></i></button>
-      <dialog id="my_modal_3" class="modal">
-        <div class="modal-box">
-          <form method="dialog">
-            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-          </form>
-          <%= render 'users/settings_form' %>
-        </div>
-      </dialog>
-
-    <!-- モーダルの外側を押しても閉じるように設定 -->
-    <script>
-      // モーダルの要素を取得
-      var modal = document.getElementById('my_modal_3');
-
-      // モーダルの外側をクリックしたときにモーダルを閉じる
-      window.onclick = function(event) {
-        if (event.target === modal) {
-          modal.close();
-        }
-      }
-    </script>
-
     <!-- グループ選択 -->
     <div class="drawer">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
@@ -95,9 +71,47 @@
       <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
       <ul class="menu p-4 w-80 min-h-full bg-primary text-base-content">
         <li class="menu-title">Menu</li>
-        <li><%= link_to users_mypage_path, class: "ml-2 hover:text-accent transition-all duration-300" do %>
-          <i class="fa-solid fa-calendar"></i>&nbsp;マイカレンダー
-          <% end %></li>
+
+        <li><%= link_to '#', class: "ml-2 hover:text-accent transition-all duration-300", onclick: "closeDrawer();my_modal_3.showModal()" do %>
+          <i class="fa-solid fa-gear"></i>&nbsp;アカウント設定<% end %>
+          <dialog id="my_modal_3" class="modal">
+          <div class="modal-box z-20 fixed left-1/2 transform -translate-x-1/2">
+            <form method="dialog">
+              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-gray-600">✕</button>
+            </form>
+            <%= render 'users/settings_form' %>
+          </div>
+        </dialog>
+          </li>
+
+          <!-- モーダルの外側を押しても閉じるように設定 -->
+          <script>
+          // ハンバーガーメニューを閉じる関数
+          function closeDrawer() {
+            var checkbox = document.getElementById('my-drawer-4');
+            if (checkbox.checked) {
+              checkbox.checked = false;
+            }
+            // モーダルを開く処理を遅らせる
+            setTimeout(function() {
+              var modal = document.getElementById('my_modal_3');
+              if (modal) {
+                modal.showModal();
+              }
+            }, 300); // 300ミリ秒後に実行
+          }
+
+            // モーダルの要素を取得
+            var modal = document.getElementById('my_modal_3');
+      
+            // モーダルの外側をクリックしたときにモーダルを閉じる
+            window.onclick = function(event) {
+              if (event.target === modal) {
+                modal.close();
+              }
+            }
+          </script>
+
         <li><%= link_to destroy_user_session_path, class: "ml-2 hover:text-accent transition-all duration-300" do %>
           <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;ログアウト<% end %></li>
       </ul>
