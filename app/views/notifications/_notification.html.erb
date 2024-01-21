@@ -7,7 +7,7 @@
     <%= link_to notification_path(notification), 
     method: :delete, 
     data: { turbo_method: :delete } do %>
-      <i class="fa-solid fa-check text-sky-500"></i>
+      <i class="fa-solid fa-check text-accent"></i>
     <% end %>
     <%= link_to user_path(visitor) do %>
       <%= visitor.name %>さん

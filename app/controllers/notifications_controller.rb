@@ -37,14 +37,7 @@ class NotificationsController < ApplicationController
     end
   end
 
-  def more_read
-    @posts = Post.all.page(params[:page]).per(5)
-  
-    render turbo_stream: [
-      turbo_stream.append("posts", partial: "posts"),
-      turbo_stream.update("more_link", partial: "more_link"),
-    ]
-  end
+
 
   def destroy_all
     @notifications = current_user.passive_notifications
