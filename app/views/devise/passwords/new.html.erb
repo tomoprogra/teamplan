@@ -1,4 +1,4 @@
-<section class="flex items-center justify-center">
+<section class="flex items-center justify-center bg-secondary">
   <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-24">
     <div class="flex justify-center mx-auto text-left shadow-xl align-bottom transition-all transform bg-white rounded-lg sm:align-middle sm:max-w-2xl sm:w-full">
       <div class="grid grid-cols-1 lg:grid-cols-2 rounded-xl">
@@ -21,8 +21,8 @@
               </div>
               <div>
                 <div class="flex flex-col mt-4 lg:space-y-2">
-                  <button class="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-gray-600 transition duration-500 ease-in-out transform bg-yellow-100 rounded-xl hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    <%= f.submit "パスワードをリセットする" %>
+                  <button class="flex items-center justify-center w-full px-10 py-4 font-medium text-center text-secondary transition duration-500 ease-in-out transform bg-primary rounded-xl hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    <%= f.submit "パスワードを再発行する" %>
                   </button>
                 </div>
               </div>
@@ -39,7 +39,3 @@
   </div>
 </div>
 </section>
-
-<div class="fixed bottom-8 right-8 rounded-full w-24 py-9 bg-yellow-100 text-gray-600 text-center ring-8 ring-offset-2 ring-cyan-100 hover:ring-offset-8">
-<%= link_to 'TOPへ戻る', root_path %>   
-</div>
