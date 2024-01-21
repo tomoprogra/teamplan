@@ -22,8 +22,14 @@ class GroupsController < ApplicationController
 
   def destroy
     @group = Group.find(params[:id])
-    @group.destroy!
-    redirect_to root_path, success: t('defaults.flash_message.delete', item: Group.model_name.human), status: :see_other
+    if @group.owner_id == current_user.id
+      @group.destroy!
+      redirect_to root_path, success: t('defaults.flash_message.delete', item: Group.model_name.human), status: :see_other
+    else
+      flash[:alert] = "グループオーナーのみ削除が可能です"
+      redirect_to group_path(@group)
+    end
+
   end
 
   def edit
