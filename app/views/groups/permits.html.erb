@@ -1,0 +1,21 @@
+<h1><%= @group.title %>の参加申請一覧</h1>
+
+<% @permits.each do |permit| %>
+  <div>
+    <!-- 申請者の情報を表示 -->
+    <p><%= permit.user.name %></p>
+    <!-- 承認または拒否のアクションリンク -->
+    <%= link_to '加入許可', group_group_users_path(@group, permit_id: permit.id), data: { turbo_method: :post }, class: "btn btn-sm btn-success" %>
+  </div>
+<% end %>
+
+<%= paginate @permits %>
+
+
+  <div class="row mt-5">
+    <div class="col-md-9 mx-auto">
+    <p class="text-center"><%= link_to "戻る", group_path(@group), class: 'text-dark font-weight-bold' %></p>
+    </div>
+  </div>
+
+</div>

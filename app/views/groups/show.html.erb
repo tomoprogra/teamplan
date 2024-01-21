@@ -10,6 +10,9 @@
             <% end %>
       <% end %>
   </div>
+  <div>
+    <%= link_to "Twitterで共有する", "https://twitter.com/intent/tweet?url=#{CGI.escape(new_permit_group_url(@group))}&text=#{CGI.escape('参加申請をしましょう')}", target: "_blank", rel: "noopener" %>
+  </div>
   <h2 class="text-2xl font-semibold mt-5 mb-3">メンバー</h2>
 <div class="mt-5 flex flex-wrap">
   <% @users.each do |user| %>
@@ -40,3 +43,6 @@
         <%= link_to 'グループを削除', group_path(@group),  data: { turbo_method: :delete, turbo_confirm: 'グループを削除しますか？' } %>
       </div>
 </div>
+<% if @group.owner_id == current_user.id %>
+  <%= link_to "承認待ち一覧", group_permits_path(@group)%>
+<% end %>

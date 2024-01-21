@@ -7,14 +7,19 @@ Rails.application.routes.draw do
   end
 
   resources :groups do
+    resources :permits, only: [:create, :destroy]
+    member do
+      get :permits
+      get :new_permit
+    end
     resources :events
+    resource :group_users, only: [:create]
     member do
       delete :leave
     end
     post :invite, on: :member
     resources :chats, only: %i[create index]
   end
-
   get '/join_group/:token', to: 'groups#add_member', as: :join_group
   devise_for :users, controllers: {
     registrations: 'users/registrations',

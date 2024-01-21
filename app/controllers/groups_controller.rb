@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
   # before_action :check_membership, only: [:update, :destroy, :edit, :show]
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy, :permits]
 
   def new
     @group = Group.new
@@ -8,6 +9,7 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
+    @group.owner_id = current_user.id
     if @group.save
       @group.users << current_user
       @group.create_notification_join!(current_user)
@@ -95,8 +97,15 @@ class GroupsController < ApplicationController
     redirect_to root_path
   end
   
-  
+  def permits
+    @group = Group.find(params[:id])
+    @permits = @group.permits.page(params[:page])
+  end
 
+  def new_permit
+    @group = Group.find(params[:id])
+    @permit = Permit.new  # Permitは参加申請を表すモデル
+  end
   private
 
   # def check_membership
@@ -108,4 +117,12 @@ class GroupsController < ApplicationController
   def group_params
     params.require(:group).permit(:title)
   end
+
+  def ensure_correct_user
+    @group = Group.find(params[:id])
+    unless @group.owner_id == current_user.id
+      redirect_to group_path(@group), alert: "グループオーナーのみ編集が可能です"
+    end
+  end
 end
+

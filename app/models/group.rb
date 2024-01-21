@@ -5,6 +5,7 @@ class Group < ApplicationRecord
   has_many :chats, dependent: :destroy
   has_many :invitations, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  has_many :permits, dependent: :destroy
   validates :title, presence: true
 
   def create_notification_join!(current_user)
