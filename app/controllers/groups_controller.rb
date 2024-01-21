@@ -74,28 +74,19 @@ class GroupsController < ApplicationController
 
   def leave
     group = Group.find(params[:id])
-    # 他のメンバーを削除する場合
-    if params[:user_id].to_i != current_user.id
-      # 権限を入れるか検討
-      user_group = group.group_users.find_by(user_id: params[:user_id])
-      if user_group
-        user_group.destroy
-        flash[:notice] = 'メンバーを削除しました。'
-      end
-    elsif params[:user_id].to_i == current_user.id
-      # カレントユーザーが自分自身をグループから退出させる場合
+    if group.owner_id == current_user.id
+      flash[:alert] = 'オーナーはグループを退出できません。'
+    else
+      # カレントユーザーが自分自身をグループから退出させる
       user_group = group.group_users.find_by(user_id: current_user.id)
       if user_group
         user_group.destroy
         flash[:notice] = 'グループを退出しました。'
       end
-      if group.users.empty?
-        group.destroy
-        flash[:notice] = 'グループが削除されました。'
-      end
     end
     redirect_to root_path
   end
+  
   
   def permits
     @group = Group.find(params[:id])
