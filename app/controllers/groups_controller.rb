@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
-  # before_action :check_membership, only: [:update, :destroy, :edit, :show]
+  before_action :check_membership, only: [:update, :destroy, :edit, :show]
   before_action :ensure_correct_user, only: [:destroy, :permits]
 
   def new
@@ -87,7 +87,6 @@ class GroupsController < ApplicationController
     redirect_to root_path
   end
   
-  
   def permits
     @group = Group.find(params[:id])
     @permits = @group.permits.page(params[:page])
@@ -95,15 +94,21 @@ class GroupsController < ApplicationController
 
   def new_permit
     @group = Group.find(params[:id])
-    @permit = Permit.new  # Permitは参加申請を表すモデル
+    @permit = Permit.new
+    if @group.members.include?(current_user)
+      flash[:alert] = 'すでにグループに所属しています。'
+      redirect_to root_path
+    end
   end
   private
 
-  # def check_membership
-  #   unless current_user.belongs_to_group?(@group)
-  #     redirect_to root_path, flash.now[:alert] = "グループに参加してください"
-  #   end
-  # end
+  def check_membership
+    @group = Group.find(params[:id])
+    unless @group.members.include?(current_user)
+      flash[:alert] = "グループに参加してください"
+      redirect_to root_path
+    end
+  end
 
   def group_params
     params.require(:group).permit(:title)

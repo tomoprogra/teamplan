@@ -1,7 +1,4 @@
 <h1><%= @group.title %>に参加申請</h1>
-
-
-
 <% permit = current_user.permits.find_by(group_id: @group.id) %>
 <% if permit %>
   <%= link_to '申請取消', group_permit_path(@group, permit), data: { turbo_method: :delete } %>
