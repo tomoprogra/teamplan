@@ -41,7 +41,7 @@
           <% end %>
         </li>
 
-        <li class="menu-title font-semibold"><i class="fa-regular fa-hand-pointer">&nbsp;グループを選ぶ</i></li>
+        <li class="menu-title font-semibold"><i class="fa-solid fa-caret-down">&nbsp;グループを選ぶ</i></i></li>
           <% if @user_groups.present? %>
             <% @user_groups.each do |group| %>
               <li>
@@ -81,7 +81,7 @@
 
   <!-- ホームボタン&ユーザー名表示 -->
 <div class="flex-1">
-  <%= link_to current_user.name, root_path, class: "btn btn-ghost text-xl" %>
+  <%= link_to current_user.name, users_mypage_path, class: "btn btn-ghost text-xl" %>
 </div>
 
   <!-- ハンバーガーメニュー -->
