@@ -44,6 +44,7 @@
     </div>
   <% end %>
 </div>
+<%= link_to "戻る", group_events_path(@group) %>
 <% if @group.owner_id == current_user.id %>
    <div class="btn btn-error mt-3">
     <%= link_to 'グループを削除', group_path(@group),  data: { turbo_method: :delete, turbo_confirm: 'グループを削除しますか？' } %>
