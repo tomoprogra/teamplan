@@ -1,4 +1,5 @@
 class ChatsController < ApplicationController
+  include MembershipCheck
   before_action :authenticate_user!
 
   def index
