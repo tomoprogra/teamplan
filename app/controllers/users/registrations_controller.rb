@@ -14,7 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "ユーザー登録が完了しました。"
-      redirect_to new_user_registration_path
+      redirect_to user_session_path
     else
       flash.now[:alert] = "ユーザー登録に失敗しました"
       render 'new'
