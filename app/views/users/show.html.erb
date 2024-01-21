@@ -1,27 +1,27 @@
-<div class="antialiased bg-gray-100 w-full h-full">
+<div class="antialiased bg-gray-100 w-full h-full text-gray-600">
   <div class="container px-7 mx-auto flex items-center pt-4 pb-2">
     <div class="avatar">
-      <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+      <div class="w-24 rounded-full ring ring-accent ring-offset-base-100 ring-offset-2">
         <%= image_tag @user.profile_image.url %>
       </div>
     </div>
-    <h3 class="pl-3 text-2xl l eading-6 lg:text-4xl text-gray-600"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Myカレンダー</font></font></h3>
+    <h3 class="pl-3 text-2xl l eading-6 lg:text-4xl">Myカレンダー</h3>
   </div>
   <div>
     <%= turbo_frame_tag 'calendar' do %>
       <%= month_calendar events: current_user.events_for_calendar do |date, events| %>
-        <%= link_to date.day, events_for_date_path(current_user, date: date), class:"inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100 hover:bg-blue-200", data: { turbo_frame: '_top' } %>
+        <%= link_to date.day, events_for_date_path(current_user, date: date), class:"inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100 hover:bg-sky-200 font-medium", data: { turbo_frame: '_top' } %>
           <div class="overflow-hidden">
             <% events.first(2).each do |event| %>
                 <%= link_to event_path(event, group_id: event.group_id), data: { turbo_frame: '_top' } do %>
-                  <div class="px-1 py-1 rounded-lg mt-1 overflow-auto border border-sky-100 text-sky-700 bg-sky-100">
+                  <div class="px-1 py-1 rounded-lg mt-1 overflow-auto border border-sky-100 bg-sky-100">
                     <p class="text-sm truncate leading-tight"><%= event.title %></p>
                   </div>
                 <% end %>
             <% end %>
 
             <% if events.size > 2 %>
-              <div class="px-1 py-1 text-sky-700">
+              <div class="px-1 py-1 text-primary">
                 <%= link_to "+#{events.size - 2} more", events_for_date_path(current_user, date: date), class: "text-sm truncate leading-tight", data: { turbo_frame: '_top' } %>
               </div>
             <% end %>
