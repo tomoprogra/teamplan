@@ -1,42 +1,50 @@
 <div class="flex items-center justify-center h-screen bg-gray-100">
-  <div class="bg-white py-6 rounded-md px-10 max-w-lg shadow-md space-y-5">
+  <div class="bg-white py-6 rounded-md px-10 max-w-lg shadow-md space-y-5 text-gray-600 text-sm">
     <div class="space-y-5">
       <div>
-        <p class="text-lg text-gray-600 px-1">タイトル</p>
-        <p class="block w-full px-5 py-3 text-lg text-neutral-600 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"> <%= @event.title %></p>
+        <p class="px-1">グループ名</p>
+        <p class="block w-full px-5 py-3 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"><%= @group.title %></p>
       </div>
       <div>
-        <p class="text-lg text-gray-600 px-1">開始</p>
-        <p class="block w-full px-5 py-3 text-lg text-neutral-600 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"><%= @event.start_time.strftime("%Y-%m-%d %H:%M") %></p>
+        <p class="px-1">タイトル</p>
+        <p class="block w-full px-5 py-3 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"> <%= @event.title %></p>
+      </div>
+      <div>
+        <p class="px-1">開始</p>
+        <p class="block w-full px-5 py-3 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"><%= @event.start_time.strftime("%Y-%m-%d %H:%M") %></p>
       </div>
 
       <div>
-        <p class="text-lg text-gray-600 px-1">終了</p>
-        <p class="block w-full px-5 py-3 text-lg text-neutral-600 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"><%= @event.end_time.strftime("%Y-%m-%d %H:%M") %></p>
+        <p class="px-1">終了</p>
+        <p class="block w-full px-5 py-3 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"><%= @event.end_time.strftime("%Y-%m-%d %H:%M") %></p>
       </div>
 
       <div>
-        <p class="text-lg text-gray-600 px-1">内容</p>
-        <p class="block w-full px-5 py-3 text-lg text-neutral-600 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300", row: "10", style: "height: 150px"><%= @event.description %></p>
+        <p class="px-1">内容</p>
+        <p class="block w-full px-5 py-3 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50", style="row: 10; height: 150px;"><%= @event.description %></p>
       </div>
 
-      <div class="flex space-x-3 text-gray-600 justify-center">
+      <div class="flex space-x-3 justify-center">
         <div class="flex flex-col">
-          <%= link_to :back, class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-5 py-3", title: "戻る" do %>
-            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          <%= link_to edit_event_path(@event, group_id: @group.id), class: "rounded-lg drop-shadow-lg bg-primary text-secondary hover:bg-accent hover:drop-shadow-none px-4 py-3", title: "イベント編集" do %>
+            <div class="flex items-center">
+              <i class="fa fa-pencil fa-sm px-1" aria-hidden="true"></i>
+              <p class="text-xs">編集</p>
+            </div>
           <% end %>
         </div>
         <div class="flex flex-col">
-          <%= link_to edit_event_path(@event, group_id: @group.id), class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-4 py-3", title: "イベント編集" do %>
-            <i class="fa-solid fa-pencil" aria-hidden="true"></i>
-          <% end %>
-        </div>
-        <div class="flex flex-col">
-          <%= link_to event_path(@event, group_id: @group.id), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: "rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-4 py-3", title: "イベント削除" do %>
-            <i class="fa-solid fa-trash" aria-hidden="true"></i>
+          <%= link_to event_path(@event, group_id: @group.id), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: "rounded-lg drop-shadow-lg bg-primary text-secondary hover:bg-accent hover:drop-shadow-none px-4 py-3", title: "イベント削除" do %>
+            <div class="flex items-center">
+              <i class="fa fa-trash fa-sm px-1" aria-hidden="true"></i>
+              <p class="text-xs">削除</p>
+            </div>
           <% end %>
         </div>
       </div>
+    </div>
+    <div class="text-center text-gray-500 pt-2 text-xs">
+      <%= link_to "グループカレンダーにいく", group_events_path(group_id: @group.id) %>
     </div>
   </div>
 </div>

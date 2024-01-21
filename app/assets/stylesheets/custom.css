@@ -21,10 +21,10 @@
   }
   .day {
     height: 120px;
-    max-width: 130px;
+    max-width: 120px;
   }
   td {
-    width: 130px;
+    width: 120px;
     padding: 9px;
     vertical-align: top;
     border-left: 0.8px solid rgba(234, 232, 232, 0.857);
@@ -38,6 +38,13 @@
     border-bottom-color: rgba(234, 232, 232, 0.857);
   }
   .today a {
-    background-color: lightblue;
+    background-color: #136988c0;
+    color: #f3f4f6;
+    p {
+      color: #4b5563;
+    }
+  }
+  .today a:hover{
+    background-color: #bae6fd;
   }
 }

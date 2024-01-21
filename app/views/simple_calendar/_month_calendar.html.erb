@@ -1,15 +1,15 @@
-<div class="simple-calendar">
+<div class="simple-calendar text-gray-600">
   <div class="container mx-auto px-2 py-2 md:py-22">
     <div class="bg-white rounded-lg shadow overflow-hidden">
       <div class="flex items-center justify-between py-2 px-6">
         <div>
-          <span class="ml-1 text-xl text-gray-800 font-normal"><%= "#{start_date.year}年" %></span>
-          <span class="ml-1 text-xl text-gray-800 font-normal"><%= t('date.month_names')[start_date.month] %></span>
+          <span class="ml-1 text-xl"><%= "#{start_date.year}年" %></span>
+          <span class="ml-1 text-xl font-normal"><%= t('date.month_names')[start_date.month] %></span>
         </div>
         <div class="border rounded-lg px-1" style="padding-top: 4px;">
           <button>
             <%= link_to(calendar.url_for_previous_view, type: "button", class: "leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 items-center") do %>
-              <svg class="h-6 w-6 text-gray-500 hover:text-sky-600 inline-flex leading-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-6 w-6 hover:text-accent inline-flex leading-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
               </svg>
             <% end %>
@@ -17,7 +17,7 @@
           <div class="border-r inline-flex h-6"></div>
           <button>
             <%= link_to(calendar.url_for_next_view, type: "button", class: "leading-none rounded-lg transition ease-in-out duration-100 inline-flex items-center cursor-pointer hover:bg-gray-200 p-1") do %>
-              <svg class="h-6 w-6 text-gray-500 hover:text-sky-600 inline-flex leading-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-6 w-6 hover:text-accent inline-flex leading-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
               </svg>
             <% end %>
@@ -33,7 +33,7 @@
                 <tr>
                   <div style="width: 14.26%" class="px-0.5 py-0.5">
                       <% date_range.slice(0, 7).each do |day| %>
-                          <th class="text-gray-600 text-sm uppercase tracking-wide font-bold text-center"><%= t('date.abbr_day_names')[day.wday] %></th>
+                          <th class="text-sm uppercase tracking-wide text-center"><%= t('date.abbr_day_names')[day.wday] %></th>
                       <% end %>
                   </div>
                 </tr>
