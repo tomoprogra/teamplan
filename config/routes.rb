@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       get :new_permit
     end
     resources :events
-    resource :group_users, only: [:create]
+    resource :group_users, only: [:create, :destroy]
     member do
       delete :leave
     end

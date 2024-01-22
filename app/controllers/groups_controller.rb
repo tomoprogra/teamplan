@@ -29,7 +29,6 @@ class GroupsController < ApplicationController
       flash[:alert] = "グループオーナーのみ削除が可能です"
       redirect_to group_path(@group)
     end
-
   end
 
   def edit
