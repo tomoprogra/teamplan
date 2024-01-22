@@ -22,8 +22,14 @@ class GroupsController < ApplicationController
 
   def destroy
     @group = Group.find(params[:id])
-    @group.destroy!
-    redirect_to root_path, success: t('defaults.flash_message.delete', item: Group.model_name.human), status: :see_other
+    if @group.owner_id == current_user.id
+      @group.destroy!
+      redirect_to root_path, success: t('defaults.flash_message.delete', item: Group.model_name.human), status: :see_other
+    else
+      flash[:alert] = "グループオーナーのみ削除が可能です"
+      redirect_to group_path(@group)
+    end
+
   end
 
   def edit
@@ -74,17 +80,24 @@ class GroupsController < ApplicationController
 
   def leave
     group = Group.find(params[:id])
-    if group.owner_id == current_user.id
-      flash[:alert] = 'オーナーはグループを退出できません。'
-    else
-      # カレントユーザーが自分自身をグループから退出させる
-      user_group = group.group_users.find_by(user_id: current_user.id)
-      if user_group
-        user_group.destroy
-        flash[:notice] = 'グループを退出しました。'
-      end
+
+    if group.owner_id == current_user.id && params[:user_id].to_i == current_user.id
+      flash[:alert] = "グループホストはグループから脱退できません。"
+      redirect_to group_path(group)
+      return
     end
-    redirect_to root_path
+
+    user_id = params[:user_id].to_i
+    user_group = group.group_users.find_by(user_id: user_id)
+    user_group.destroy
+    
+    if group.owner_id == current_user.id
+      flash[:notice] = "グループから脱退させました。"
+      redirect_to group_path(group)
+    else
+      flash[:notice] = "グループから脱退しました。"
+      redirect_to root_path
+    end
   end
   
   def permits
