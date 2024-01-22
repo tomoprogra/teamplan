@@ -1,0 +1,6 @@
+<%= turbo_stream.append "table-chat" do %>
+    <%= render 'chats/chat', chat: @chat %>
+<% end %>
+<%= turbo_stream.replace "chat-form" do %>
+    <%= render 'chats/new', locals: { group: @group, chat: @group.chats.new } %>
+<% end %>
