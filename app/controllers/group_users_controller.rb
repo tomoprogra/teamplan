@@ -1,5 +1,6 @@
 class GroupUsersController < ApplicationController
   before_action :authenticate_user!
+  # before_action :ensure_correct_user, only: [:create,:destroy]
 
   def create
     @group = Group.find(params[:group_id])
@@ -15,5 +16,15 @@ class GroupUsersController < ApplicationController
     @permit.destroy
     flash[:notice] = "加入を拒否しました。"
     redirect_to group_permits_path(@group), status: :see_other
+  end
+
+  private
+
+  def ensure_correct_user
+    @group = Group.find(params[:id])
+    unless @group.owner_id == current_user.id
+      flash[:alert] = "グループオーナーのみ編集が可能です"
+      redirect_to group_path(@group)
+    end
   end
 end
