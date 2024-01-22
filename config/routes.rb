@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   get "users/events_for_date", to: "users#events_for_date", as: :events_for_date
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root "tops#index"
+  get 'privacy_policy', to: 'tops#privacy_policy'
+  get 'terms_of_use', to: 'tops#terms_of_use'
 
   resources :users do
     resources :events, only: [:index]
