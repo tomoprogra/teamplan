@@ -36,14 +36,14 @@
           <div class="overflow-hidden">
             <% events.first(2).each do |event| %>
                 <%= link_to event_path(event, group_id: @group.id), data: { turbo_frame: '_top' } do %>
-                  <div class="px-1 py-1 rounded-lg mt-1 overflow-auto border border-sky-100 text-gray-600 bg-sky-100" >
-                    <p class="text-sm truncate leading-tight"><%= event.title %></p>
+                  <div class="px-1 py-1 rounded-lg mt-0.5 overflow-auto border border-sky-100 text-gray-600 bg-sky-100" >
+                    <p class="text-xs truncate leading-tight"><%= event.title %></p>
                   </div>
                 <% end %>
             <% end %>
 
             <% if events.size > 2 %>
-              <div class="px-1 py-1 text-primary">
+              <div class="px-1 py-1 text-primary text-xs">
                 <%= link_to "+#{events.size - 2} more", daily_schedule_events_path(date: date, group_id: @group.id), class: "text-sm truncate leading-tight", data: { turbo_frame: '_top' } %>
               </div>
             <% end %>

@@ -7,4 +7,8 @@ module ApplicationHelper
         else "flex items-center p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800"
         end
       end
+
+  def turbo_stream_flash
+    turbo_stream.update "flash", partial: "shared/flash_message"
+  end
 end

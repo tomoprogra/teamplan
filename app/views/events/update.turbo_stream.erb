@@ -1,0 +1,5 @@
+<%= turbo_stream.replace @event do %>
+  <%= render "events/event",
+            locals: { event: @event } %>
+<% end %>
+<%= turbo_stream_flash %>

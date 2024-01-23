@@ -1,4 +1,4 @@
-<div class="container mx-auto mt-8">
+<div class="container mx-auto mt-8 text-gray-600">
   <div class="text-3xl font-bold">グループ名：<%=@group.title %></div>
     <div class="mt-8 mb-8">
         <%= form_with url: invite_group_path(@group), method: :post do |form| %>
@@ -14,7 +14,7 @@
     <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(new_permit_group_url(@group))}&text=#{CGI.escape('参加申請をしましょう')}", target: "_blank", rel: "noopener" do %>
       <%= image_tag "logo-black.png", alt: "xのリンク", class: "w-5 h-5" %>
     <% end %>
-  </div> 
+  </div>
   <h2 class="text-2xl font-semibold mt-5 mb-3">メンバー</h2>
 <div class="mt-5 flex flex-wrap">
   <% @users.each do |user| %>
@@ -41,7 +41,7 @@
             <% if current_user && @group.owner_id == current_user.id && current_user != user %>
               <%= link_to leave_group_path(user_id: user.id), data: { turbo_method: :delete, turbo_confirm: 'メンバーを退出させますか？' } do %>
                 <i class="fas fa-trash"></i>
-               <% end %>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -59,5 +59,3 @@
     </div>
   <% end %>
 </div>
-
-  
