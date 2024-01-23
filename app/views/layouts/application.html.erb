@@ -20,9 +20,9 @@
       <%= render 'shared/before_login_header' %>
     <% end %>
 
-    <% flash.each do |key, value| %>
-      <div class="flash <%= flash_background_color(key) %> flex items-center p-4 mb-4  "><i class="fa-solid fa-circle-info"></i> <%= value %></div>
-    <% end %>
+    <div id="flash">
+      <%= render "shared/flash_message" %>
+    </div>
     </header>
     <main class="flex-grow overflow-y-auto">
       <%= yield %>

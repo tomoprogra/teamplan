@@ -44,9 +44,9 @@ end
   def update
     @event = Event.find(params[:id])
     if @event.update(event_params)
-      redirect_to group_events_path(@group), success: t('defaults.flash_message.updated', item: Event.model_name.human)
+      flash.now.notice = "イベントを更新しました。"
+      # redirect_to group_events_path(@group), success: t('defaults.flash_message.updated', item: Event.model_name.human)
     else
-      flash.now[:danger] = t('defaults.flash_message.not_updated', item: Event.model_name.human)
       render :edit, status: :unprocessable_entity
     end
   end

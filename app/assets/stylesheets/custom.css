@@ -20,11 +20,11 @@
     }
   }
   .day {
-    height: 120px;
-    max-width: 120px;
+    height: 110px;
+    max-width: 110px;
   }
   td {
-    width: 120px;
+    width: 110px;
     padding: 9px;
     vertical-align: top;
     border-left: 0.8px solid rgba(234, 232, 232, 0.857);
