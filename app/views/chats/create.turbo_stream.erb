@@ -1,0 +1,6 @@
+<%= turbo_stream.replace "new_chat" do %>
+  <%= render partial:"form", locals: {group: @group, chat: @chat} %>
+<% end %>
+<%= turbo_stream.prepend "chats" do %>
+  <%= render @chats %>
+<% end %>
