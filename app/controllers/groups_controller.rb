@@ -2,6 +2,7 @@ class GroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_membership, only: [:update, :destroy, :edit, :show]
   before_action :ensure_correct_user, only: [:destroy, :permits]
+  before_action :ensure_normal_user, only: [:add_member, :invite, :new, :create, :destroy, :edit, :update]
 
   def new
     @group = Group.new
@@ -130,6 +131,12 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     unless @group.owner_id == current_user.id
       redirect_to group_path(@group), alert: "グループオーナーのみ編集が可能です"
+    end
+  end
+
+  def ensure_normal_user
+    if current_user.email == 'guest@example.com'
+      redirect_to root_path, notice: "ゲストユーザーではできない動作です。"
     end
   end
 end

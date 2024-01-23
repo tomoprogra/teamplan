@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get '/join_group/:token', to: 'groups#add_member', as: :join_group
   devise_for :users, controllers: {
     registrations: 'users/registrations',
+    passwords: 'users/passwords'
   }
   get "users/mypage" => "users#show"
   get "users/events_for_date", to: "users#events_for_date", as: :events_for_date
@@ -40,6 +41,10 @@ Rails.application.routes.draw do
       delete "destroy_all"
       get :more_read
     end
+  end
+
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
