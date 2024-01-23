@@ -30,6 +30,14 @@ class User < ApplicationRecord
   #   groups.exists?(group.id)
   # end
 
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
+      user.name = "ゲスト"
+    end
+  end
+
   def events_for_calendar
     group_ids = self.groups.pluck(:id)
     Event.where(group_id: group_ids)
