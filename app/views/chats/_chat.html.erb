@@ -1,44 +1,22 @@
-<% if chat.user == current_user %>
-<!-- Current Userのchatは右に表示 -->
-<div class="chat chat-end">
-  <div class="chat-image avatar">
-    <div class="w-10 rounded-full">
-      <% if current_user.profile_image.present? %>
-        <%= image_tag current_user.profile_image.url, class: "rounded-full h-24 w-24" %>
-      <% else %>
-        <%= image_tag 'default.jpg', class: "rounded-full h-24 w-24" %>
-      <% end %>
+<div id="chat_<%= chat.id %>" 
+    class="chat"
+    data-controller=>
+  <div class="chat chat-start">
+    <div class="chat-image avatar">
+      <div class="w-10 rounded-full">
+        <% if chat.user.profile_image.present? %>
+          <%= image_tag current_user.profile_image.url, class: "rounded-full h-24 w-24" %>
+        <% else %>
+          <%= image_tag 'default.jpg', class: "rounded-full h-24 w-24" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="chat-header">
+      <%= chat.user.name %>
+    </div>
+    <div class="chat-bubble chat-bubble-primary"><%= chat.body %></div>
+    <div class="chat-footer opacity-50">
+      <time class="text-xs opacity-50"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></time>
     </div>
   </div>
-  <div class="chat-header">
-  <%= current_user.name %>
-  </div>
-  <div class="chat-bubble chat-bubble-primary"><%= chat.body %></div>
-  <div class="chat-footer opacity-50">
-  <time class="text-xs opacity-50"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></time>
-  </div>
 </div>
-
-<% else %>
-
-<!-- Current User以外のchatは左に表示 -->
-<div class="chat chat-start">
-  <div class="chat-image avatar">
-    <div class="w-10 rounded-full">
-      <% if chat.user.profile_image.present? %>
-        <%= image_tag current_user.profile_image.url, class: "rounded-full h-24 w-24" %>
-      <% else %>
-        <%= image_tag 'default.jpg', class: "rounded-full h-24 w-24" %>
-      <% end %>
-    </div>
-  </div>
-  <div class="chat-header">
-  <%= chat.user.name %>
-  </div>
-  <div class="chat-bubble chat-bubble-primary"><%= chat.body %></div>
-  <div class="chat-footer opacity-50">
-  <time class="text-xs opacity-50"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></time>
-  </div>
-</div>
-
-<% end %>

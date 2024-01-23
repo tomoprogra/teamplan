@@ -1,0 +1,11 @@
+<div class="relative space-x-3 bg-secondary bg-opacity-50", id="new_chat">
+    <%= form_with(model: @chat, url: group_chats_path(@group), local: true) do |f|%>
+    <div class="flex items-center">
+        <%= f.text_field :body, class: "input input-bordered input-base-100 block w-full h-10 rounded-md ", placeholder: "ここに入力"%>
+        <%= f.submit "投稿", class: "justify-center rounded-md border border-transparent bg-yellow-100 px-4 py-2 text-sm font-bold text-gray-600" do %>
+          <i class="fa-solid fa-paper-plane fa-xl"></i>
+        <% end %>
+          <%= hidden_field_tag :user_id, current_user.id %>
+    <% end %>
+    </div>
+</div>

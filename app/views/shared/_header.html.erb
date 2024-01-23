@@ -8,19 +8,13 @@
       <label for="my-drawer" class="btn btn-primary drawer-button hover:bg-accent hover:drop-shadow-none">
       <i class="mx-2 fa-regular fa-calendar-check fa-xl text-secondary "></i></label>
     </div> 
-    <div class="drawer-side z-10">
+    <div class="drawer-side z-40">
       <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
       <ul class="menu p-4 w-80 min-h-full bg-secondary text-gray-600">
-        <li class="menu-title hover:text-accent transition-all duration-300">
-          <div class="collapse bg-base-200">
-            <input type="checkbox" class="peer" /> 
-            <div class="collapse-title">
-              <i class="fa-solid fa-plus"></i>&nbsp;グループを作る
-            </div>
-            <div class="collapse-content"> 
-              <%= render 'groups/new'%>
-            </div>
-          </div>
+        <li class="menu-title hover:text-accent transition-all duration-300"">
+          <%= link_to new_group_path do %>
+            <i class="fa-solid fa-plus"></i>&nbsp;グループを作る
+          <% end %>
         </li>
 
         <li class="menu-title font-semibold"><i class="fa-solid fa-caret-down">&nbsp;グループを選ぶ</i></i></li>
@@ -41,7 +35,7 @@
         <%= render 'notifications/notification_count' %>
           <i class="fa-solid fa-bell fa-xl p-2"></i></div>
           </div>
-      <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-secondary rounded-box w-64 text-gray-600">
+      <ul tabindex="0" class="dropdown-content z-30 menu p-2 shadow bg-secondary rounded-box w-64 text-gray-600">
         <li class="menu-title"><i class="fa-solid fa-bell">&nbsp;通知</i></li>
           <%= turbo_frame_tag 'notifications' do %>
             <% if @notifications.present? && @notifications.reject(&:self_chat_notification?).any? %>
@@ -73,7 +67,7 @@
     <div class="drawer-content">
       <label for="my-drawer-4" class="drawer-button btn btn-primary hover:bg-accent hover:drop-shadow-none"><i class="fa-solid fa-bars fa-xl cursor-pointer" ></i></label>
     </div> 
-    <div class="drawer-side z-10">
+    <div class="drawer-side z-40">
       <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
       <ul class="menu p-4 w-80 min-h-full bg-primary text-base-content">
         <li class="menu-title">Menu</li>
@@ -118,6 +112,8 @@
             }
           </script>
 
+        <li><%= link_to root_path, class: "ml-2 hover:text-accent transition-all duration-300" do %>
+          <i class="fa-solid fa-house"></i>&nbsp;ホーム画面<% end %></li>
         <li><%= link_to destroy_user_session_path, class: "ml-2 hover:text-accent transition-all duration-300" do %>
           <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;ログアウト<% end %></li>
       </ul>
