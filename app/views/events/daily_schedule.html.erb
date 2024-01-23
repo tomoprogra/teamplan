@@ -3,7 +3,7 @@
 
   <!-- イベント追加ボタン -->
   <div class="text-right">
-    <%= link_to new_group_event_path(group_id: @group.id, date: @date), class: "button-add-event rounded-none bg-lemon-100 bg-yellow-100 px-8 py-6" do %>
+    <%= link_to new_group_event_path(group_id: @group.id, date: @date), class: "button-add-event text-secondary rounded-none bg-primary hover:bg-accent px-8 py-6" do %>
       <i class="fas fa-plus"></i>
     <% end %>
   </div>
@@ -21,7 +21,7 @@
         <% @events.each do |event| %>
           <li class="event-item my-2">
             <div class="flex justify-between items-center">
-              <div class="event-details bg-cyan-100 rounded-lg p-2 text-gray-600 w-full mr-5">
+              <div class="event-details bg-secondary rounded-lg p-2 text-gray-600 w-full mr-5">
                 <div class="event-time font-semibold">
                   <% if event.start_time.to_date == event.end_time.to_date %>
                     <%= event.start_time.strftime('%H:%M') %> ~ <%= event.end_time.strftime('%H:%M') %>
@@ -36,7 +36,7 @@
                   内容: <%= event.description %>
                 </div>
               </div>
-              <%= link_to event_path(event, group_id: @group.id), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: "btn-delete-event rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2" do %>
+              <%= link_to event_path(event, group_id: @group.id), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: "btn-delete-event text-secondary rounded-lg drop-shadow-lg bg-primary hover:bg-accent hover:drop-shadow-none px-2 py-2" do %>
                 <i class="fas fa-trash"></i>
               <% end %>
             </div>
@@ -48,6 +48,6 @@
   </div>
 
   <div class="mt-4">
-    <%= link_to 'カレンダーに戻る', group_events_path(group_id: @group.id), class: "back-to-calendar rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2" %>
+    <%= link_to 'カレンダーに戻る', group_events_path(group_id: @group.id), class: "back-to-calendar text-secondary rounded-lg drop-shadow-lg bg-primary hover:bg-accent hover:drop-shadow-none px-2 py-2" %>
   </div>
 </div>
