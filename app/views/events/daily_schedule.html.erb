@@ -35,6 +35,9 @@
                   内容: <%= event.description %>
                 </div>
               </div>
+              <%= link_to edit_event_path(event, group_id: @group.id), class: "btn-edit-event mr-2 text-secondary rounded-lg drop-shadow-lg bg-primary hover:bg-accent hover:drop-shadow-none px-2 py-2" do %>
+                <i class="fas fa-pencil"></i>
+              <% end %>
               <%= link_to event_path(event, group_id: @group.id), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: "btn-delete-event text-secondary rounded-lg drop-shadow-lg bg-primary hover:bg-accent hover:drop-shadow-none px-2 py-2" do %>
                 <i class="fas fa-trash"></i>
               <% end %>
