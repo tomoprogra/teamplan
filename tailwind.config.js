@@ -25,8 +25,7 @@ module.exports = {
           "accent": "#38a9d1",
         },
       },
-      "dark",
-      "cupcake",
     ],
+    darkTheme: false,
   },
 }
