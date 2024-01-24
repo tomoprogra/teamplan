@@ -14,7 +14,7 @@
             <% @events_for_selected_date.each do |event| %>
               <li class="event-item my-2">
                 <div class="flex justify-between items-center">
-                  <div class="event-details bg-cyan-100 rounded-lg p-2 text-gray-600 w-full mr-5">
+                  <div class="event-details bg-secondary rounded-lg p-2 text-gray-600 w-full mr-5">
                     <div class="event-time font-semibold">
                       <% if event.start_time.to_date == event.end_time.to_date %>
                         <%= event.start_time.strftime('%H:%M') %> ~ <%= event.end_time.strftime('%H:%M') %>
@@ -42,6 +42,6 @@
   </div>
 
   <div class="mt-4">
-    <%= link_to "マイページに戻る", users_mypage_path, class: "back-to-calendar rounded-lg drop-shadow-lg bg-yellow-100 hover:bg-yellow-300 hover:drop-shadow-none px-2 py-2" %>
+    <%= link_to "マイページに戻る", users_mypage_path, class: "back-to-calendar text-secondary rounded-lg drop-shadow-lg bg-primary hover:bg-accent hover:drop-shadow-none px-2 py-2" %>
   </div>
 </div>
