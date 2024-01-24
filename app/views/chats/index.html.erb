@@ -9,13 +9,14 @@
         <%= turbo_stream_from @group %>
         <%= render @chats %>
       </turbo-frame>
-    <div>
-      <%= render partial: "form", locals: { group: @group, chat: @chat } %>
+    </div>
+    
 </div>
-
+<div class="ticky bottom-0 py-2" style="position: -webkit-sticky; position: sticky;">
+      <%= render partial: "form", locals: { group: @group, chat: @chat } %></div>
 <div>
  <%= link_to group_events_path(@group), class: "btn fixed bottom-36 right-12 rounded-full w-16 py-8 text-primary text-center" do %><i class="fa-solid fa-chevron-left fa-lg"></i><% end %>   
-    </div>
+</div>
 <script>
   function scrollToElement() {
     const scrollerInner = document.getElementById("scroller_inner");
