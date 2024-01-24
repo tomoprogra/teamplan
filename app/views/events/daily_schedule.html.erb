@@ -1,15 +1,14 @@
 <div class="container mx-auto mt-8 text-gray-600">
   <h1 class="text-3xl font-bold"><%= @group.title %></h1>
 
-  <!-- イベント追加ボタン -->
-  <div class="text-right">
-    <%= link_to new_group_event_path(group_id: @group.id, date: @date), class: "button-add-event text-secondary rounded-none bg-primary hover:bg-accent px-8 py-6" do %>
-      <i class="fas fa-plus"></i>
-    <% end %>
-  </div>
-
   <div class="event-date-header text-2xl font-semibold mt-5 mb-3">
-    <p><%= @date.strftime('%Y年%m月%d日') %></p>
+    <p class="flex items-center">
+      <%= @date.strftime('%Y年%m月%d日') %>
+            <!-- イベント追加ボタン -->
+      <%= link_to new_group_event_path(group_id: @group.id, date: @date), class: "button-add-event text-secondary btn bg-primary hover:bg-accent" do %>
+        <i class="fas fa-plus"></i>
+      <% end %>
+    </p>
     <p>予定一覧</p>
   </div>
 
