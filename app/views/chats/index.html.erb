@@ -14,6 +14,10 @@
     <div>
       <%= render partial: "form", locals: { group: @group, chat: @chat } %>
 </div>
+
+<div>
+ <%= link_to group_events_path(@group), class: "btn fixed bottom-36 right-12 rounded-full w-16 py-8 text-primary text-center" do %><i class="fa-solid fa-chevron-left fa-lg"></i><% end %>   
+    </div>
 <script>
   function scrollToElement() {
     const scrollerInner = document.getElementById("scroller_inner");
