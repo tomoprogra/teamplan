@@ -2,7 +2,7 @@
     <%= form_with(model: @chat, url: group_chats_path(@group), local: true) do |f|%>
     <div class="flex items-center">
         <%= f.text_field :body, class: "input input-bordered input-base-100 block w-full h-10 rounded-full ", placeholder: "メッセージを入力"%>
-        <%= f.button type: 'submit', class: "justify-center rounded-full border border-transparent bg-primary px-4 py-2 text-sm font-bold text-secondary" do %>
+        <%= f.button type: 'submit', class: "justify-center rounded-full border border-transparent bg-primary px-4 py-2 text-sm font-bold text-secondary hover:bg-accent hover:drop-shadow-none" do %>
           <i class="fa-solid fa-paper-plane fa-xl"></i>
         <% end %>
           <%= hidden_field_tag :user_id, current_user.id %>
