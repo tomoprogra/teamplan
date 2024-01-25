@@ -13,23 +13,19 @@
   .next-month .label-style {
     display: none;
   }
-  .wday-0 a {
+  .wday-0 .calendar-day {
     color: red;
-    p {
-      color: #4b5563;
-    }
   }
-  .wday-6 a {
+  .wday-6 .calendar-day {
     color: blue;
-    p {
-      color: #4b5563;
-    }
   }
-  .past a {
+  .past .calendar-day {
     color: gray;
-    p {
+  }
+  .past .title-flame {
       color: gray;
-    }
+      background-color: rgb(233, 230, 230);
+      border-color: rgb(233, 230, 230);
   }
   .day {
     height: 110px;
@@ -73,7 +69,7 @@
     tr {
       font-size: x-small;
     }
-    .label-style .title-flame{
+    .title-flame{
       width: 30px;
       padding: 0.2px;
       p {
