@@ -84,8 +84,8 @@
       </div>
     </div>
     <div class="grid justify-items-center"> 
-      <div class="mb-4 bg-transparent hover:bg-red-500 text-red-500 hover:text-white py-2 px-2 border border-red-500 hover:border-transparent rounded-xl">
-        <%= link_to 'グループを削除', group_path(@group),  data: { turbo_method: :delete, turbo_confirm: 'グループを削除しますか？' } %>
+      <div class="mb-4 mt-8 bg-transparent hover:bg-red-500 text-red-500 hover:text-white py-2 px-2 border border-red-500 hover:border-transparent rounded-xl">
+        <%= link_to 'グループを削除', group_path(@group),  data: { turbo_method: :delete, turbo_confirm: '本当にグループを削除しますか？' } %>
       </div>
     </div>
   <% end %>
