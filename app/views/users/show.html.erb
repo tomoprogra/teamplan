@@ -15,14 +15,14 @@
             <% events.first(2).each do |event| %>
                 <%= link_to event_path(event, group_id: event.group_id), data: { turbo_frame: '_top' } do %>
                   <div class="px-1 py-1 rounded-lg mt-1 overflow-auto border border-sky-100 bg-sky-100">
-                    <p class="text-sm truncate leading-tight"><%= event.title %></p>
+                    <p class="text-xs truncate leading-tight"><%= event.title %></p>
                   </div>
                 <% end %>
             <% end %>
 
             <% if events.size > 2 %>
               <div class="px-1 py-1 text-primary">
-                <%= link_to "+#{events.size - 2} more", events_for_date_path(current_user, date: date), class: "text-sm truncate leading-tight", data: { turbo_frame: '_top' } %>
+                <%= link_to "+#{events.size - 2} more", events_for_date_path(current_user, date: date), class: "text-xs truncate leading-tight", data: { turbo_frame: '_top' } %>
               </div>
             <% end %>
           </div>
