@@ -5,9 +5,17 @@
     </div>
     <ul class="menu menu-horizontal bg-white rounded-box mt-6 items-center">
       <li>
-        <%= link_to(edit_group_path(@group), class: "tooltip", "data-tip" => "グループ名変更") do %>
+        <label for="my_modal_7" class="tooltip" data-tip="グループ名変更">
           <i class="fa-solid fa-pencil fa hover:text-accent" aria-hidden="true"></i>
-        <% end %>
+        </label>
+
+        <input type="checkbox" id="my_modal_7" class="modal-toggle" />
+        <div class="modal flex items-center justify-center" role="dialog">
+          <div class="modal-box">
+            <%= render 'groups/edit' %>
+          </div>
+          <label class="modal-backdrop" for="my_modal_7">Close</label>
+        </div>
       </li>
       <div class="border-r inline-flex h-6"></div>
       <li>
