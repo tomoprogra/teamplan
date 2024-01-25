@@ -5,6 +5,7 @@ class EventsController < ApplicationController
 
   def index
     @events = @group.events
+    @event = @group.events.build
   end
 
   def new
@@ -52,6 +53,7 @@ end
   end
 
   def daily_schedule
+    @event = @group.events.build
     @date = params[:date].to_date
     @group = Group.find(params[:group_id])
   

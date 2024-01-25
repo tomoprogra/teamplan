@@ -31,9 +31,17 @@
       </li>
       <div class="border-r inline-flex h-6"></div>
       <li>
-        <%= link_to(new_group_event_path(group_id: @group.id), class: "tooltip", "data-tip" => "イベント作成") do %>
+        <label for="my_modal_8" class="tooltip" data-tip="イベント作成">
           <i class="fa-solid fa-plus fa hover:bg-accent px-1.5 py-1.5 rounded-full overflow-auto border border-secondary text-secondary bg-primary"></i>
-        <% end %>
+        </label>
+
+        <input type="checkbox" id="my_modal_8" class="modal-toggle" />
+        <div class="modal flex items-center justify-center" role="dialog">
+          <div class="modal-box">
+            <%= render 'new', group_id: @group.id %>
+          </div>
+        </div>
+        <label class="modal-backdrop" for="my_modal_8">Close</label>
       </li>
     </ul>
   </div>
@@ -43,11 +51,17 @@
         <%= link_to date.day, daily_schedule_events_path(date: date, group_id: @group.id), class:"inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100 hover:bg-sky-200 font-medium", data: { turbo_frame: '_top' } %>
           <div class="overflow-hidden">
             <% events.first(2).each do |event| %>
-                <%= link_to event_path(event, group_id: @group.id), data: { turbo_frame: '_top' } do %>
-                  <div class="px-1 py-1 rounded-lg mt-0.5 overflow-auto border border-sky-100 text-gray-600 bg-sky-100" >
-                    <p class="text-xs truncate leading-tight"><%= event.title %></p>
-                  </div>
-                <% end %>
+              <label for="event_modal_<%= event.id %>" class="px-1 py-1 rounded-lg mt-0.5 overflow-auto border border-sky-100 text-gray-600 bg-sky-100">
+                <i class="text-xs truncate leading-tight"></i> <%= event.title %>
+              </label>
+
+              <input type="checkbox" id="event_modal_<%= event.id %>" class="modal-toggle" />
+              <div class="modal flex items-center justify-center" role="dialog">
+                <div class="modal-box">
+                  <%= render 'show', event: event, group_id: @group.id %>
+                </div>
+                <label class="modal-backdrop" for="event_modal_<%= event.id %>">Close</label>
+              </div>
             <% end %>
 
             <% if events.size > 2 %>

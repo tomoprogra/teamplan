@@ -2,17 +2,25 @@
   <h1 class="text-3xl font-bold"><%= @group.title %></h1>
 
   <div class="event-date-header text-2xl font-semibold mt-5 mb-3">
-    <p class="flex items-center">
+    <div class="flex items-center">
       <%= @date.strftime('%Y年%m月%d日') %>
-            <!-- イベント追加ボタン -->
-      <%= link_to new_group_event_path(group_id: @group.id, date: @date), class: "button-add-event text-secondary btn bg-primary hover:bg-accent" do %>
+      <!-- イベント追加ボタン -->
+      <label for="my_modal_9" class="button-add-event text-secondary btn bg-primary hover:bg-accent mx-2">
         <i class="fas fa-plus"></i>
-      <% end %>
-    </p>
-    <p>予定一覧</p>
-  </div>
+      </label>
 
-  <div class="event-list mb-5 px-5">
+      <input type="checkbox" id="my_modal_9" class="modal-toggle" />
+      <div class="modal flex items-center justify-center" role="dialog">
+        <div class="modal-box">
+          <%= render 'new', group_id: @group.id, date: @date %>
+        </div>
+      </div>
+      <label class="modal-backdrop" for="my_modal_9">Close</label>
+    </div> 
+  </div>
+  <p class="text-2xl font-semibold">予定一覧</p>
+
+  <div class="event-list mb-5 px-5 text-base">
     <% if @events.empty? %>
       <p>イベントはありません。</p>
     <% else %>
@@ -35,21 +43,28 @@
                   内容: <%= event.description %>
                 </div>
               </div>
-              <%= link_to edit_event_path(event, group_id: @group.id), class: "btn-edit-event mr-2 text-secondary rounded-lg drop-shadow-lg bg-primary hover:bg-accent hover:drop-shadow-none px-2 py-2" do %>
+              <label for="event_modal_<%= event.id %>" class="tooltip btn-edit-event mr-2 text-secondary rounded-lg drop-shadow-lg bg-primary hover:bg-accent hover:drop-shadow-none px-2 py-2", data-tip="イベント編集">
                 <i class="fas fa-pencil"></i>
-              <% end %>
+              </label>
+
+              <input type="checkbox" id="event_modal_<%= event.id %>" class="modal-toggle" />
+              <div class="modal flex items-center justify-center" role="dialog">
+                <div class="modal-box">
+                  <%= render 'show', event: event, group_id: @group.id %>
+                </div>
+                <label class="modal-backdrop" for="event_modal_<%= event.id %>">Close</label>
+              </div>
               <%= link_to event_path(event, group_id: @group.id), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: "btn-delete-event text-secondary rounded-lg drop-shadow-lg bg-primary hover:bg-accent hover:drop-shadow-none px-2 py-2" do %>
                 <i class="fas fa-trash"></i>
               <% end %>
             </div>
           </li>
         <% end %>
-
       </ul>
     <% end %>
   </div>
 
-  <div class="mt-4">
+  <div class="mt-4 text-base">
     <%= link_to 'カレンダーに戻る', group_events_path(group_id: @group.id), class: "back-to-calendar text-secondary rounded-lg drop-shadow-lg bg-primary hover:bg-accent hover:drop-shadow-none px-2 py-2" %>
   </div>
 </div>
