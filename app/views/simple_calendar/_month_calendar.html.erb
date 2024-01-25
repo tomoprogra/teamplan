@@ -6,7 +6,7 @@
           <span class="ml-1 text-lg"><%= "#{start_date.year}年" %></span>
           <span class="ml-1 text-lg font-normal"><%= t('date.month_names')[start_date.month] %></span>
         </div>
-        <div class="border rounded-lg px-1" style="padding-top: 4px;">
+        <div class="month-button border rounded-lg px-1" style="padding-top: 4px;">
           <button>
             <%= link_to(calendar.url_for_previous_view, type: "button", class: "leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 items-center") do %>
               <svg class="h-6 w-6 hover:text-accent inline-flex leading-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">

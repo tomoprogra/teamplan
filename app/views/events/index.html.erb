@@ -48,11 +48,13 @@
   <div>
     <%= turbo_frame_tag 'calendar' do %>
       <%= month_calendar events: @events do |date, events| %>
-        <%= link_to date.day, daily_schedule_events_path(date: date, group_id: @group.id), class:"inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100 hover:bg-sky-200 font-medium", data: { turbo_frame: '_top' } %>
+        <%= link_to date.day, daily_schedule_events_path(date: date, group_id: @group.id), class:"calendar-day inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100 hover:bg-sky-200 font-medium", data: { turbo_frame: '_top' } %>
           <div class="overflow-hidden">
             <% events.first(2).each do |event| %>
-              <label for="event_modal_<%= event.id %>" class="px-1 py-1 rounded-lg mt-0.5 overflow-auto border border-sky-100 text-gray-600 bg-sky-100">
-                <i class="text-xs truncate leading-tight"></i> <%= event.title %>
+              <label for="event_modal_<%= event.id %>" class="label-style">
+                <div class="title-flame px-1 py-1 rounded-lg mt-0.5 overflow-auto border border-sky-100 text-gray-600 bg-sky-100" >
+                  <p class="text-xs truncate leading-tight"><%= event.title %></p>
+                </div>
               </label>
 
               <input type="checkbox" id="event_modal_<%= event.id %>" class="modal-toggle" />

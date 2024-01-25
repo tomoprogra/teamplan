@@ -10,11 +10,11 @@
   <div>
     <%= turbo_frame_tag 'calendar' do %>
       <%= month_calendar events: current_user.events_for_calendar do |date, events| %>
-        <%= link_to date.day, events_for_date_path(current_user, date: date), class:"inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100 hover:bg-sky-200 font-medium", data: { turbo_frame: '_top' } %>
+        <%= link_to date.day, events_for_date_path(current_user, date: date), class:"calendar-day inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100 hover:bg-sky-200 font-medium", data: { turbo_frame: '_top' } %>
           <div class="overflow-hidden">
             <% events.first(2).each do |event| %>
-                <%= link_to event_path(event, group_id: event.group_id), data: { turbo_frame: '_top' } do %>
-                  <div class="px-1 py-1 rounded-lg mt-1 overflow-auto border border-sky-100 bg-sky-100">
+                <%= link_to group_events_path(group_id: event.group_id), data: { turbo_frame: '_top' } do %>
+                  <div class="title-flame px-1 py-1 rounded-lg mt-1 overflow-auto border border-sky-100 bg-sky-100">
                     <p class="text-xs truncate leading-tight"><%= event.title %></p>
                   </div>
                 <% end %>

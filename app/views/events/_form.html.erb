@@ -22,14 +22,8 @@
       </div>
 
       <div class="flex space-x-3 justify-center">
-        <div class="flex flex-col">
-          <%= f.submit class: "text-xs rounded-lg drop-shadow-lg bg-primary text-secondary hover:bg-accent hover:drop-shadow-none px-8 py-3" %>
-        </div>
-
-        <div class="flex flex-col">
-          <%= link_to group_events_path(@group, @event), class: "text-xs rounded-lg drop-shadow-lg bg-secondary text-primary hover:bg-accent hover:drop-shadow-none px-4 py-3" do %>
-          <i class="mr-2 fa-regular fa-calendar-check fa-xl text-primary "></i>に戻る
-          <% end %>
+        <div class="flex flex-col w-3/4">
+          <%= f.submit class: "w-full text-xs rounded-lg drop-shadow-lg bg-primary text-secondary hover:bg-accent hover:drop-shadow-none py-3" %>
         </div>
       </div>
     </div>
