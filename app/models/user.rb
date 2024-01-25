@@ -8,6 +8,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { minimum: 2, maximum: 20 }
   TRUE_EMAIL = /[\w]+@[a-z]+.[a-z]+.?[a-z]+/
   validates :email, presence: true, format: { with: TRUE_EMAIL}
+  validates :introduction, length: { maximum: 20 }
   has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
   has_many :chats, dependent: :destroy
