@@ -18,7 +18,7 @@ class ChatsController < ApplicationController
           @chat = Chat.new
           format.html { redirect_to group_chats_path(@group) }
           format.turbo_stream
-          # @group.create_notification_chat!(current_user, @chat.id)
+          @group.create_notification_chat!(current_user, @chat.id)
         else
           format.html { render :index, status: :unprocessable_entity }
         end
