@@ -4,14 +4,26 @@
   .prev-month a {
     display: none;
   }
+  .prev-month .label-style {
+    display: none;
+  }
   .next-month a {
+    display: none;
+  }
+  .next-month .label-style {
     display: none;
   }
   .wday-0 a {
     color: red;
+    p {
+      color: #4b5563;
+    }
   }
   .wday-6 a {
     color: blue;
+    p {
+      color: #4b5563;
+    }
   }
   .past a {
     color: gray;
@@ -46,5 +58,27 @@
   }
   .today a:hover{
     background-color: #bae6fd;
+  }
+  @media screen and (max-width: 600px) {
+    .month-button a {
+      width: 20px;
+      height: 10px;
+    }
+    span {
+      font-size: small;
+    }
+    th {
+      font-size: x-small;
+    }
+    tr {
+      font-size: x-small;
+    }
+    .label-style .title-flame{
+      width: 30px;
+      padding: 0.2px;
+      p {
+        font-size: xx-small;
+      }
+    }
   }
 }
