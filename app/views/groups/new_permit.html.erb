@@ -1,8 +1,13 @@
-<h1><%= @group.title %>に参加申請</h1>
-<% permit = current_user.permits.find_by(group_id: @group.id) %>
-<% if permit %>
-  <%= link_to '申請取消', group_permit_path(@group, permit), data: { turbo_method: :delete } %>
-<% else %>
-  <%= link_to '加入申請', group_permits_path(@group), data: { turbo_method: :post } %>
-<% end %>
-
+<div class="col-md-9 mx-auto h-scrren text-center mt-10 text-gray-600">
+  <div>
+    <h1 class="text-2xl"><%= @group.title %>に参加申請を送る</h1>
+  </div>
+  <div class="mt-10">
+    <% permit = current_user.permits.find_by(group_id: @group.id) %>
+    <% if permit %>
+      <%= link_to '申請取消', group_permit_path(@group, permit), data: { turbo_method: :delete }, class: "rounded-lg drop-shadow-lg border-2 bg-primary text-secondary hover:bg-accent hover:drop-shadow-none px-4 py-2"%>
+    <% else %>
+      <%= link_to '加入申請', group_permits_path(@group), data: { turbo_method: :post }, class: "text-primary rounded-lg border-2 border-primary hover:bg-gray-200 px-4 py-2" %>
+    <% end %>
+  </div>
+</div>

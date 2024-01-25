@@ -1,25 +1,21 @@
-<div class="relative h-full">
-<div class="sticky top-0 navbar bg-secondary text-gray-600 z-10">
+<div class="ticky top-0 navbar bg-secondary text-gray-600 z-10" style="position: -webkit-sticky; position: sticky;">
   <div class="btn btn-ghost text-xl">
       <%= @group.title %>
     </div>
   </div>
-<div class="overflow-y-scroll pb-28">
+<div class="overflow-scroll">
     <div class="text-gray-600 mb-5 px-5 ", id="scroller_inner">
       <turbo-frame  id="chats">
         <%= turbo_stream_from @group %>
         <%= render @chats %>
       </turbo-frame>
     </div>
+    
 </div>
- <%= link_to group_events_path(@group), class: "btn fixed bottom-56 right-12 rounded-full w-16 py-8 text-primary text-center" do %><i class="fa-solid fa-chevron-left fa-lg"></i><% end %>   
-</div>
-<div class="fixed bottom-32 md:bottom-16 w-full">
-  <%= render partial: "form", locals: { group: @group, chat: @chat } %>
+<div class="ticky bottom-0 py-2" style="position: -webkit-sticky; position: sticky;">
+      <%= render partial: "form", locals: { group: @group, chat: @chat } %></div>
 <div>
-<div class="fixed bottom-0 w-full">
-    <%= render "shared/footer" %>
-  </div>
+ <%= link_to group_events_path(@group), class: "btn fixed bottom-36 right-12 rounded-full w-16 py-8 text-primary text-center" do %><i class="fa-solid fa-chevron-left fa-lg"></i><% end %>   
 </div>
 <script>
   function scrollToElement() {
@@ -31,4 +27,3 @@
   document.addEventListener("DOMContentLoaded", scrollToElement);
   document.addEventListener("turbo:load", scrollToElement);
 </script>
-
