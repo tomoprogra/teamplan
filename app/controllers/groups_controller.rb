@@ -16,8 +16,8 @@ class GroupsController < ApplicationController
       @group.create_notification_join!(current_user)
       redirect_to group_events_path(@group), success: t('defaults.flash_message.created', item: Group.model_name.human)
     else
-      flash.now[:danger] = t('defaults.flash_message.not_created', item: Group.model_name.human)
-      render :new, status: :unprocessable_entity
+      flash[:danger] = t('defaults.flash_message.not_created', item: Group.model_name.human)
+      redirect_to request.referer and return
     end
   end
 
@@ -41,7 +41,8 @@ class GroupsController < ApplicationController
     if @group.update(group_params)
       redirect_to group_events_path(@group), success: t('defaults.flash_message.updated', item: Group.model_name.human)
     else
-      render :edit, status: :unprocessable_entity
+      flash[:alert] = @group.errors.full_messages
+      redirect_to request.referer and return
     end
   end
 
