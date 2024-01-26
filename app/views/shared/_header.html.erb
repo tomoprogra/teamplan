@@ -1,5 +1,5 @@
 <div class="navbar bg-primary text-secondary">
-  <div class="flex-none space-x-1">
+  <div class="flex-none md:space-x-1 space-x-0">
     <!-- グループ選択 -->
     <div class="drawer">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
@@ -10,7 +10,7 @@
     </div> 
     <div class="drawer-side z-40">
       <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-      <ul class="menu p-4 w-80 min-h-full bg-secondary text-gray-600">
+      <ul class="menu p-4 w-60 md:w-80 min-h-full bg-secondary text-gray-600">
         <li class="menu-title hover:text-accent transition-all duration-300">
           <div class="collapse bg-base-200">
             <input type="checkbox" class="peer" /> 
@@ -62,7 +62,7 @@
 
   <!-- ホームボタン&ユーザー名表示 -->
 <div class="flex-1 mx-2">
-  <%= link_to current_user.name, users_mypage_path, class: "btn btn-ghost text-xl hover:text-accent hover:drop-shadow-none" %>
+  <%= link_to current_user.name, users_mypage_path, class: "btn btn-ghost text-base hover:text-accent hover:drop-shadow-none md:text-xl" %>
 </div>
 
   <!-- ハンバーガーメニュー -->
@@ -74,7 +74,7 @@
     </div> 
     <div class="drawer-side z-40">
       <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
-      <ul class="menu p-4 w-80 min-h-full bg-primary text-base-content">
+      <ul class="menu p-4 w-60 md:w-80 min-h-full bg-primary text-base-content">
         <li class="menu-title">Menu</li>
 
         <li><%= link_to '#', class: "ml-2 hover:text-accent transition-all duration-300", onclick: "closeDrawer();my_modal_3.showModal()" do %>

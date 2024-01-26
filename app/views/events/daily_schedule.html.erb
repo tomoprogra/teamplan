@@ -1,14 +1,12 @@
 <div class="container mx-auto mt-8 text-gray-600">
-  <h1 class="text-3xl font-bold"><%= @group.title %></h1>
-
-  <div class="event-date-header text-2xl font-semibold mt-5 mb-3">
+  <h1 class="text-2xl font-bold ml-3"><%= @group.title %></h1>
+  <div class="event-date-header ml-3 mt-5 mb-3">
     <div class="flex items-center">
       <%= @date.strftime('%Y年%m月%d日') %>
       <!-- イベント追加ボタン -->
       <label for="my_modal_9" class="button-add-event text-secondary btn bg-primary hover:bg-accent mx-2">
         <i class="fas fa-plus"></i>
       </label>
-
       <input type="checkbox" id="my_modal_9" class="modal-toggle" />
       <div class="modal flex items-center justify-center" role="dialog">
         <div class="modal-box">
@@ -17,10 +15,12 @@
       </div>
       <label class="modal-backdrop" for="my_modal_9">Close</label>
     </div> 
+    <div>
+      <%= link_to group_events_path(@group), class: "btn fixed top-20 right-12 rounded-full w-14 py-7 text-primary text-center" do %><i class="fa-solid fa-chevron-left fa-lg"></i><% end %>  
+    </div>
   </div>
-  <p class="text-2xl font-semibold">予定一覧</p>
-
-  <div class="event-list mb-5 px-5 text-base">
+  <p>予定一覧</p>
+  <div class="event-list mb-5 px-3 text-base">
     <% if @events.empty? %>
       <p>イベントはありません。</p>
     <% else %>
@@ -29,35 +29,39 @@
           <li class="event-item my-2">
             <div class="flex justify-between items-center">
               <div class="event-details bg-secondary rounded-lg p-2 text-gray-600 w-full mr-5">
-                <div class="event-time font-semibold">
+                <div class="event-time ">
                   <% if event.start_time.to_date == event.end_time.to_date %>
                     <%= event.start_time.strftime('%H:%M') %> ~ <%= event.end_time.strftime('%H:%M') %>
                   <% else %>
                     <%= event.start_time.strftime('%m月%d日 %H:%M') %> ~ <%= event.end_time.strftime('%m月%d日 %H:%M') %>
                   <% end %>
                 </div>
-                <div class="event-title font-semibold">
+                <div class="event-title">
                   タイトル: <%= link_to event.title, event %>
                 </div>
-                <div class="event-description font-semibold">
+                <div class="event-description">
                   内容: <%= event.description %>
                 </div>
               </div>
-              <label for="event_modal_<%= event.id %>" class="tooltip btn-edit-event mr-2 text-secondary rounded-lg drop-shadow-lg bg-primary hover:bg-accent hover:drop-shadow-none px-2 py-2", data-tip="イベント編集">
-                <i class="fas fa-pencil"></i>
-              </label>
-
-              <input type="checkbox" id="event_modal_<%= event.id %>" class="modal-toggle" />
-              <div class="modal flex items-center justify-center" role="dialog">
-                <div class="modal-box">
-                  <%= render 'show', event: event, group_id: @group.id %>
+              <div class="flex flex-col items-center justify-center">
+                <div>
+                  <label for="event_modal_<%= event.id %>" class="tooltip btn-edit-event text-secondary rounded-lg drop-shadow-lg bg-primary hover:bg-accent hover:drop-shadow-none mb-2 px-2 py-2">
+                    <i class="fas fa-pencil"></i>
+                  </label>
+                  <input type="checkbox" id="event_modal_<%= event.id %>" class="modal-toggle" />
+                  <div class="modal flex items-center justify-center" role="dialog">
+                    <div class="modal-box">
+                      <%= render 'show', event: event, group_id: @group.id %>
+                    </div>
+                    <label class="modal-backdrop" for="event_modal_<%= event.id %>">Close</label>
+                  </div>
                 </div>
-                <label class="modal-backdrop" for="event_modal_<%= event.id %>">Close</label>
+                <div>
+                  <%= link_to event_path(event, group_id: @group.id), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: "btn-delete-event text-secondary rounded-lg drop-shadow-lg bg-primary hover:bg-accent hover:drop-shadow-none mb-2 px-2 py-2" do %>
+                    <i class="fas fa-trash"></i>
+                  <% end %>
+                </div>
               </div>
-              <%= link_to event_path(event, group_id: @group.id), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: "btn-delete-event text-secondary rounded-lg drop-shadow-lg bg-primary hover:bg-accent hover:drop-shadow-none px-2 py-2" do %>
-                <i class="fas fa-trash"></i>
-              <% end %>
-            </div>
           </li>
         <% end %>
       </ul>
