@@ -1,7 +1,7 @@
-<div class="space-x-3 bg-secondary py-6 px-2" id="new_chat">
+<div class="space-x-3 bg-secondary py-6 px-2 md:px-16" id="new_chat">
     <%= form_with(model: @chat, url: group_chats_path(@group), local: true) do |f|%>
     <div class="flex items-center">
-        <%= f.text_field :body, class: "input input-bordered input-base-100 block w-full h-10 rounded-full ", placeholder: "メッセージを入力"%>
+        <%= f.text_area :body, class: "input input-bordered input-base-100 block w-full h-10 pt-1 rounded-full", placeholder: "メッセージを入力", rows: 3 %>
         <%= f.button type: 'submit', class: "justify-center rounded-full border border-transparent bg-primary px-4 py-2 text-sm font-bold text-secondary hover:bg-accent hover:drop-shadow-none" do %>
           <i class="fa-solid fa-paper-plane fa-xl"></i>
         <% end %>

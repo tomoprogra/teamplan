@@ -1,7 +1,7 @@
 <div id="chat_<%= chat.id %>" 
-    class="chat"
-    data-controller=>
-  <div class="chat chat-start">
+    class="chat, w-full
+    data-controller">
+  <div class="chat chat-start px-4">
     <div class="chat-image avatar">
       <div class="w-10 rounded-full">
         <% if chat.user.profile_image.present? %>
@@ -14,7 +14,7 @@
     <div class="chat-header">
       <%= chat.user.name %>
     </div>
-    <div class="chat-bubble chat-bubble-primary"><%= chat.body %></div>
+    <div class="chat-bubble chat-bubble-primary"><%= simple_format(chat.body) %></div>
     <div class="chat-footer opacity-50">
       <time class="text-xs opacity-50"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></time>
     </div>
