@@ -22,7 +22,10 @@
           <% chat_content = chat.body %>
           <%= link_to group.title,  group_path(group) %>
           にチャットを送信しました
-      <% end %>
+        <% when 'permit' %>
+          <%= link_to group.title, permits_group_path(group) %>
+          に参加申請をしました
+        <% end %>
       <span>(<%= "#{time_ago_in_words(notification.created_at)}前" %>)</span>
     <% end %>
   <% end %>
