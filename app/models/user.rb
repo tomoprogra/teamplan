@@ -5,7 +5,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          
-  validates :name, presence: true, length: { minimum: 2, maximum: 20 }
+  validates :name, presence: true, length: { minimum: 2, maximum: 10 }
   TRUE_EMAIL = /[\w]+@[a-z]+.[a-z]+.?[a-z]+/
   validates :email, presence: true, format: { with: TRUE_EMAIL}
   validates :introduction, length: { maximum: 20 }
