@@ -7,7 +7,7 @@ class Group < ApplicationRecord
   has_many :notifications, dependent: :destroy
   has_many :permits, dependent: :destroy
   has_many :members, through: :group_users, source: :user
-  validates :title, presence: true
+  validates :title, presence: true, length: { maximum: 15 }
 
   def create_notification_join!(current_user)
     # グループメンバー全員を検索

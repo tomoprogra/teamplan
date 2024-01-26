@@ -1,8 +1,8 @@
 class Event < ApplicationRecord
   belongs_to :group
 
-  validates :title, presence: true, length: { maximum: 255 }
-  validates :description, presence: true, length: { maximum: 65_535 }
+  validates :title, presence: true, length: { maximum: 15 }
+  validates :description, presence: true, length: { maximum: 200 }
   validates :start_time, presence: true
   validates :end_time, presence: true
   validates :group_id, presence: true
