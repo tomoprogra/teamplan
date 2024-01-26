@@ -1,4 +1,14 @@
 <%= turbo_frame_tag dom_id(@event) do %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation" class="text-red-600">
+      <h2>編集できませんでした。</h2>
+      <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <%= form_with(model: @event, url: group_event_path(@group, @event), local: true, method: :patch) do |f| %>
     <div>
       <div class="title">
