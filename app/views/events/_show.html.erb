@@ -6,6 +6,9 @@
         <p class="link link-primary"><%= @group.title %></p>
       <% end %>
     </div>
+    <div id="flash">
+      <%= render "shared/flash_message" %>
+    </div>
     <div class="space-y-5">
       <%= turbo_frame_tag dom_id(event) do %>
         <div>

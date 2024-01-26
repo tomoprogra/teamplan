@@ -4,13 +4,13 @@
   .prev-month a {
     display: none;
   }
-  .prev-month .label-style {
+  .prev-month .title-flame {
     display: none;
   }
   .next-month a {
     display: none;
   }
-  .next-month .label-style {
+  .next-month .title-flame {
     display: none;
   }
   .wday-0 .calendar-day {
@@ -47,11 +47,14 @@
   }
   .today a {
     background-color: #136988c0;
-    color: #f3f4f6;
     p {
       color: #4b5563;
     }
   }
+  .today .calendar-day{
+    color: #f3f4f6;
+    }
+
   .today a:hover{
     background-color: #bae6fd;
   }
@@ -69,10 +72,16 @@
     tr {
       font-size: x-small;
     }
-    .title-flame{
+    .title-flame {
       width: 30px;
       padding: 0.2px;
       p {
+        font-size: xx-small;
+      }
+    }
+    .more-event {
+      padding: 0.2px;
+      a {
         font-size: xx-small;
       }
     }

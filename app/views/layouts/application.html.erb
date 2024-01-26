@@ -21,14 +21,13 @@
       <%= render 'shared/before_login_header' %>
     <% end %>
 
-    <div id="flash">
-      <%= render "shared/flash_message" %>
-    </div>
+    <%= render "shared/flash_message" %>
+
     </header>
     <main class="flex-grow">
       <%= yield %>
     </main>
-    
+
     <footer class="mt-auto">
     <%= render 'shared/footer' %>
     </footer>
