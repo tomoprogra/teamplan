@@ -29,8 +29,14 @@
                     <div class="event-description">
                       内容: <%= event.description %>
                     </div>
-                    <div class="event-group">
-                      グループ:  <%= link_to group_events_path(group_id: event.group_id), data: { turbo_frame: '_top' } do%><i class="fa-solid fa-users" aria-hidden="true"></i><%= event.group.title %><% end %>
+                    <div class="flex items-center justify-between">
+                      <div>
+                        グループ:
+                        <%= event.group.title %>
+                      </div>
+                      <div>
+                       <%= link_to group_events_path(group_id: event.group_id), data: { turbo_frame: '_top' } do%><i class="fa-solid fa-users btn btn-sm pt-2" aria-hidden="true"></i><% end %>
+                      </div>
                     </div>
                   </div>
                 </div>
