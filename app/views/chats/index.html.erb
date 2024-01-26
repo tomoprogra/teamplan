@@ -4,8 +4,8 @@
     </div>
   </div>
 <div class="flex flex-col min-h-screen">
-<div class="overflow-scroll flex-grow">
-    <div class="text-gray-600 mb-5 px-5 ", id="scroller_inner">
+<div class="overflow-scroll flex-grow ">
+    <div class="text-gray-600 mb-5 px-5 md:px-16", id="scroller_inner">
       <turbo-frame  id="chats">
         <%= turbo_stream_from @group %>
         <%= render @chats %>
@@ -17,7 +17,7 @@
     </div>
   </div>
 <div>
- <%= link_to group_events_path(@group), class: "btn fixed bottom-36 right-12 rounded-full bg-white w-16 py-8 text-primary text-center hover:bg-secondary hover:drop-shadow-none" do %>
+ <%= link_to group_events_path(@group), class: "btn fixed bottom-52 md:bottom-36 right-6 md:right-12 rounded-full w-14 py-7 text-primary text-center hover:bg-secondary hover:drop-shadow-none" do %>
     <i class="fa-solid fa-chevron-left fa-lg"></i><% end %>   
 </div>
 <script>
