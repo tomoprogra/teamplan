@@ -11,11 +11,11 @@ class EventsController < ApplicationController
   def new
   @event = @group.events.build
 
-  # params[:date]が存在する場合のみDateTime.parseを使用
-  if params[:date].present?
-    @event.start_time = DateTime.parse(params[:date])
+    # params[:date]が存在する場合のみDateTime.parseを使用
+    if params[:date].present?
+      @event.start_time = DateTime.parse(params[:date])
+    end
   end
-end
 
   def show
     @event = Event.find(params[:id])
@@ -27,8 +27,8 @@ end
     if @event.save
       redirect_to group_events_path(@group, @event), success: t('defaults.flash_message.created', item: Event.model_name.human)
     else
-      flash.now[:danger] = @event.errors.full_messages.join(', ')
-      render :new, status: :unprocessable_entity
+      flash[:danger] = @event.errors.full_messages.join(', ')
+      redirect_to request.referer and return
     end
   end
 
@@ -44,11 +44,15 @@ end
 
   def update
     @event = Event.find(params[:id])
-    if @event.update(event_params)
-      flash.now.notice = "イベントを更新しました。"
-      # redirect_to group_events_path(@group), success: t('defaults.flash_message.updated', item: Event.model_name.human)
-    else
-      render :edit, status: :unprocessable_entity
+    
+    respond_to do |format|
+      if @event.update(event_params)
+        format.html { redirect_to request.referer }
+        format.turbo_stream { flash.now[:success] = "イベントを更新しました。" }
+      else
+        format.html { redirect_to request.referer }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@event, partial: "form", locals: { event: @event }) }
+      end
     end
   end
 
