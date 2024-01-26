@@ -77,19 +77,11 @@
       <ul class="menu p-4 w-60 md:w-80 min-h-full bg-primary text-base-content">
         <li class="menu-title">Menu</li>
 
-        <li><%= link_to '#', class: "ml-2 hover:text-accent transition-all duration-300", onclick: "closeDrawer();my_modal_3.showModal()" do %>
-          <i class="fa-solid fa-gear"></i>&nbsp;アカウント設定<% end %>
-          <dialog id="my_modal_3" class="modal">
-          <div class="modal-box z-20 fixed left-1/2 transform -translate-x-1/2">
-            <form method="dialog">
-              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-gray-600">✕</button>
-            </form>
-            <%= render 'users/settings_form' %>
-          </div>
-        </dialog>
-          </li>
-
-          <!-- モーダルの外側を押しても閉じるように設定 -->
+        <li>
+          <label for="my_modal_3" class="ml-2 hover:text-accent transition-all duration-300">
+            <i class="fa-solid fa-gear"></i>&nbsp;アカウント設定
+          </label>
+        </li>
           <script>
           // ハンバーガーメニューを閉じる関数
           function closeDrawer() {
@@ -106,15 +98,15 @@
             }, 300); // 300ミリ秒後に実行
           }
 
-            // モーダルの要素を取得
-            var modal = document.getElementById('my_modal_3');
-      
-            // モーダルの外側をクリックしたときにモーダルを閉じる
-            window.onclick = function(event) {
-              if (event.target === modal) {
-                modal.close();
-              }
+          // ページが読み込まれた後にイベントリスナーを設定
+          document.addEventListener("DOMContentLoaded", function() {
+            var settingsLabel = document.querySelector('label[for="my_modal_3"]');
+            if(settingsLabel) {
+              settingsLabel.addEventListener("click", function() {
+                closeDrawer();
+              });
             }
+          });
           </script>
 
         <li><%= link_to root_path, class: "ml-2 hover:text-accent transition-all duration-300" do %>
@@ -124,6 +116,14 @@
       </ul>
     </div>
  </div>
+ <!-- アカウント設定モーダル -->
+  <input type="checkbox" id="my_modal_3" class="modal-toggle" />
+  <div class="modal flex items-center justify-center" role="dialog">
+    <div class="modal-box">
+      <%= render 'users/settings_form' %>
+    </div>
+    <label class="modal-backdrop" for="my_modal_3">Close</label>
+  </div>
 </div>
 </div>
 </div>
