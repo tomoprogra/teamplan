@@ -23,7 +23,8 @@ Rails.application.routes.draw do
   get '/join_group/:token', to: 'groups#add_member', as: :join_group
   devise_for :users, controllers: {
     registrations: 'users/registrations',
-    passwords: 'users/passwords'
+    passwords: 'users/passwords',
+    sessions: 'users/sessions'
   }
   get "users/mypage" => "users#show"
   get "users/events_for_date", to: "users#events_for_date", as: :events_for_date
