@@ -51,4 +51,24 @@ class Group < ApplicationRecord
     end
     notification.save if notification.valid?
   end
+
+  def create_notification_permit!(current_user)
+    # グループメンバー全員を検索
+    group_users.each do |temp_id|
+      save_notification_permit!(current_user, temp_id['user_id'])
+    end
+  end
+
+  def save_notification_permit!(current_user, visited_id)
+    # グループ参加は複数人が参加することが考えられるため、複数回通知する
+    notification = current_user.active_notifications.new(
+      group_id: id,
+      visited_id: visited_id,
+      action: 'permit'
+    )
+    if notification.visitor_id == notification.visited_id
+      notification.checked = true
+    end
+    notification.save if notification.valid?
+  end
 end
