@@ -4,7 +4,7 @@
       <h2>編集できませんでした。</h2>
       <ul>
       <% @event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <div class="flash flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800 flex items-center p-4 mb-4  "><i class="fa-solid fa-circle-info"></i><%= message %></div>
       <% end %>
       </ul>
     </div>
