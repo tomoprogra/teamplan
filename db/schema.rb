@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_21_020354) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_25_164414) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,8 +70,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_21_020354) do
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "permit_id"
     t.index ["chat_id"], name: "index_notifications_on_chat_id"
     t.index ["group_id"], name: "index_notifications_on_group_id"
+    t.index ["permit_id"], name: "index_notifications_on_permit_id"
     t.index ["visited_id"], name: "index_notifications_on_visited_id"
     t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end
@@ -124,6 +126,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_21_020354) do
   add_foreign_key "groups", "users", column: "owner_id"
   add_foreign_key "invitations", "groups"
   add_foreign_key "invitations", "users"
+  add_foreign_key "notifications", "permits"
   add_foreign_key "permits", "groups"
   add_foreign_key "permits", "users"
 end
