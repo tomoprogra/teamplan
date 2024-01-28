@@ -35,11 +35,11 @@
 <div class="hero min-h-screen bg-base-200 ">
   <div class="hero-content text-center py-12">
     <div class="max-w-screen-lg bg-primary rounded-lg">
-      <h1 class="text-5xl font-bold text-secondary pt-8">How To Use</h1>
+      <h1 class="text-6xl font-bold text-secondary pt-16 md:pt-8">How To Use</h1>
 
 <section>
   <div class="relative items-center w-full px-5 py-12 mx-auto md:px-12 lg:px-24 max-w-7xl">
-    <div class="grid w-full grid-cols-1 gap-12 mx-auto lg:grid-cols-3">
+    <div class="md:grid w-full gap-12 mx-auto md:grid-cols-3 hidden">
       <div class="p-6">
       <a href="#item1">
         <button type="botton" class="rounded-full w-14 py-4 text-primary bg-secondary text-center hover:bg-accent hover:drop-shadow-none">
@@ -68,7 +68,7 @@
 </section>
 
 <!-- カルーセル -->
-<div class="carousel w-5/6 text-gray-600">
+<div class="md:carousel w-5/6 text-gray-600 hidden">
   <div id="item1" class="carousel-item relative w-full">
     <%= image_tag("集まって.png") %>
   </div> 
@@ -78,8 +78,33 @@
   <div id="item3" class="carousel-item relative w-full">
     <%= image_tag("シェアして.png") %>
   </div> 
+</div>
+
+<!-- カルーセル スマホver -->
+<div class="carousel md:hidden w-5/6 text-gray-600">
+  <div id="item4" class="carousel-item relative w-full">
+    <%= image_tag("集まってsm.png") %>
+    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+      <a href="#item6" class="btn btn-circle text-gray-400">❮</a> 
+      <a href="#item5" class="btn btn-circle text-gray-400">❯</a> 
+    </div> 
+  </div> 
+  <div id="item5" class="carousel-item relative w-full">
+    <%= image_tag("計画してsm.png") %>
+    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+      <a href="#item4" class="btn btn-circle text-gray-400">❮</a> 
+      <a href="#item6" class="btn btn-circle text-gray-400">❯</a> 
+    </div> 
+  </div> 
+  <div id="item6" class="carousel-item relative w-full">
+    <%= image_tag("シェアしてsm.png") %>
+    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+      <a href="#item5" class="btn btn-circle text-gray-400">❮</a> 
+      <a href="#item4" class="btn btn-circle text-gray-400">❯</a> 
+    </div> 
+  </div> 
 </div> 
-  <div class="mx-auto flex justify-center space-x-4 py-12 w-1/2">
+  <div class="mx-auto flex justify-center space-x-4 py-12 w-5/6 md:w-1/2">
   <%= link_to new_user_session_path, class: "btn btn-secondary text-gray-600 drawer-button hover:bg-accent hover:drop-shadow-none rounded-full w-1/2" do %><i class="fa-solid fa-user-plus"></i>SignUp<% end %>
   <%= link_to users_guest_sign_in_path, data: {turbo_method: :post}, class: "btn btn-primary drawer-button border-secondary hover:bg-accent hover:drop-shadow-none rounded-full w-1/2" do %>
     <i class="fa-solid fa-face-smile-wink"></i> お試し
