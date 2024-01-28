@@ -103,7 +103,7 @@ class GroupsController < ApplicationController
   
   def permits
     @group = Group.find(params[:id])
-    @permits = @group.permits.page(params[:page])
+    @permits = @group.permits.includes(:user).page(params[:page])
   end
 
   def new_permit
