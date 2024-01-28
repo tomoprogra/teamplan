@@ -17,7 +17,6 @@
           に参加しました
         <% when 'chat' %>
           <% chat = Chat.find_by(id: visitor_chat) %>
-          <% chat_content = chat.body %>
           <%= group.title %>
           にチャットを送信しました
         <% when 'permit' %>
