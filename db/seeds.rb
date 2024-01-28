@@ -9,10 +9,16 @@
 #   end
 guest_user = User.guest
 
-# ゲスト用のグループの作成
-5.times do |i|
-  group = Group.create!(
-    title: "ゲストグループ#{i + 1}",
-    owner_id: guest_user.id
-  )
+unless Group.where(owner_id: guest_user.id).exists?
+  5.times do |i|
+    group = Group.create!(
+      title: "ゲストグループ#{i + 1}",
+      owner_id: guest_user.id
+    )
+
+    GroupUser.create!(
+      group_id: group.id,
+      user_id: guest_user.id
+    )
+  end
 end
