@@ -15,9 +15,4 @@ guest_user = User.guest
     title: "ゲストグループ#{i + 1}",
     owner_id: guest_user.id
   )
-
-  GroupUser.create!(
-    group_id: group.id,
-    user_id: guest_user.id
-  )
 end
