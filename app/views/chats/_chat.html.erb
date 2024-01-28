@@ -5,7 +5,7 @@
     <div class="chat-image avatar">
       <div class="w-10 rounded-full">
         <% if chat.user.profile_image.present? %>
-          <%= image_tag current_user.profile_image.url, class: "rounded-full h-24 w-24" %>
+          <%= image_tag chat.user.profile_image.url, class: "rounded-full h-24 w-24" %>
         <% else %>
           <%= image_tag 'default.png', class: "rounded-full h-24 w-24" %>
         <% end %>
