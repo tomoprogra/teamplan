@@ -19,7 +19,6 @@
           に参加しました
         <% when 'chat' %>
           <% chat = Chat.find_by(id: visitor_chat) %>
-          <% chat_content = chat.body %>
           <%= link_to group.title,  group_path(group) %>
           にチャットを送信しました
       <% end %>

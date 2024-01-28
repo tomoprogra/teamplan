@@ -4,7 +4,7 @@
   </div>
   <div class="flex pt-8 ml-8 items-center">
     <p>参加者を招待</p>
-    <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(new_permit_group_url(@group))}&text=#{CGI.escape('参加申請をしましょう')}", target: "_blank", rel: "noopener", class: "ml-8" do %>
+    <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(new_permit_group_url(@group))}&text=#{CGI.escape((@group.title) +'に参加申請をしましょう! To.Gather.App')}", target: "_blank", rel: "noopener", class: "ml-8" do %>
       <%= image_tag "logo-black.png", alt: "xのリンク", class: "w-5 h-5" %>
     <% end %>
   </div>
