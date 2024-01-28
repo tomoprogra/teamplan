@@ -26,8 +26,6 @@ class Users::SessionsController < Devise::SessionsController
 
   protected
 
-  protected
-
   def after_sign_in_path_for(resource)
     users_mypage_path
   end

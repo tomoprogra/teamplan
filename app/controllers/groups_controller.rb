@@ -50,6 +50,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @events = @group.events
     @users = @group.users
+    @guest_user = User.guest
   end
 
   def add_member
@@ -103,17 +104,22 @@ class GroupsController < ApplicationController
   
   def permits
     @group = Group.find(params[:id])
-    @permits = @group.permits.page(params[:page])
+    @permits = @group.permits.includes(:user).page(params[:page])
   end
 
   def new_permit
-    @group = Group.find(params[:id])
-    @permit = Permit.new
+    @group = Group.find_by(id: params[:id])
+    unless @group.present?
+      flash[:alert] = 'グループが存在しません。'
+      redirect_to root_path and return
+    end
     if @group.members.include?(current_user)
       flash[:alert] = 'すでにグループに所属しています。'
-      redirect_to root_path
+      redirect_to root_path and return
     end
+    @permit = Permit.new
   end
+
   private
 
   def check_membership
