@@ -2,7 +2,7 @@ class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @notifications = current_user.passive_notifications.checked.page(1).per(5)
+    @notifications = current_user.passive_notifications.includes(:visitor).checked.page(1).per(5)
       respond_to do |format|
         format.turbo_stream do
             render turbo_stream: [
@@ -14,7 +14,7 @@ class NotificationsController < ApplicationController
       end
   end
   def destroy
-    @notification = current_user.passive_notifications.find(params[:id])
+    @notification = current_user.passive_notifications.includes(:visitor).find(params[:id])
     @notification.destroy
     if @notification
       respond_to do |format|
@@ -40,7 +40,7 @@ class NotificationsController < ApplicationController
 
 
   def destroy_all
-    @notifications = current_user.passive_notifications
+    @notifications = current_user.passive_notifications.includes(:visitor)
     @notifications.destroy_all
     respond_to do |format|
       format.turbo_stream do
