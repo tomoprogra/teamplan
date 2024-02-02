@@ -49,3 +49,16 @@ To.Gather
 - UI/UXの向上
 - ログインにGoogle認証機能実装
 - カレンダーの月の移動をしやすくするなど
+
+# 環境構築方法
+- git clone
+- git checkout -b develop origin/develop
+- git pull origin develop
+- docker compose build
+- docker compose up
+- docker compose exec web bash
+- bundle install
+- yarn install
+- bin/rails db:create
+- rails db:migrate
+- bin/dev
