@@ -24,7 +24,7 @@
                       <% end %>
                     </div>
                     <div class="event-title">
-                      タイトル: <%= link_to event.title, event_path(event, group_id: event.group_id), data: { turbo_frame: '_top' } %>
+                      タイトル: <%= event.title %>
                     </div>
                     <div class="event-description">
                       内容: <%= event.description %>
